@@ -1,0 +1,589 @@
+---
+params:
+  farm_id: "bc9_v2"
+title: "FARMR!SK automatic report"
+subtitle: "`r paste('Farm:',params$farm_id)`"
+date: now
+date-format: "[Last Updated on] dddd D MMMM, YYYY [(]HH:mm:ss[)]"
+bibliography: references.bib
+number-sections: false
+number-equations: true
+crossref:
+  chapters: true
+execute:
+  echo: false
+format:
+  html: 
+    toc: true
+    toc-location: left
+    embed-resources: true
+link-citations: true
+---
+
+```{r run-farmrisk, include=FALSE}
+farm_id<-params$farm_id
+source("run_farmrisk.R")
+save_tables=TRUE
+show_table=FALSE
+```
+
+```{r setup-report, include=FALSE}
+source("R/report_funcions.R")
+#Packages for report formatting
+library(knitr)
+library(kableExtra)
+library(ggrepel)
+opts <- options(knitr.kable.NA = "")
+```
+
+**User ID:** `{r} bsg$user_id` **Farm ID:** `{r} bsg$farm_id` **Survey date:** `{r} format.Date(bsg$date)`
+
+# **Risk analysis results**
+
+> *All risk values from Monte Carlo simulations are provided as median (50th percentile) with 95% confidence interval (97.5%–2.5%).*
+
+```{r current, results='asis', message=FALSE}
+ibr_agg_list<- agg_list(mcmodule=intro, pathogen="IBR")
+bvd_agg_list<- agg_list(mcmodule=intro, pathogen="BVD")
+tb_agg_list<- agg_list(mcmodule=intro, pathogen="TB")
+
+ibr_agg_by_list <- agg_by_list(mcmodule=intro, pathogen="IBR")
+bvd_agg_by_list <- agg_by_list(mcmodule=intro, pathogen="BVD")
+tb_agg_by_list <- agg_by_list(mcmodule=intro, pathogen="TB")
+
+output_agg_list<-list(
+  pathogen_agg_list = list (
+    ibr=ibr_agg_list,
+    bvd=bvd_agg_list,
+    tb=tb_agg_list
+  ),
+  agg_by_agg_list = list (
+    ibr=ibr_agg_by_list,
+    bvd=bvd_agg_by_list,
+    tb=tb_agg_by_list
+  )
+)
+```
+
+```{r save-results}
+# Create directory if it doesn't exist
+dir.create(paste0("output_files/", farm_id), 
+           showWarnings = FALSE, 
+           recursive = TRUE)
+
+# Save the file
+save(output_agg_list, 
+     file = paste0("output_files/", farm_id, "/output"))
+```
+
+The annual probability of disease entry is `{r} I(ibr_agg_list[["0"]]$formatted_results$total)` for infectious bovine rhinotracheitis (IBR), `{r} I(bvd_agg_list[["0"]]$formatted_results$total)` for bovine viral diarrhea (BVD) and `{r} I(tb_agg_list[["0"]]$formatted_results$total)` for tuberculosis (TB).
+
+```{r current-plot}
+#| label: fig-current
+#| layout-ncol: 3
+#| fig-cap: "Risk of disease entry"
+#| fig-subcap: 
+#|   - "IBR"
+#|   - "BVD"
+#|   - "TB"
+
+ibr_total_plot<-ggplot_risk_value(ibr_agg_list[["0"]]$results$total$`50%`, max_box=1)
+bvd_total_plot<-ggplot_risk_value(bvd_agg_list[["0"]]$results$total$`50%`, max_box=1)
+tb_total_plot<-ggplot_risk_value(tb_agg_list[["0"]]$results$total$`50%`, max_box=1)
+
+plot(ibr_total_plot)
+plot(bvd_total_plot)
+plot(tb_total_plot)
+```
+
+```{r current-pathways, results='asis', message=FALSE}
+pathways_data_all<-bind_rows(ibr_agg_list[["0"]]$pathways_data, bvd_agg_list[["0"]]$pathways_data, tb_agg_list[["0"]]$pathways_data)%>%
+  arrange(desc(value))
+
+il_main_pathways<-key_to_lit(unique(pathways_data_all$name))
+```
+
+The main pathways of disease entry are: **`{r} il_main_pathways[1]`** and **`{r} il_main_pathways[2]`**.
+
+```{r pathway-plot}
+#| label: fig-pathway
+#| layout-ncol: 3
+#| fig-cap: "Risk of disease entry by pathway"
+#| fig-subcap: 
+#|   - "IBR"
+#|   - "BVD"
+#|   - "TB"
+
+ibr_pathway_plot<-ggplot_donut(ibr_agg_list[["0"]]$pathways_data)
+bvd_pathway_plot<-ggplot_donut(bvd_agg_list[["0"]]$pathways_data)
+tb_pathway_plot<-ggplot_donut(tb_agg_list[["0"]]$pathways_data)
+
+plot(ibr_pathway_plot)
+plot(bvd_pathway_plot)
+plot(tb_pathway_plot)
+```
+
+## **Infectious Bovine Rhinotracheitis (IBR)**
+
+### Current risk
+
+Annual risk of IBR entry in the farm: `{r} I(ibr_agg_list[["0"]]$formatted_results$total)`
+
+By pathway:
+
+```{r ibr-current-pathways, results='asis', message=FALSE}
+# Print formatted results
+cat(paste0("- ", key_to_lit(names(ibr_agg_list[["0"]]$formatted_pathways)),": ",ibr_agg_list[["0"]]$formatted_pathways), sep = "\n")
+```
+
+### Risk reduction of biosecurity measures
+
+```{r ibr-biosecurity-plot}
+ibr_biosecurity<-ggplot_biosecurity_bars("IBR")
+plot(ibr_biosecurity)
+
+if(show_table){
+  kable(biosecurity_table("IBR"))
+}
+```
+
+## **Bovine viral diarrhea (BVD)**
+
+### Current risk
+
+Annual risk of BVD entry in the farm: `{r} I(bvd_agg_list[["0"]]$formatted_results$total)`
+
+By pathway:
+
+```{r bvd-current-pathways, results='asis', message=FALSE}
+# Print formatted results
+cat(paste0("- ", key_to_lit(names(bvd_agg_list[["0"]]$formatted_pathways)),": ",bvd_agg_list[["0"]]$formatted_pathways), sep = "\n")
+```
+
+### Risk reduction of biosecurity measures
+
+```{r bvd-biosecurity-plot}
+bvd_biosecurity<-ggplot_biosecurity_bars("BVD")
+plot(bvd_biosecurity)
+
+if(show_table){
+  kable(biosecurity_table("BVD"))
+}
+```
+
+## **Bovine Tuberculosis (TB)**
+
+### Current risk
+
+Annual risk of TB entry in the farm: `{r} I(tb_agg_list[["0"]]$formatted_results$total)`
+
+By pathway:
+
+```{r tb-current-pathways, results='asis', message=FALSE}
+# Print formatted results
+cat(paste0("- ", key_to_lit(names(tb_agg_list[["0"]]$formatted_pathways)),": ",tb_agg_list[["0"]]$formatted_pathways), sep = "\n")
+```
+
+### Risk reduction of biosecurity measures
+
+```{r tb-biosecurity-plot}
+tb_biosecurity<-ggplot_biosecurity_bars("TB")
+plot(tb_biosecurity)
+
+if(show_table){
+  kable(biosecurity_table("TB"))
+}
+```
+
+# 🐄 Description of the farm
+
+## Farm information
+
+```{r description}
+#suffixes "in report":
+#   "il" means that objecte is created to use "in line" in the report
+#   "it" means that objecte is a formated table for the report
+
+il_loc<-paste0(gid_to_name(bsg$farm_gid1), ", ", gid_to_name(bsg$farm_gid0))
+
+il_farm<-paste0(key_to_lit(bsg$farm_type), ", ", 
+                ifelse(bsg$farm_site, 
+                       ifelse(bsg$farm_epiunit, "multiple sites and epidemiological units", "multiple sites part a single epidemiological unit"), "single site and epidemiological unit"))
+```
+
+**Location:** `{r} il_loc`
+
+**Farm type:** `{r} il_farm`
+
+**Cattle cens:**
+
+```{r cens, results='asis'}
+census<-tidy_census_table(bsg,census_key = "farm_census")%>%
+  left_join(key_dictionary, by=join_by(animal_category == key))%>%
+  transmute(animals_n, lit)
+
+cat(paste0("- ", census$animals_n, " ",census$lit), sep = "\n")
+```
+
+**Other animals in the farm:**
+
+```{r other-cens}
+other_contact<-tidy_prefix(bsg, "farm_other_contact")%>%
+  select(!ends_with("id"))%>%
+  pivot_longer(everything(),values_transform  = list(value = as.character))%>%
+  mutate(contact=ifelse(!is.na(value),as.logical(value),FALSE),
+         value=NULL)
+
+other_census<-tidy_prefix(bsg, "farm_other_census")%>%
+  select(!ends_with("id"))%>%
+  pivot_longer(everything(), values_transform  = list(value = as.character))%>%
+  left_join(other_contact, by="name")%>%
+  mutate(name=ifelse(name=="other","",name))%>%
+  filter(!is.na(value)&!value=="0")
+
+
+il_other_census_contact<-paste0(other_census$value[other_census$contact], " ", other_census$name[other_census$contact], collapse=", ")
+
+il_other_census_no_contact<-paste0(other_census$value[!other_census$contact], " ", other_census$name[!other_census$contact], collapse=", ")
+```
+
+-   **Direct contact with cattle:** `{r} il_other_census_contact`
+
+-   **No direct contact with cattle:** `{r} il_other_census_no_contact`
+
+```{r neighbours}
+il_neigbours<-paste0(ifelse(bsg$neighbour_farms,paste0(bsg$neighbour_n, " cattle farms within a 1-2km radious, ", ifelse(bsg$neighbour_direct, "possible", "no")," direct contact"),"No cattle farms within a 1-2km radious")," (",il_medians("neighbour_total"),")")
+
+
+it_outdoors_fencing_type<-tidy_prefix(bsg,"outdoors_fencing_type")%>%
+  select(!ends_with("id"))%>%
+  pivot_longer(everything())%>%
+  filter(!is.na(value))
+
+```
+
+**Neighbours**: `{r} il_neigbours`
+
+## Farm vehicles
+
+```{r veh-farm, results='asis', message=FALSE}
+#Get vehicles table
+veh<-tidy_prefix(tidy_panel(panel="veh"),"veh", rm_prefix=FALSE)%>%
+  filter(!is.na(veh_id))
+  
+if(nrow(veh)>0){
+  
+  it_veh<-veh%>%
+  transmute(veh_id=paste0(veh_name, " (",key_to_lit(veh_id,factor="veh_id "),")"),
+            Size=paste0(veh_size,"m2"),
+            Shared= ifelse(veh_otherfarms,
+                           paste("Shared with ", veh_otherfarms_cattle_n, "cattle farms"),"No"),
+            Cleaning = key_to_lit(veh_cleaning))
+  
+  it_veh[is.na(it_veh)]<-"-"
+
+  kable(it_veh)
+
+  }else{
+  cat("*The farm does not have its own vehicles for animal transport.*")
+}
+```
+
+## Visits
+
+### People entering the barn
+
+```{r people-visits, results='asis', message=FALSE}
+if(exists("visit_people_data")&&nrow(visit_people_data)>0){
+  it_people_visits<-visit_people_data%>%
+  transmute(`Visit`=visit_name,
+            `Type`= key_to_lit(visit_type),
+            `Frequency`= key_to_lit(visit_frequency),
+            `Boots`= paste0(key_to_lit(visit_boots_enter), " used in other farms", ifelse(!visit_boots_enter=="never",paste0(", ", visit_boots_cleaning, " cleaned and disinfected"),"")),
+            `Equipment`= ifelse(is.na(visit_equipment_enter),"-",paste0(key_to_lit(visit_equipment_enter), " used in other farms", ifelse(!visit_equipment_enter=="never",paste0(", ", visit_equipment_cleaning, " cleaned and disinfected"),""))),
+            Risk=sapply(as.character(visit_name), il_medians, agg_by=TRUE))%>%
+  mutate(
+    first_pathogen_risk = as.numeric(sub("%.*$", "", sub("^[^:]+: ", "", Risk)))) %>%
+  arrange(desc(first_pathogen_risk)) %>%
+  select(-first_pathogen_risk)
+  
+  it_people_visits[is.na(it_people_visits)]<-"-"
+  
+  kable(it_people_visits)
+  
+}else{
+  cat("*No people entering the barn or contacting the animals*")
+}
+```
+
+### Vehicles entering the farm perimeter
+
+```{r veh-visits, results='asis', message=FALSE}
+if(exists("visit_veh_data")&&nrow(visit_veh_data)>0){
+  it_veh_visits<-visit_veh_data%>%
+  transmute(`Visit`=visit_name,
+            `Type`= paste0(key_to_lit(visit_type),if(visit_own_exists) ifelse(visit_own&!is.na(visit_own)," (own and not shared)","")else ""),
+            `Frequency`= key_to_lit(visit_frequency),
+            `Driver`= ifelse(is.na(visit_direct),"-" ,ifelse(visit_direct,paste0("Contacts farm animals",paste0(", boots ",visit_boots_enter, " used in other farms", ifelse(!visit_boots_enter=="never",paste0(", ", visit_boots_cleaning, " cleaned and disinfected"),""))), ifelse(is.na(visit_close),"", ifelse(visit_close,paste0( "Enters areas used by farm animals (no contact with animals), boots ",visit_boots_enter, " used in other farms", ifelse(!visit_boots_enter=="never",paste0(", ", visit_boots_cleaning, " cleaned and disinfected"),"")),"No contact with animals")))),
+            Risk=sapply(as.character(visit_name), il_medians, agg_by=TRUE))%>%
+  mutate(
+    first_pathogen_risk = as.numeric(sub("%.*$", "", sub("^[^:]+: ", "", Risk)))) %>%
+  arrange(desc(first_pathogen_risk)) %>%
+  select(-first_pathogen_risk)
+  
+  it_veh_visits[is.na(it_veh_visits)]<-"-"
+
+  kable(it_veh_visits)
+
+}else{
+  cat("*No vehicles entering the farm perimeter*")
+}
+```
+
+# 🚚 Movements
+
+Animal movements in the last `{r} risk_days/30` months
+
+```{r mov-summary, results='asis', message=FALSE}
+if(exists("movement")&&nrow(mov_animal)>0){
+  
+  mov_veh_summarize<-mov_veh%>%
+    mutate(veh_info=paste0(ifelse(veh_type=="none","No",ifelse(veh_type=="own",paste0("Own ",veh_name),"External")), ifelse(veh_exclusive=="yes",""," (shared journey)")))%>%
+    group_by(mov_id) %>%
+    summarize(
+      veh_info = case_when(
+        n_distinct(veh_info) == 1 ~ first(veh_info),
+        TRUE ~ paste(veh_info, collapse = " and ")
+      ),
+      .groups = "drop"
+    )
+  
+  mov_animal_summarize<-mov_animal%>%
+    group_by(mov_id) %>%
+    mutate(
+      own_animal_info=paste0(animals_n*farms_total," ",key_to_lit(animal_category)),
+      other_animal_info = ifelse(site_share,paste0("Shared with ", round(mov_other_animals_n*mov_other_farm_n,0), " animals from ", mov_other_farm_n, " farms ", ifelse(site_bulls,"(presence of bulls)","")),"No"))%>%
+    summarize(
+      own_animal_info = case_when(
+        n_distinct(own_animal_info) == 1 ~ first(own_animal_info),
+        TRUE ~ paste(key_to_lit(own_animal_info), collapse = ", ")
+      ),
+      other_animal_info=first(other_animal_info),
+      .groups = "drop"
+    )
+
+  
+  it_mov<-mov_animal_summarize%>%
+    left_join(mov_region)%>%
+    left_join(mov_veh_summarize)%>%
+    left_join(select(mov,c("mov_id","mov_type","mov_recurrent","mov_frequency","mov_in_date","mov_out_date","recurrent_days")))%>%
+    transmute(mov_id, 
+              When=ifelse(mov_recurrent=="recurrent",
+                            ifelse(mov_type=="round", 
+                                   paste0("🔁 Recurrent round: ",mov_frequency," times/year, out for ", recurrent_days, " days"),
+                                   paste0("➡️ Recurrent entry: ",mov_frequency, " times/year")),
+                            ifelse(mov_type=="round",
+                                   paste0("🔁 One-off round: From ",format.Date(mov_out_date*60*60*24)," to ", format.Date(mov_in_date*60*60*24)),
+                                   paste0("➡️ One-off entry: ",format.Date(mov_in_date*60*60*24)))),
+              Origin=paste0(key_to_lit(mov_origin),": ",gid_to_name(region_code)),
+              `Animals moved`= own_animal_info,
+              `Shared site`=other_animal_info,
+              `Vehicle used`= veh_info,
+              Risk=sapply(as.character(mov_id), il_medians, agg_by=TRUE))%>%
+  mutate(
+    first_pathogen_risk = as.numeric(sub("%.*$", "", sub("^[^:]+: ", "", Risk)))) %>%
+  arrange(desc(first_pathogen_risk)) %>%
+  select(-first_pathogen_risk)
+  
+  it_mov[is.na(it_mov)]<-"-"
+
+  kable(it_mov)
+
+}else{
+  
+  cat("*No movements in selected period*")
+  
+}
+```
+
+### Health status and tests in origin
+
+```{r purchase-health, results='asis'}
+if(exists("movement")&&nrow(mov_animal)>0){
+  it_health<-mov_health_origin%>%
+    transmute(mov_id, 
+              Pathogen = pathogen,
+              `Health status in origin`= key_to_lit(status),
+              `Test in origin` = key_to_lit(test))%>%
+    distinct()
+  it_health[is.na(it_health)]<-"-"
+  kable(it_health)%>%
+    collapse_rows()
+}
+```
+
+### Quarantine
+
+#### Characteristics
+
+```{r quarantine, results='asis', message=FALSE}
+if(exists("quarantine_bsg_data")&&quarantine_bsg_data$quarantine_area){
+  it_quarantine<-quarantine_bsg_data%>%
+    transmute(`Quarantine area`= ifelse(quarantine_area, "Yes","No"),
+              `Direct contact posible` = ifelse(quarantine_direct, "Yes","No"),
+              `Days` = quarantine_time,
+              `Visit time` = quarantine_visits,
+              `Visit frequency` = quarantine_frequency,
+              `Equipment` = ifelse(!quarantine_equipment, "Exclusive",
+                                   ifelse(quarantine_cleaning,
+                                          ifelse(quarantine_disinfection, "Cleaned and disinfected after each use", "Cleaned after each use"), "Not cleaned after each use"))
+              )%>%
+    pivot_longer(everything(),values_transform = list(value = as.character))
+  
+  it_quarantine[is.na(it_quarantine)]<-"-"
+
+  cat(paste0("- ", it_quarantine$name, ": ", it_quarantine$value), sep = "\n")
+
+  
+}else{
+    cat("*No quarantine*")
+}
+
+```
+
+#### Per movement
+
+```{r purchase-quarantine, results='asis', message=FALSE}
+#TODO
+if(exists("purchase_animal")&&nrow(purchase_animal)>0){
+  it_mov_quarantine<-quarantine_bsg_data%>%
+  left_join(purchase_origin_data[,!names(purchase_origin_data)%in%"test"])%>%
+  left_join(purchase_test_quarantine)%>%
+    transmute(mov_id, 
+              Pathogen = pathogen,
+              `Quarantine`= ifelse(quarantine, "Yes","No"),
+              `Test in quarantine` = key_to_lit(test))
+  it_mov_quarantine[is.na(it_mov_quarantine)]<-"-"
+  kable(it_mov_quarantine) 
+}
+```
+
+# 🐗 Wildlife
+
+```{r wildlife, results='asis', message=FALSE}
+il_outdoors_wildlife<-paste0(ifelse(bsg$outdoors_access,
+                   paste0("Outdoors grazing",
+                   ifelse(!is.na(bsg$outdoors_fencing_perimeter),
+                          paste0(ifelse(bsg$outdoors_fencing_perimeter, paste0(", complete perimeter fence", ifelse(is.na(bsg$outdoors_fencing_wildlife),"", ifelse(bsg$outdoors_fencing_wildlife,", wildlife can access the farm",""))), ", no complete perimeter fence")," (",paste0(it_outdoors_fencing_type$name, collapse=", "),")"),"")),
+                   "No outdoors grazing")," (",il_medians("farm_wildlife"),")")
+
+if(exists("pasture_wildlife_water_data")&&nrow(pasture_animal)>0){
+  il_pasture_wildlife<-il_medians("pasture_wildlife")
+}else{
+  il_pasture_wildlife<-"No pastures"
+}
+
+il_wildlife<-il_medians("total_wildlife")
+```
+
+**Wildlife:** `{r} il_wildlife`
+
+-   Outdoors grazing: `{r} il_outdoors_wildlife`
+
+-   Pasture (trashumance): `{r} il_pasture_wildlife`
+
+### Farm water points
+
+```{r oudoors-wildlife, results='asis', message=FALSE}
+if(exists("wildlife_water_data")&&nrow(wildlife_water_data)>0){
+  
+  it_wildlife<-wildlife_contact$node_list$wildlife_contact_indir_contact_herd_point$summary%>%
+    filter(scenario_id =="0")%>%
+    left_join(wildlife_contact_data)%>%
+    transmute(`Risk point`=paste0(sum_p,"% ", key_to_lit(gsub("_p","",contact_point_type))),
+              `Mud/Organic`=paste0(mud_p*100,"%"),
+              `Risk` = paste0(Signif(`50%`*100,2),"% (",Signif(`2.5%`*100,2),"-",Signif(`97.5%`*100,2),"%)"))%>%
+    distinct()
+    
+  it_wildlife[is.na(it_wildlife)]<-"-"
+  kable(it_wildlife)
+}else{
+  cat("*No outdoors water points*")
+}
+```
+
+### Pasture water points
+
+```{r pasture-wildlife, results='asis', message=FALSE}
+if(exists("mov_wildlife_water_data")&&nrow(mov_wildlife_water_data)>0){
+  it_pasture_wildlife<-mov_wildlife_water_data%>%
+    transmute(Pasture=paste0(key_to_lit(pasture_id,factor="pasture_id"),ifelse(!is.na(pasture_name),paste0(" (",pasture_name,")"),"")),
+              `Waterpoints`=paste0(pasture_sum_p,"% ", key_to_lit(gsub("pasture_|_p","",waterpoint_type))),
+              `Mud`=as.character(pasture_mud_p))%>%
+    distinct()
+    
+  it_pasture_wildlife[is.na(it_pasture_wildlife)]<-"-"
+  kable(it_pasture_wildlife) 
+}else{
+  cat("*No pasture water points*")
+}
+```
+
+# Comments
+
+```{r comments, results='asis'}
+bsg_comments<-bsg%>%
+  select(contains("comments"))%>%
+  pivot_longer(everything())%>%
+  filter(!is.na(value))%>%
+  mutate(name=gsub("_comments","",name))
+
+comments_n<-nrow(bsg_comments)
+
+if(exists("mov")){
+  
+  mov_comments<-mov%>%
+  select(contains("comments"), mov_id)%>%
+  pivot_longer(contains("comments"))%>%
+  filter(!is.na(value))%>%
+  mutate(name=gsub("_comments","",name))
+  comments_n<-comments_n+nrow(mov_comments)
+
+}
+
+
+comments_exist<-comments_n>0
+
+if(comments_exist){
+  if(nrow(bsg_comments)>0){
+    cat(paste0("- ", bsg_comments$value, " (",bsg_comments$name,")"), sep = "\n")
+  }
+  
+  if(exists("mov")&&nrow(mov_comments)>0){
+    cat(paste0("- ", mov_comments$mov_id, ": ", mov_comments$value, " (",mov_comments$name, ")"), sep = "\n")
+  }
+
+}else{
+  cat("*No survey comments*")
+}
+```
+
+# Technical Annex
+
+```{r simulation-info, results='asis'}
+cat(
+  "\n - Simulation date: ",format(as.POSIXct(Sys.time()), "%Y-%m-%d %H:%M:%S"),
+  "\n - Script unification date: ", format(as.POSIXct(script_date), "%Y-%m-%d %H:%M:%S"),
+  "\n - Repository: ", repo,
+  "\n - Last commit: ", last_commit,
+  "\n - Last commit date: ", format(as.POSIXct(commit_date), "%Y-%m-%d %H:%M:%S"),
+  "\n - user_id: ", user_id,
+  "\n - farm_id: ", farm_id,
+  "\n - Risk timeframe: ", paste(risk_days, "days"),
+  "\n - Calculate all summaries: ", calc_summary,
+  "\n - Automatic what-if scenarios: ", admin_wif,
+  "\n - Analyse model sensitivity: ", model_analysis,
+  "\n - Farm biosecurity survey: ",paste0(bsg$survey_id,"_",bsg$version), format(as.POSIXct(bsg$date, origin = "1960-01-01"), "%Y-%m-%d"),
+  if(exists("mov")){ paste0("\n - Movements surveys:\n   - ",paste(paste(unique(mov$version), collapse=", "), "(",
+    nrow(mov), "):", paste(mov$mov_id, collapse=", "), collapse="\n   - "))}else{ "\n - No movements"})
+```

@@ -1,0 +1,118 @@
+mcnode;description;mc_func;from_variable;transformation;sensi_analysis;param_type
+inf_dc;Probability of infection by direct contact (general);rpert;;;TRUE;transmission
+inf_ic;Probability of infection by indirect contact (general);rpert;;;TRUE;transmission
+inf_dc_pi;Probability of infection by direct contact (other);rpert;;;TRUE;transmission
+inf_ic_pi;Probability of infection by indirect contact (other);rpert;;;TRUE;transmission
+infectious_inf;Proportion of infected animals that are infectious (for diseases with non-infectious states);;;;FALSE;inf_period
+transient_inf;Proportion of transientrly infected animals;;;;FALSE;inf_period
+inf_time;Infectious period duration in days;runif;;;FALSE;inf_period
+sus_time;Susteptible period duration in days;;;;FALSE;inf_period
+quarantine_opt_time;Optimun quarantine time to minimize risk;;;;FALSE;inf_period
+cleaning_eff;Cleaning efficacy;rpert;;;TRUE;survival
+disinfection_eff;Disinfection efficacy;rpert;;;TRUE;survival
+herd_prev;Herd prevalence;rpert;;;TRUE;prevalence
+herd_pos;Positive herd (known from the control plan);;;;FALSE;prevalence
+within_prev;Within herd prevalence;rpert;;;TRUE;prevalence
+within_prev_pi;Within herd prevalence;rpert;;;TRUE;prevalence
+test_sensi;Test sensitivity;rpert;;;TRUE;test
+test_spec;Test specificity;rpert;;;TRUE;test
+test_useful_i;A test useful to detect infected animals was used;;;;FALSE;test
+test_useful_pi;A test useful to detect BVD presistently infected animals was used;;;;FALSE;test
+test_useful_tr;A test useful to detect BVD trojan cows was used;;;;FALSE;test
+plan_no_pos;Status means no positive animals detected;;;;FALSE;control_plan
+plan_sample_all;All animals sampled to get status;;;;FALSE;control_plan
+plan_prev;Design prevalence of sampling protocol;;;;FALSE;control_plan
+plan_sensi;Sensitivity of sampling protocol;;;;TRUE;control_plan
+plan_times;Times sampled to get status;;;;FALSE;control_plan
+plan_period;Period between samples according to the plan;;;;FALSE;control_plan
+plan_vaccine;Plan allows vaccination;;;;FALSE;control_plan
+survival_k;Speed of inactivation parameter;;;;FALSE;survival
+survival_init;Survival at time 0 ;;;;FALSE;survival
+animals_n;Number of animals (per farm);;;;FALSE;user_n
+farms_n;Number of animals;;;;FALSE;user_n
+veh_none;Type of vehicle used (true = No vehicle);;veh_type;"value==""none""";FALSE;user_p
+veh_own;Type of vehicle used (true = own vehicle);;veh_type;"value==""own""";FALSE;user_p
+pregnant_p;Probability of a cow being pregnant (from pregnant_n);;;;FALSE;user_p
+veh_epiunit_yes;Did your animals and the others come from the same farm? True = yes;;veh_epiunit;"value==""yes""";FALSE;user_p
+veh_epiunit_unk;Did your animals and the others come from the same farm? True = Unknown;;veh_epiunit;"value==""unknown""";FALSE;user_p
+veh_size;Vehicle size;;;;TRUE;veh
+veh_otherfarms_cattle_n;Number of cattle farms own vehicle is shared with;;;;TRUE;veh
+veh_otherfarms;Is the vehicle shared with other ruminant farms?;;;;FALSE;user_p
+veh_cleaning;When is the vehicle cleaned? (true = Each time the vehicle is used);;;"value==""each""";FALSE;user_p
+quarantine;Were this animals quarantined?;;;;FALSE;user_p
+quarantine_direct;Can isolated animals come into direct contact with other cattle in the herd?;;;;FALSE;user_p
+quarantine_time;Average duration of quarantine in days;;;;FALSE;user_n
+quarantine_test_time;Time at wich tests are usually performed during quarantine;;;"ifelse(value==""end"",data$quarantine_time,ifelse(value==""any"",2,ifelse(value==""start"",1,as.numeric(value))))";FALSE;user_n
+quarantine_visits_never;What time of day is the quarantine visited? (true = never);;quarantine_visits;"value==""never""";FALSE;user_p
+quarantine_visits_time;What time of day is the quarantine visited? (Time between visiting quarantine and herd: 12h if At the end of the day, 0h if At any time of the day);;quarantine_visits;"ifelse(value==""end"",12,ifelse(value==""any"",0,as.numeric(value)))";FALSE;user_n
+quarantine_frequency;How often is the quarantine visited?;;;"ifelse(value==""daily"",1,ifelse(value==""weekly"",7,ifelse(value==""few"",data$quarantine_time/4,ifelse(value==""never"",data$quarantine_time,as.numeric(value)))))";FALSE;user_n
+quarantine_equipment;Is quarantine equipment shared with the rest of the herd?;;;;FALSE;user_p
+quarantine_cleaning;Is equipment cleaned after each use?;;;;FALSE;user_p
+quarantine_disinfection;Is equipment disinfected after each use?;;;;FALSE;user_p
+purchase_category_cattleunder8;Cattle category (true = Calves <8 m);;;;FALSE;user_p
+pasture_goes;Do livestock go seasonally to pasture? (transhumance);;;;FALSE;user_p
+pasture_waterpoints_low;What type of water points are available? (true = low waterer);;;;FALSE;user_p
+pasture_waterpoints_high;What type of water points are available? (true = high waterer);;;;FALSE;user_p
+pasture_waterpoints_waterhole;What type of water points are available? (true = waterhole);;;;FALSE;user_p
+pasture_waterpoints_river;What type of water points are available? (true = river);;;;FALSE;user_p
+pasture_waterpoints_stream;What type of water points are available? (true = stream);;;;FALSE;user_p
+pasture_low_n;How many low waterers are there?;;;;FALSE;user_n
+pasture_high_n;How many high waterers are there?;;;;FALSE;user_n
+pasture_mud_p;What is the percentage of waterers with mud around them?;;;;FALSE;user_p
+veh_time_between;Time between transports (from discharge of animals to next loading);rpert;;;TRUE;veh
+veh_farms_from_n;Number of farms from where animals are loaded in shared travels;rpert;;;TRUE;veh
+veh_farms_to_n;Number of farms where animals are unloaded;rpert;;;TRUE;veh
+test_opt_time;Number of days after the infection at which the test reaches optimun sensibility;;;;FALSE;user_n
+test_time;Number of days after the infection at which test is performed;;;;FALSE;user_n
+veh_exclusive_p;Percentage of times transport is shared (animals from diferent farms in the vehicle);rpert;;;FALSE;user_p
+veh_exclusive_yes;Did your animals come with other animals? True = yes;;veh_exclusive;"value==""yes""";FALSE;user_p
+veh_exclusive_unk;Did your animals come with other animals? True = unk;;veh_exclusive;"value==""unknown""";FALSE;user_p
+other_all_animals_n;Other animals at risk of direct contact with your animals;;;;FALSE;user_n
+prev_all_animals_n;Previous animals at risk of indirect contact with your animals;;;;FALSE;user_n
+veh_mult_origin_p;Percentage of times animals in a shared transport come from multiple origins;rpert;;;TRUE;veh
+veh_share_p;Percentage of times animals in a not-exclusive (shared transport, multiple origins or destinations);rpert;;;TRUE;veh
+visit_livestock;Do visitors have contact with other cattle?;;;;FALSE;user_p
+visit_enter;Is the farm introducing boots, equipment or wheels that have been used on other farms?;;;"ifelse(value==""always"",1,ifelse(value==""sometimes"",0.5,ifelse(value==""never"",0,as.numeric(value))))";FALSE;user_p
+visit_enter_p;Percentage of times a farm introduces boots, equipment or wheels that have will be used on other farms;rpert;;;FALSE;user_p
+visit_cleaning;Are boots and equipment clean and disinfected when entering the farm?;;;"ifelse(value==""always"",1,ifelse(value==""sometimes"",0.5,ifelse(value==""never"",0,as.numeric(value))))";FALSE;user_p
+visit_cleaning_p;Percentage of times boots and equipment are clean and disinfected when entering the farm;rpert;;;FALSE;user_p
+visit_time_between;Time between visits (from visit to other cattle to visit to this farm);rpert;;;TRUE;visit
+visit_close;Can visits be in areas used by farm animals? - Does the driver help to load the animals?;;;;FALSE;user_p
+visit_direct;Can visits enter in direct contact with animals?;;;;FALSE;user_p
+visit_frequency;Visit frequency;;;"ifelse(value==""daily"",1,ifelse(value==""weekly"",7,ifelse(value==""monthly"",30,ifelse(value==""few"",90,ifelse(value==""rare"",360,as.numeric(value))))))";FALSE;user_n
+risk_days;Days at risk;;;;FALSE;user_n
+visit_farms_n;Number of farms a visit (person or vehicle) visits per day;rpert;;;TRUE;visit
+visit_animals_n;Number of livestock contacted in previous farm visit;rpert;;;TRUE;visit
+animal_category_p;Proportion of animals of each category;;;;FALSE;user_p
+neighbour_direct; Is it possible for your livestock to have direct contact with livestock on neighbouring farms? ;;;;FALSE;user_p
+neighbour_n; Number of cattle farms in 1-2 km radius;;;;FALSE;user_n
+neighbour_farms;Are there other cattle farms within a 1-2km radius?;;;;FALSE;user_p
+wildlife_prev;Prevalence of pathogen in wildlife;rpert;;;TRUE;prevalence
+contact_rate_livestock;Rate (visits/day) at which livestock visits riskpoints;runif;;;TRUE;riskpoint
+contact_rate_wildlife;Rate (visits/day) at which wildlife visits riskpoints;runif;;;TRUE;riskpoint
+access;Do the farm animals have access to outdoors areas/pasture?;;;;FALSE;user_p
+fencing_perimeter;Does the farm have a complete perimeter fence?;;;;FALSE;user_p
+fencing_wildlife;Can terrestrial wildlife access the farm?;;;;FALSE;user_p
+mud_p;Proportion of mud/soil/organic contact surface;;;;FALSE;user_p
+contact_point_p;What percentage of the time do the cows use each type of water point? ;;;;TRUE;riskpoint
+contact_point_ratio;"Relationship between the expected number of ""contact points"" (e.g. drinking points) and the size of the herd (in LSU).";;;;TRUE;riskpoint
+livestock_units;Animal aggregation reference unit based on feed requirements (Eurostat LSU);;;;FALSE;riskpoint
+contact_point_access_wildlife;Probability that wildlife will be able to access the contact point;;;;TRUE;riskpoint
+density_index;Index aggregating the proportion of animal density levels in wildlife region (not used, just to solve bug #117);;;;FALSE;riskpoint
+pasture_other_farm_n;Number of farms the pasture is shared with;;;;FALSE;user_n
+pasture_own_farm_n;User farm to pasture (1);;;;FALSE;user_n
+pasture_other_animals_n;Number of animals per farm the pasture is shared with (purchase_cattle_n/purchase_fams_n);;;;FALSE;user_n
+pasture_own_animals_n;Number of animals from the farm taken to the pasture;;;;FALSE;user_n
+pasture_cattlebull;Do you or any of the other farms take bulls to the pasture?;;;;FALSE;user_p
+pasture_share;Is the pasture shared with cattle from other farms?;;;;FALSE;user_p
+pasture_risk_days;Days in pasture (days at risk per pasture movement);;;;FALSE;user_n
+mov_other_farm_n;Number of farms the recurrent site is shared with;;;;FALSE;user_n
+mov_own_farm_n;User farm to recurrent site (1);;;;FALSE;user_n
+mov_other_animals_n;Number of animals per farm the recurrent site is shared with (purchase_cattle_n/purchase_fams_n);;;;FALSE;user_n
+mov_own_animals_n;Number of animals from the farm taken to the recurrent;;;;FALSE;user_n
+site_bulls;Do you or any of the other farms take bulls to the recurrent site?;;;;FALSE;user_p
+site_share;Is the site shared with cattle from other farms?;;;;FALSE;user_p
+recurrent_days;Days in recurrent site (days at risk per recurrent movement);;;;FALSE;user_n
+mov_round;Is it a round movement?;;mov_type;"value==""round""";FALSE;user_p
+mov_frequency;Movement annual frequency (times/year);;;;FALSE;user_n
+mov_recurrent;Is a recurring movement?;;mov_recurrent;"value==""recurrent""";FALSE;user_p

@@ -1,0 +1,20 @@
+pathway;key;wif;lit;description
+current;0;0;Current;Current scenario
+mov;MO1;wif_no_share_pasture;No sharing sites;No sharing sites
+mov;MO2;test;Test before transport;Test before transport
+mov;MO3;wif_test;Screening herds sharing sites;Screening herds sharing sites
+mov;MO4;own_veh;Own vehicle;Use, and not share, your own vehicle
+mov;MO5;no_share_veh;No shared transport;No shared transport
+mov;MO6;clean;Vehicle disinfection;Clean and disinfect the vehicle between transports
+mov;MO7;quarantine;Isolate new animals;Isolate new animals
+mov;MO8;quarantine+test;Quarantine testing;Test during quarantine
+mov;MO9;quarantine+clean;Quarantine hygiene;Clean and disinfect quarantine equipment
+mov;MO10;quarantine+exclusive_material;Exclusive quarantine material;Exclusive quarantine material
+mov;MO11;quarantine+test+exclusive_material;Comprehensive quarantine;Test during quarantine with exclusive material
+visit;VI1;no_fomites;No vehicle entry;Do not allow vehicles to enter in the farm perimeter
+visit;VI2;no_fomites;Boots for drivers;Provide boots to all drivers
+visit;VI3;no_fomites;Boots for visitors;Provide boots to all visitors
+visit;VI4;no_fomites;No shared equipment;Do not share equipment with other farms
+neighbour;NE1;no_dc;No neighbor contact;Do not allow direct contact with neighbour farms
+wildlife;WI1;no_mud;Avoid mud on wateres;Avoid mud on wateres
+wildlife;WI2;high_waterer;Use high wateres;Use high wateres

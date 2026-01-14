@@ -1,0 +1,22 @@
+pathogen;plan;plan_compulsory;health_status;herd_pos;plan_sensi;pathogen_region_status_notes;pathogen_region_status_ref
+TB;Commission delegated regulation (EU) 2020/694;1;no_plan;0;0.8;Should not be posible - compulsory;
+TB;Commission delegated regulation (EU) 2020/694;1;unk;0;0.8;Even if unknown it is assumed that they follow the compulsory plan;
+TB;Commission delegated regulation (EU) 2020/689;1;T3H;0;0.9;;
+TB;Commission delegated regulation (EU) 2020/690;1;T3;0;0.8;;
+TB;Commission delegated regulation (EU) 2020/691;1;T2neg;0;0.7;;
+TB;Commission delegated regulation (EU) 2020/692;1;T2pos;1;;;
+TB;Commission delegated regulation (EU) 2020/693;1;T1;1;;;
+TB;Commission delegated regulation (EU) 2020/694;1;Ts;1;;;
+TB;Commission delegated regulation (EU) 2020/695;1;Tr;1;;;
+IBR;Real Decreto 554/2014;0;no_plan;0;;;
+IBR;;0;unk;0;;;
+IBR;;0;IBRpos;1;;;
+IBR;Real Decreto 554/2014;0;IBR1;1;;;
+IBR;Real Decreto 554/2015;0;IBR1neg;0;0.7;;
+IBR;Real Decreto 554/2016;0;IBR2;0;0.8;;
+IBR;Real Decreto 554/2017;0;IBR3;0;0.9;;
+IBR;Real Decreto 554/2018;0;IBR4;0;0.95;;
+BVD;Commission delegated regulation (EU) 2020/689;0;no_plan;0;;;
+BVD;Commission delegated regulation (EU) 2020/689;0;unk;0;;;
+BVD;Commission delegated regulation (EU) 2020/689;0;BVDneg;0;0.95;;
+BVD;Commission delegated regulation (EU) 2020/690;0;BVDpos;1;;;

@@ -1,0 +1,4797 @@
+{
+  "title": {
+    "default": "🐄 Biosecurity Survey - Cattle",
+    "es": "🐄 Encuesta de Bioseguridad - Bovinos",
+    "ca": "🐄 Enquesta de bioseguretat - Bestiar"
+  },
+  "logoFit": "none",
+  "logoPosition": "right",
+  "completedHtml": {
+    "default": "<p>Thank you for completing this biosecurity survey!</p>\n<p>If new animals were introduced to your farm in the last year, answer the <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\">Animal Movements Survey</a> to complete the risk assessment.</p>\n<p>To ensure an accurate risk assessment, please remember to update it if there are any changes on your farm.</p>",
+    "es": "<p>¡Gracias por completar esta encuesta de bioseguridad!</p>\n<p>Si se introdujeron nuevos animales en su granja en el último año, responda a la <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\">Encuesta de Movimientos de Animales</a> para completar la evaluación de riesgos.</p>\n<p>Para garantizar una evaluación de riesgos precisa, recuerde actualizarla si hay algún cambio en su granja.</p>",
+    "ca": "<p>Gràcies per completar aquesta enquesta de bioseguretat!</p>\n<p>Si s'han introduït nous animals a la vostra granja l'any passat, responeu a l'enquesta de moviments d'animals <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\"></a> per completar l'avaluació de riscos.</p>\n<p>Per garantir una avaluació precisa del risc, recordeu actualitzar-la si hi ha canvis a la vostra granja.</p>"
+  },
+  "pages": [
+    {
+      "name": "general",
+      "title": {
+        "default": "General information",
+        "es": "Información general",
+        "ca": "Informació general"
+      },
+      "navigationTitle": {
+        "default": "General information",
+        "es": "Información general",
+        "ca": "Informació general"
+      },
+      "elements": [
+        {
+          "type": "expression",
+          "name": "survey_id",
+          "title": {
+            "default": "Survey id",
+            "es": "ID de la encuesta",
+            "ca": "Identificador de l'enquesta"
+          },
+          "expression": "bsg_cattle"
+        },
+        {
+          "type": "expression",
+          "name": "version",
+          "title": {
+            "default": "Survey version",
+            "es": "Versión de la encuesta",
+            "ca": "Versió de l'enquesta"
+          },
+          "expression": "v4_1_ciria"
+        },
+        {
+          "type": "panel",
+          "name": "pilot",
+          "title": {
+            "default": "Pilot survey ",
+            "es": "Encuesta piloto ",
+            "ca": "Enquesta pilot "
+          },
+          "description": {
+            "default": "Please provide the following information for the pilot data processing. Use only lower case and underscores in the text inputs.",
+            "es": "Proporcione la siguiente información para el procesamiento de datos del piloto. Utilice solo minúsculas y guiones bajos en las entradas de texto.",
+            "ca": "Si us plau, proporcioneu la informació següent per al tractament de dades del pilot. Utilitzeu només minúscules i guions baixos a les entrades de text."
+          },
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "survey_mode",
+              "state": "collapsed",
+              "title": {
+                "default": "Survey mode",
+                "es": "Modo de encuesta",
+                "ca": "Mode d'enquesta"
+              },
+              "setValueIf": "{user_id} notempty and {farm_id} notempty and {date} empty",
+              "setValueExpression": "true",
+              "defaultValueExpression": "true",
+              "labelTrue": {
+                "default": "Survey",
+                "es": "Encuesta",
+                "ca": "Enquesta"
+              },
+              "labelFalse": {
+                "default": "Designer",
+                "es": "Diseñador",
+                "ca": "Dissenyador"
+              }
+            },
+            {
+              "type": "text",
+              "name": "date",
+              "title": {
+                "default": "Interview date",
+                "es": "granja",
+                "ca": "granja"
+              },
+              "isRequired": true,
+              "requiredIf": "{survey_mode} = true",
+              "inputType": "date",
+              "placeholder": "user_id"
+            },
+            {
+              "type": "text",
+              "name": "user_id",
+              "title": {
+                "default": "Interviewer name (user_id)",
+                "es": "granja",
+                "ca": "granja"
+              },
+              "description": {
+                "default": "Always use the same alias (e.g. \"nat\"). Use only lower case and underscores.",
+                "es": "Utilice siempre el mismo alias (por ejemplo, \"nat\"). Utilice solo minúsculas y guiones bajos.",
+                "ca": "Utilitzeu sempre el mateix àlies (per exemple, \"nat\"). Utilitzeu només minúscules i guions baixos."
+              },
+              "isRequired": true,
+              "requiredIf": "{survey_mode} = true",
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, underscores and hyphens.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números, guiones bajos y guiones.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números, guions baixos i guionets."
+                  },
+                  "regex": "^[a-zA-Z0-9_-]*$"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "farm_id",
+              "title": {
+                "default": "Farm (farm_id)",
+                "es": "granja",
+                "ca": "granja"
+              },
+              "description": {
+                "default": "Use a name that allows you to remember which farm you are referring to (e.g. \"dairy_lleida_joan\"). Use only lower case and underscores.",
+                "es": "Use un nombre que le permita recordar a qué granja se refiere (por ejemplo, \"dairy_lleida_joan\"). Utilice solo minúsculas y guiones bajos.",
+                "ca": "Utilitzeu un nom que us permeti recordar a quina granja us referiu (per exemple, \"dairy_lleida_joan\"). Utilitzeu només minúscules i guions baixos."
+              },
+              "isRequired": true,
+              "requiredIf": "{survey_mode} = true",
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, underscores and hyphens.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números, guiones bajos y guiones.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números, guions baixos i guionets."
+                  },
+                  "regex": "^[a-zA-Z0-9_-]*$"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "farm_gid",
+          "title": {
+            "default": "Where is the farm located?",
+            "es": "¿Dónde se encuentra la granja?",
+            "ca": "On es troba la granja?"
+          },
+          "elements": [
+            {
+              "type": "dropdown",
+              "name": "farm_gid0",
+              "title": {
+                "default": "Country",
+                "es": "País",
+                "ca": "País"
+              },
+              "defaultValueExpression": "ESP",
+              "choicesFromQuestion": "gid0",
+              "autocomplete": "country-name"
+            },
+            {
+              "type": "dropdown",
+              "name": "farm_gid1",
+              "visibleIf": "{farm_gid0} notempty",
+              "title": {
+                "default": "Region",
+                "es": "Región",
+                "ca": "Regió"
+              },
+              "description": {
+                "default": "1st admisnistrative level",
+                "es": "1º nivel de admisión",
+                "ca": "1r nivell admissiu"
+              },
+              "choicesFromQuestion": "gid1",
+              "hideIfChoicesEmpty": true,
+              "autocomplete": "country-name"
+            },
+            {
+              "type": "dropdown",
+              "name": "farm_gid2",
+              "visibleIf": "{farm_gid1} notempty",
+              "title": {
+                "default": "Province",
+                "es": "Provincia",
+                "ca": "Província"
+              },
+              "description": {
+                "default": "2nd administrative level",
+                "es": "2º nivel administrativo",
+                "ca": "2n nivell administratiu"
+              },
+              "choicesFromQuestion": "gid2",
+              "hideIfChoicesEmpty": true,
+              "autocomplete": "country-name"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "farm",
+      "title": {
+        "default": "Farm characteristics",
+        "es": "Características de la granja",
+        "ca": "Característiques de la granja"
+      },
+      "navigationTitle": {
+        "default": "Farm characteristics",
+        "es": "Características de la granja",
+        "ca": "Característiques de la granja"
+      },
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "farm_type",
+          "title": {
+            "default": "Farm type",
+            "es": "Tipo de granja",
+            "ca": "Tipus de granja"
+          },
+          "choices": [
+            {
+              "value": "beef",
+              "text": {
+                "default": "Beef cattle",
+                "es": "Bovinos",
+                "ca": "Boví boví"
+              }
+            },
+            {
+              "value": "dairy",
+              "text": {
+                "default": "Dairy cattle",
+                "es": "Ganado lechero",
+                "ca": "Bestiar lleter"
+              }
+            },
+            {
+              "value": "mixed",
+              "text": {
+                "default": "Mixed/Other",
+                "es": "Mixto/Otro",
+                "ca": "Mixt / Altres"
+              }
+            }
+          ],
+          "otherText": {
+            "default": "Other",
+            "es": "Otro",
+            "ca": "Altre"
+          }
+        },
+        {
+          "type": "panel",
+          "name": "panel1",
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "farm_site_mult",
+              "title": {
+                "default": "Does the farm have separated sites?",
+                "es": "¿La granja tiene sitios separados?",
+                "ca": "La granja té llocs separats?"
+              },
+              "description": {
+                "default": "e.g. cows and heifers are housed several kilometres apart.",
+                "es": "Por ejemplo, las vacas y las vaquillas se alojan a varios kilómetros de distancia.",
+                "ca": "per exemple, les vaques i les vaques s'allotgen a diversos quilòmetres de distància."
+              }
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "farm_site",
+              "visibleIf": "{farm_site_mult} = true",
+              "title": {
+                "default": "Farm sites",
+                "es": "Sitios de granjas",
+                "ca": "Parcel·les agrícoles"
+              },
+              "description": {
+                "default": "Include in this biosecurity survey all sites within the same epidemiological unit. Treat independent sites (distant, different workers, shared with animals from other farms) as separate farms requiring their own surveys.",
+                "es": "Incluir en esta encuesta de bioseguridad todos los sitios dentro de la misma unidad epidemiológica. Trate los sitios independientes (distantes, trabajadores diferentes, compartidos con animales de otras granjas) como granjas separadas que requieren sus propias encuestas.",
+                "ca": "Incloeu en aquesta enquesta de bioseguretat tots els llocs de la mateixa unitat epidemiològica. Tractar els llocs independents (llunyans, treballadors diferents, compartits amb animals d'altres granges) com a granges separades que requereixen les seves pròpies enquestes."
+              },
+              "defaultValue": [
+                {
+                  "farm_epi_unit": true
+                },
+                {}
+              ],
+              "columns": [
+                {
+                  "name": "farm_site_name",
+                  "title": {
+                    "default": "Site name or description",
+                    "es": "Nombre o descripción del sitio",
+                    "ca": "Nom o descripció del lloc"
+                  },
+                  "cellType": "text",
+                  "width": "80%",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "text": {
+                        "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                        "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                        "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                      },
+                      "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                    }
+                  ],
+                  "placeholder": {
+                    "default": "Main farm, rearing...",
+                    "es": "Finca principal, cría...",
+                    "ca": "Finca principal, cria..."
+                  }
+                },
+                {
+                  "name": "farm_epi_unit",
+                  "title": {
+                    "default": "Include in this biosecurity survey",
+                    "es": "Incluir en esta encuesta de bioseguridad",
+                    "ca": "Inclou en aquesta enquesta de bioseguretat"
+                  },
+                  "cellType": "boolean"
+                }
+              ],
+              "choices": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "cellType": "text"
+            }
+          ]
+        },
+        {
+          "type": "multipletext",
+          "name": "farm_census",
+          "title": {
+            "default": "Cattle census",
+            "es": "Censo ganadero",
+            "ca": "Cens de bestiar"
+          },
+          "description": {
+            "default": "Include all the animals in the epidemiological unit, even if they are in diferent sites",
+            "es": "Incluir a todos los animales de la unidad epidemiológica, aunque se encuentren en diferentes emplazamientos.",
+            "ca": "Incloure tots els animals de la unitat epidemiològica, encara que estiguin en llocs diferents"
+          },
+          "items": [
+            {
+              "name": "cattlefrom24",
+              "inputType": "number",
+              "title": {
+                "default": "Adult cows (>24 m)",
+                "es": "Vacas adultas (>24 m)",
+                "ca": "Vaques adultes (>24 m)"
+              }
+            },
+            {
+              "name": "cattle8to24",
+              "inputType": "number",
+              "title": {
+                "default": "Heifers (8 - 24 m)",
+                "es": "Vaquillonas (8 - 24 m)",
+                "ca": "Vaquetes (8 - 24 m)"
+              }
+            },
+            {
+              "name": "cattleunder8",
+              "inputType": "number",
+              "title": {
+                "default": "Calves ( <8 m)",
+                "es": "Terneros ( <8 m)",
+                "ca": "Vedells ( <8 m)"
+              }
+            },
+            {
+              "name": "cattlebull",
+              "inputType": "number",
+              "title": {
+                "default": "Bulls",
+                "es": "Toros",
+                "ca": "Toros"
+              }
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "name": "farm_category",
+          "visible": false,
+          "title": {
+            "default": "Cattle categories",
+            "es": "Categorías de ganado",
+            "ca": "Categories de bestiar"
+          },
+          "description": {
+            "default": "Number of animals",
+            "es": "Número de animales",
+            "ca": "Nombre d'animals"
+          },
+          "defaultValue": [
+            "cattlefrom24",
+            "cattle8to24",
+            "cattleunder8",
+            "cattlebull"
+          ],
+          "choices": [
+            {
+              "value": "cattlefrom24",
+              "text": {
+                "default": "Adult cows (>24 m)",
+                "es": "Vacas adultas (>24 m)",
+                "ca": "Vaques adultes (>24 m)"
+              },
+              "visibleIf": "{farm_census.cattlefrom24} > 0"
+            },
+            {
+              "value": "cattle8to24",
+              "text": {
+                "default": "Heifers (8 - 24 m)",
+                "es": "Vaquillonas (8 - 24 m)",
+                "ca": "Vaquetes (8 - 24 m)"
+              },
+              "visibleIf": "{farm_census.cattle8to24} > 0"
+            },
+            {
+              "value": "cattleunder8",
+              "text": {
+                "default": "Calves (<8m )",
+                "es": "Pantorrillas (<8m )",
+                "ca": "Vedells (<8m )"
+              },
+              "visibleIf": "{farm_census.cattleunder8} > 0"
+            },
+            {
+              "value": "cattlebull",
+              "text": {
+                "default": "Bulls",
+                "es": "Toros",
+                "ca": "Toros"
+              },
+              "visibleIf": "{farm_census.cattlebull} > 0"
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "farm_other",
+          "title": {
+            "default": "Are there other domestic species on the farm?",
+            "es": "¿Hay otras especies domésticas en la granja?",
+            "ca": "Hi ha altres espècies domèstiques a la granja?"
+          },
+          "description": {
+            "default": "Sheep, goats, pigs, poultry, dogs, cats, horses...",
+            "es": "Ovejas, cabras, cerdos, aves de corral, perros, gatos, caballos...",
+            "ca": "Ovelles, cabres, porcs, aus de corral, gossos, gats, cavalls..."
+          }
+        },
+        {
+          "type": "multipletext",
+          "name": "farm_other_census",
+          "visibleIf": "{farm_other} = true",
+          "title": {
+            "default": "Other domestic species census",
+            "es": "Censo de otras especies domésticas",
+            "ca": "Cens d'altres espècies domèstiques"
+          },
+          "description": {
+            "default": "Number of animals",
+            "es": "Número de animales",
+            "ca": "Nombre d'animals"
+          },
+          "validators": [
+            {
+              "type": "expression"
+            }
+          ],
+          "items": [
+            {
+              "name": "sheep",
+              "inputType": "number",
+              "title": {
+                "default": "Sheep",
+                "es": "Oveja",
+                "ca": "Ovella"
+              }
+            },
+            {
+              "name": "goats",
+              "inputType": "number",
+              "title": {
+                "default": "Goats",
+                "es": "Caprinos",
+                "ca": "Cabres"
+              }
+            },
+            {
+              "name": "pigs",
+              "inputType": "number",
+              "title": {
+                "default": "Pigs",
+                "es": "Cerdos",
+                "ca": "Porcs"
+              }
+            },
+            {
+              "name": "poultry",
+              "inputType": "number",
+              "title": {
+                "default": "Poultry",
+                "es": "Ave de corral",
+                "ca": "Aviram"
+              }
+            },
+            {
+              "name": "dogs",
+              "inputType": "number",
+              "title": {
+                "default": "Dogs",
+                "es": "Perros",
+                "ca": "Gossos"
+              }
+            },
+            {
+              "name": "cats",
+              "inputType": "number",
+              "title": {
+                "default": "Cats",
+                "es": "Gatos",
+                "ca": "Gats"
+              }
+            },
+            {
+              "name": "horses",
+              "inputType": "number",
+              "title": {
+                "default": "Horses",
+                "es": "Caballos",
+                "ca": "Cavalls"
+              }
+            },
+            {
+              "name": "other",
+              "placeholder": {
+                "default": "e.g. 4 Alpacas, 2 Ostriches",
+                "es": "por ejemplo, 4 alpacas, 2 avestruces",
+                "ca": "per exemple, 4 alpaques, 2 estruços"
+              },
+              "title": {
+                "default": "Other (describe)",
+                "es": "Otro (describir)",
+                "ca": "Altres (descriu)"
+              },
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                  },
+                  "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "name": "farm_other_contact",
+          "visibleIf": "{farm_other} = true",
+          "title": {
+            "default": "Which species have direct contact with cattle?",
+            "es": "¿Qué especies tienen contacto directo con el ganado?",
+            "ca": "Quines espècies tenen contacte directe amb el bestiar?"
+          },
+          "defaultValue": [
+            "sheep",
+            "goats",
+            "pigs",
+            "poultry",
+            "dogs",
+            "cats",
+            "horses",
+            "other"
+          ],
+          "choices": [
+            {
+              "value": "sheep",
+              "text": {
+                "default": "Sheep",
+                "es": "Oveja",
+                "ca": "Ovella"
+              },
+              "visibleIf": "{farm_other_census.sheep} > 0"
+            },
+            {
+              "value": "goats",
+              "text": {
+                "default": "Goats",
+                "es": "Caprinos",
+                "ca": "Cabres"
+              },
+              "visibleIf": "{farm_other_census.goats} > 0"
+            },
+            {
+              "value": "pigs",
+              "text": {
+                "default": "Pigs",
+                "es": "Cerdos",
+                "ca": "Porcs"
+              },
+              "visibleIf": "{farm_other_census.pigs} > 0"
+            },
+            {
+              "value": "poultry",
+              "text": {
+                "default": "Poultry",
+                "es": "Ave de corral",
+                "ca": "Aviram"
+              },
+              "visibleIf": "{farm_other_census.poultry} > 0"
+            },
+            {
+              "value": "dogs",
+              "text": {
+                "default": "Dogs",
+                "es": "Perros",
+                "ca": "Gossos"
+              },
+              "visibleIf": "{farm_other_census.dogs} > 0"
+            },
+            {
+              "value": "cats",
+              "text": {
+                "default": "Cats",
+                "es": "Gatos",
+                "ca": "Gats"
+              },
+              "visibleIf": "{farm_other_census.cats} > 0"
+            },
+            {
+              "value": "horses",
+              "text": {
+                "default": "Horses",
+                "es": "Caballos",
+                "ca": "Cavalls"
+              },
+              "visibleIf": "{farm_other_census.horses} > 0"
+            },
+            {
+              "value": "other",
+              "text": {
+                "default": "Other",
+                "es": "Otro",
+                "ca": "Altre"
+              },
+              "visibleIf": "{farm_other_census.other} notempty"
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "farm_other_entry",
+          "visibleIf": "{farm_other} = true",
+          "title": {
+            "default": "Have there been any entries of small ruminants in the last year?",
+            "es": "¿Ha habido entradas de pequeños rumiantes en el último año?",
+            "ca": "Hi ha hagut entrades de petits remugants en l'últim any?"
+          }
+        }
+      ]
+    },
+    {
+      "name": "quarantine",
+      "title": {
+        "default": "Quarantine",
+        "es": "Cuarentena",
+        "ca": "Quarantena"
+      },
+      "navigationTitle": {
+        "default": "Quarantine",
+        "es": "Cuarentena",
+        "ca": "Quarantena"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "quarantine_area",
+          "title": {
+            "default": "When new cattle enter the farm, are they isolated from the herd (quarantine)?",
+            "es": "Cuando el ganado nuevo ingresa a la granja, ¿se aísla del rebaño (cuarentena)?",
+            "ca": "Quan el bestiar nou entra a la granja, està aïllat del ramat (quarantena)?"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "quarantine_direct",
+          "visibleIf": "{quarantine_area} = true",
+          "title": {
+            "default": "Can isolated animals come into direct contact with other cattle in the herd?",
+            "es": "¿Pueden los animales aislados entrar en contacto directo con otros animales del rebaño?",
+            "ca": "Els animals aïllats poden entrar en contacte directe amb altres caps de bestiar del ramat?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "quarantine_time",
+          "visibleIf": "{quarantine_area} = true",
+          "title": {
+            "default": "Average duration of quarantine in days",
+            "es": "Duración media de la cuarentena en días",
+            "ca": "Durada mitjana de la quarantena en dies"
+          },
+          "inputType": "number"
+        },
+        {
+          "type": "radiogroup",
+          "name": "quarantine_visits",
+          "visibleIf": "{quarantine_area} = true",
+          "title": {
+            "default": "What time of day is the quarantine visited?",
+            "es": "¿A qué hora del día se visita la cuarentena?",
+            "ca": "A quina hora del dia es visita la quarantena?"
+          },
+          "choices": [
+            {
+              "value": "end",
+              "text": {
+                "default": "At the end of the day",
+                "es": "Al final del día",
+                "ca": "Al final del dia"
+              }
+            },
+            {
+              "value": "any",
+              "text": {
+                "default": "At any time of the day",
+                "es": "A cualquier hora del día",
+                "ca": "A qualsevol hora del dia"
+              }
+            },
+            {
+              "value": "never",
+              "text": {
+                "default": "Never",
+                "es": "Nunca",
+                "ca": "Mai"
+              }
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "quarantine_frequency",
+          "visibleIf": "{quarantine_area} = true",
+          "title": {
+            "default": "How often is the quarantine visited?",
+            "es": "¿Con qué frecuencia se visita la cuarentena?",
+            "ca": "Amb quina freqüència es visita la quarantena?"
+          },
+          "choices": [
+            {
+              "value": "daily",
+              "text": {
+                "default": "Daily",
+                "es": "Diario",
+                "ca": "Diari"
+              }
+            },
+            {
+              "value": "weekly",
+              "text": {
+                "default": "Weekly",
+                "es": "Semanal",
+                "ca": "Setmanal"
+              }
+            },
+            {
+              "value": "few",
+              "text": {
+                "default": "A few times during the period of quarantine",
+                "es": "Varias veces durante el período de cuarentena",
+                "ca": "Unes quantes vegades durant el període de quarantena"
+              }
+            },
+            {
+              "value": "never",
+              "text": {
+                "default": "Never",
+                "es": "Nunca",
+                "ca": "Mai"
+              }
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "quarantine_equipment",
+          "visibleIf": "{quarantine_area} = true",
+          "title": {
+            "default": "Is quarantine equipment shared with the rest of the herd?",
+            "es": "¿El equipo de cuarentena se comparte con el resto de la manada?",
+            "ca": "L'equip de quarantena es comparteix amb la resta del ramat?"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "quarantine_cleaning",
+          "visibleIf": "{quarantine_equipment} = true",
+          "title": {
+            "default": "Is equipment cleaned after each use?",
+            "es": "¿Se limpia el equipo después de cada uso?",
+            "ca": "Es neteja l'equip després de cada ús?"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "quarantine_disinfection",
+          "visibleIf": "{quarantine_cleaning} = true",
+          "title": {
+            "default": "Is equipment disinfected after each use?",
+            "es": "¿Se desinfecta el equipo después de cada uso?",
+            "ca": "L'equip es desinfecta després de cada ús?"
+          }
+        },
+        {
+          "type": "comment",
+          "name": "quarantine_comments",
+          "title": {
+            "default": "Comments about quarantine (optional)",
+            "es": "Comentarios sobre la cuarentena (opcional)",
+            "ca": "Comentaris sobre la quarantena (opcional)"
+          },
+          "validators": [
+            {
+              "type": "regex",
+              "text": {
+                "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+              },
+              "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+            }
+          ],
+          "autoGrow": true
+        }
+      ]
+    },
+    {
+      "name": "fattening",
+      "title": {
+        "default": "Fattening",
+        "es": "Engorde",
+        "ca": "Engreix"
+      },
+      "navigationTitle": {
+        "default": "Fattening",
+        "es": "Engorde",
+        "ca": "Engreix"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "fattening_external",
+          "title": {
+            "default": "Do you fatten calves from other farms?",
+            "es": "¿Engordan terneros de otras granjas?",
+            "ca": "Engreixeu vedells d'altres granges?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "fattening_time",
+          "visibleIf": "{fattening_external} = true",
+          "title": {
+            "default": "Average duration of fattening in months",
+            "es": "Duración media del engorde en meses",
+            "ca": "Durada mitjana de l'engreix en mesos"
+          },
+          "inputType": "number",
+          "min": 1,
+          "max": 100
+        },
+        {
+          "type": "boolean",
+          "name": "fattening_direct",
+          "visibleIf": "{fattening_external} = true",
+          "title": {
+            "default": "Can fattening calves come into direct contact with other cattle?",
+            "es": "¿Pueden los terneros de engorde entrar en contacto directo con otros ganados?",
+            "ca": "Els vedells d'engreix poden entrar en contacte directe amb altres bovins?"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "fattening_indirect",
+          "visibleIf": "{fattening_external} = true and {fattening_direct} = false",
+          "title": {
+            "default": "Is fattening equipment, clothing or personnel, shared with the rest of the herd?",
+            "es": "¿El equipo, la ropa o el personal de engorde se comparten con el resto del rebaño?",
+            "ca": "L'equip d'engreix, la roba o el personal es comparteixen amb la resta del ramat?"
+          }
+        },
+        {
+          "type": "radiogroup",
+          "name": "fattening_frequency",
+          "visibleIf": "{fattening_external} = true and {fattening_indirect} = true",
+          "title": {
+            "default": "If equipment and personnel are shared, how often can there be indirect contact between fattening animals and the rest of the herd?",
+            "es": "Si el equipo y el personal son compartidos, ¿con qué frecuencia puede haber contacto indirecto entre los animales de engorde y el resto del rebaño?",
+            "ca": "Si es comparteixen equips i personal, amb quina freqüència pot haver-hi contacte indirecte entre els animals d'engreix i la resta del ramat?"
+          },
+          "choices": [
+            {
+              "value": "daily",
+              "text": {
+                "default": "Daily",
+                "es": "Diario",
+                "ca": "Diari"
+              }
+            },
+            {
+              "value": "weekly",
+              "text": {
+                "default": "Weekly",
+                "es": "Semanal",
+                "ca": "Setmanal"
+              }
+            },
+            {
+              "value": "few",
+              "text": {
+                "default": "A few times during fattening period",
+                "es": "Varias veces durante el período de engorde",
+                "ca": "Unes quantes vegades durant el període d'engreix"
+              }
+            },
+            {
+              "value": "never",
+              "text": {
+                "default": "Never",
+                "es": "Nunca",
+                "ca": "Mai"
+              }
+            }
+          ]
+        },
+        {
+          "type": "comment",
+          "name": "fattening_comments",
+          "title": {
+            "default": "Comments about fattening (optional)",
+            "es": "Comentarios sobre el engorde (opcional)",
+            "ca": "Comentaris sobre l'engreix (opcional)"
+          },
+          "validators": [
+            {
+              "type": "regex",
+              "text": {
+                "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+              },
+              "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+            }
+          ],
+          "autoGrow": true
+        }
+      ]
+    },
+    {
+      "name": "surroundings",
+      "title": {
+        "default": "Surroundings",
+        "es": "Entorno",
+        "ca": "Entorn"
+      },
+      "navigationTitle": {
+        "default": "Surroundings",
+        "es": "Entorno",
+        "ca": "Entorn"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "neighbour_farms",
+          "title": {
+            "default": "Are there other cattle farms within a 1-2km radius?",
+            "es": "¿Hay otras granjas ganaderas en un radio de 1-2 km?",
+            "ca": "Hi ha altres granges de bestiar en un radi d'1-2 km?"
+          },
+          "description": {
+            "default": "Close to any site of the farm's epidemiological unit",
+            "es": "Cerca de cualquier sitio de la unidad epidemiológica de la granja",
+            "ca": "A prop de qualsevol lloc de la unitat epidemiològica de la granja"
+          }
+        },
+        {
+          "type": "text",
+          "name": "neighbour_n",
+          "visibleIf": "{neighbour_farms} = true",
+          "title": {
+            "default": "Number of cattle farms in  1-2 km radius",
+            "es": "Número de explotaciones ganaderas en un radio de 1-2 km",
+            "ca": "Nombre de granges ramaderes en un radi d'1-2 km"
+          },
+          "description": {
+            "default": "Sum neighbour farms from all sites of the farm's epidemiological unit",
+            "es": "Suma de las fincas vecinas de todos los sitios de la unidad epidemiológica de la finca",
+            "ca": "Suma de les granges veïnes de tots els llocs de la unitat epidemiològica de la granja"
+          },
+          "inputType": "number",
+          "max": 20,
+          "step": 0
+        },
+        {
+          "type": "boolean",
+          "name": "neighbour_direct",
+          "visibleIf": "{neighbour_farms} = true",
+          "title": {
+            "default": "Is it possible for your livestock to have direct contact with livestock on neighbouring farms?",
+            "es": "¿Es posible que su ganado tenga contacto directo con el ganado de las granjas vecinas?",
+            "ca": "És possible que el vostre bestiar tingui contacte directe amb el bestiar de les granges veïnes?"
+          },
+          "description": {
+            "default": "For example, through a fence",
+            "es": "Por ejemplo, a través de una valla",
+            "ca": "Per exemple, a través d'una tanca"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "outdoors_access",
+          "title": {
+            "default": "Do your animals graze outdoors?",
+            "es": "¿Sus animales pastan al aire libre?",
+            "ca": "Els teus animals pasturen a l'aire lliure?"
+          }
+        },
+        {
+          "type": "checkbox",
+          "name": "outdoors_fencing_type",
+          "visibleIf": "{outdoors_access} = true",
+          "title": {
+            "default": "What type of fencing does the farm have?",
+            "es": "¿Qué tipo de vallado tiene la finca?",
+            "ca": "Quin tipus de tanca té la granja?"
+          },
+          "choices": [
+            {
+              "value": "electric",
+              "text": {
+                "default": "Electric fence",
+                "es": "Valla eléctrica",
+                "ca": "Tanca elèctrica"
+              }
+            },
+            {
+              "value": "simple",
+              "text": {
+                "default": "Simple fence",
+                "es": "Valla sencilla",
+                "ca": "Tanca senzilla"
+              }
+            },
+            {
+              "value": "double",
+              "text": {
+                "default": "Double fence",
+                "es": "Doble valla",
+                "ca": "Doble tanca"
+              }
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "outdoors_fencing_perimeter",
+          "visibleIf": "{outdoors_access} = true",
+          "title": {
+            "default": "Does the farm have a complete perimeter fence?",
+            "es": "¿La finca cuenta con un cerco perimetral completo?",
+            "ca": "La granja té una tanca perimetral completa?"
+          },
+          "description": {
+            "default": "i.e. a continuous fence that surrounds the entire farm",
+            "es": "es decir, una valla continua que rodea toda la finca",
+            "ca": "és a dir, una tanca contínua que envolta tota la finca"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "outdoors_fencing_wildlife",
+          "visibleIf": "{outdoors_access} = true and {outdoors_fencing_perimeter} = true",
+          "title": {
+            "default": "Can terrestrial wildlife access the farm?",
+            "es": "¿Puede la fauna terrestre acceder a la granja?",
+            "ca": "La fauna terrestre pot accedir a la granja?"
+          },
+          "description": {
+            "default": "i.e. wild boar, red deer, etc.",
+            "es": "es decir, jabalí, ciervo rojo, etc.",
+            "ca": "és a dir, senglars, cérvols, etc."
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "outdoors_waterpoints_access",
+          "visibleIf": "{outdoors_access} = true and ({outdoors_fencing_wildlife} = true or {outdoors_fencing_perimeter} = false)",
+          "title": {
+            "default": "Are there water points accessible to wildlife (in the outdoor grazing area)?",
+            "es": "¿Hay puntos de agua accesibles para la vida silvestre (en el área de pastoreo al aire libre)?",
+            "ca": "Hi ha punts d'aigua accessibles per a la fauna (a la zona de pastura exterior)?"
+          }
+        },
+        {
+          "type": "checkbox",
+          "name": "outdoors_waterpoints",
+          "visibleIf": "{outdoors_access} = true and ({outdoors_fencing_wildlife} = true or {outdoors_fencing_perimeter} = false) and {outdoors_waterpoints_access} = true",
+          "title": {
+            "default": "What type of water points are available?",
+            "es": "¿Qué tipo de puntos de agua están disponibles?",
+            "ca": "Quin tipus de punts d'aigua hi ha disponibles?"
+          },
+          "choices": [
+            {
+              "value": "low",
+              "text": {
+                "default": "Low waterer (<90cm)",
+                "es": "Agua baja (<90cm)",
+                "ca": "Abeurador baix (<90cm)"
+              }
+            },
+            {
+              "value": "high",
+              "text": {
+                "default": "High waterer (>90cm)",
+                "es": "Bebedero alto (>90cm)",
+                "ca": "Aigua alta (>90cm)"
+              }
+            },
+            {
+              "value": "waterhole",
+              "text": {
+                "default": "Waterhole",
+                "es": "Pozo de agua",
+                "ca": "Pou d'aigua"
+              }
+            },
+            {
+              "value": "river",
+              "text": {
+                "default": "River",
+                "es": "Río",
+                "ca": "Riu"
+              }
+            },
+            {
+              "value": "stream",
+              "text": {
+                "default": "Stream (seasonal flow)",
+                "es": "Arroyo (caudal estacional)",
+                "ca": "Rierol (cabal estacional)"
+              }
+            }
+          ]
+        },
+        {
+          "type": "expression",
+          "name": "outdoors_waterpoints_types_n",
+          "visibleIf": "{outdoors_waterpoints} notempty",
+          "title": {
+            "default": "Number of visit water point types",
+            "es": "Número de tipos de puntos de agua visitados",
+            "ca": "Nombre de tipus de punts d'aigua de visita"
+          },
+          "expression": "count({outdoors_waterpoints})"
+        },
+        {
+          "type": "panel",
+          "name": "outdoors_waterpoints_p",
+          "visible": false,
+          "visibleIf": "{outdoors_access} = true and {outdoors_fencing_wildlife} = true or {outdoors_fencing_perimeter} = false and {outdoors_waterpoints_access} = true",
+          "title": {
+            "default": "What percentage of the time do the cows use each type of water point? ",
+            "es": "¿Qué porcentaje del tiempo utilizan las vacas cada tipo de punto de agua? ",
+            "ca": "Quin percentatge del temps utilitzen les vaques cada tipus de punt d'aigua? "
+          },
+          "elements": [
+            {
+              "type": "expression",
+              "name": "outdoors_sum_p",
+              "title": {
+                "default": "Sum percentage",
+                "es": "Porcentaje de suma",
+                "ca": "Percentatge de suma"
+              },
+              "titleLocation": "left",
+              "hideNumber": true,
+              "validators": [
+                {
+                  "type": "expression",
+                  "text": {
+                    "default": "Must add up to 100%",
+                    "es": "Debe sumar hasta el 100%",
+                    "ca": "S'ha de sumar fins al 100%"
+                  },
+                  "expression": "{outdoors_sum_p} = 100 or {survey_mode} = false"
+                }
+              ],
+              "expression": "{outdoors_low_p}+{outdoors_high_p}+{outdoors_waterhole_p}+{outdoors_river_p}+{outdoors_stream_p}",
+              "format": "{0}%",
+              "displayStyle": "decimal"
+            },
+            {
+              "type": "text",
+              "name": "outdoors_low_p",
+              "visibleIf": "{outdoors_waterpoints} contains 'low'",
+              "title": {
+                "default": "Low waterer (<90cm)",
+                "es": "Agua baja (<90cm)",
+                "ca": "Abeurador baix (<90cm)"
+              },
+              "titleLocation": "left",
+              "resetValueIf": "{outdoors_waterpoints} contains 'low'",
+              "setValueIf": "{outdoors_waterpoints} notcontains 'low'",
+              "setValueExpression": "0",
+              "defaultValueExpression": "100/{outdoors_waterpoints_types_n}",
+              "inputType": "number",
+              "min": 0,
+              "max": 100,
+              "step": 5
+            },
+            {
+              "type": "text",
+              "name": "outdoors_high_p",
+              "visibleIf": "{outdoors_waterpoints} contains 'high'",
+              "title": {
+                "default": "High waterer (<90cm)",
+                "es": "Agua alta (<90cm)",
+                "ca": "Aigua alta (<90cm)"
+              },
+              "titleLocation": "left",
+              "resetValueIf": "{outdoors_waterpoints} contains 'high'",
+              "setValueIf": "{outdoors_waterpoints} notcontains 'high'",
+              "setValueExpression": "0",
+              "defaultValueExpression": "100/{outdoors_waterpoints_types_n}",
+              "inputType": "number",
+              "min": 0,
+              "max": 100,
+              "step": 5
+            },
+            {
+              "type": "text",
+              "name": "outdoors_waterhole_p",
+              "visibleIf": "{outdoors_waterpoints} contains 'waterhole'",
+              "title": {
+                "default": "Waterhole",
+                "es": "Pozo de agua",
+                "ca": "Pou d'aigua"
+              },
+              "titleLocation": "left",
+              "resetValueIf": "{outdoors_waterpoints} contains 'waterhole'",
+              "setValueIf": "{outdoors_waterpoints} notcontains 'waterhole'",
+              "setValueExpression": "0",
+              "defaultValueExpression": "100/{outdoors_waterpoints_types_n}",
+              "inputType": "number",
+              "min": 0,
+              "max": 100,
+              "step": 5
+            },
+            {
+              "type": "text",
+              "name": "outdoors_river_p",
+              "visibleIf": "{outdoors_waterpoints} contains 'river'",
+              "title": {
+                "default": "River",
+                "es": "Río",
+                "ca": "Riu"
+              },
+              "titleLocation": "left",
+              "resetValueIf": "{outdoors_waterpoints} contains 'river'",
+              "setValueIf": "{outdoors_waterpoints} notcontains 'river'",
+              "setValueExpression": "0",
+              "defaultValueExpression": "100/{outdoors_waterpoints_types_n}",
+              "inputType": "number",
+              "min": 0,
+              "max": 100,
+              "step": 5
+            },
+            {
+              "type": "text",
+              "name": "outdoors_stream_p",
+              "visibleIf": "{outdoors_waterpoints} contains 'stream'",
+              "title": {
+                "default": "Stream (seasonal flow)",
+                "es": "Arroyo (caudal estacional)",
+                "ca": "Rierol (cabal estacional)"
+              },
+              "titleLocation": "left",
+              "resetValueIf": "{outdoors_waterpoints} contains 'stream'",
+              "setValueIf": "{outdoors_waterpoints} notcontains 'stream'",
+              "setValueExpression": "0",
+              "defaultValueExpression": "100/{outdoors_waterpoints_types_n}",
+              "inputType": "number",
+              "min": 0,
+              "max": 100,
+              "step": 5
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "outdoors_mud",
+          "visibleIf": "{outdoors_waterpoints} anyof ['low', 'high']",
+          "title": {
+            "default": "Is there usually mud around the waterers?",
+            "es": "¿Suele haber barro alrededor de los bebederos?",
+            "ca": "Normalment hi ha fang al voltant dels abeuradors?"
+          }
+        },
+        {
+          "type": "dropdown",
+          "name": "outdoors_mud_p",
+          "visibleIf": "{outdoors_mud} = true",
+          "title": {
+            "default": "What is the percentage of waterers with mud around them?",
+            "es": "¿Cuál es el porcentaje de bebederos con barro a su alrededor?",
+            "ca": "Quin és el percentatge d'abeuradors amb fang al seu voltant?"
+          },
+          "choices": [
+            {
+              "value": "10%",
+              "text": {
+                "es": "10%",
+                "ca": "10%"
+              }
+            },
+            {
+              "value": "20%",
+              "text": {
+                "es": "20%",
+                "ca": "20%"
+              }
+            },
+            {
+              "value": "30%",
+              "text": {
+                "es": "30%",
+                "ca": "30%"
+              }
+            },
+            {
+              "value": "40%",
+              "text": {
+                "es": "40%",
+                "ca": "40%"
+              }
+            },
+            {
+              "value": "50%",
+              "text": {
+                "es": "50%",
+                "ca": "50%"
+              }
+            },
+            {
+              "value": "60%",
+              "text": {
+                "es": "60%",
+                "ca": "60%"
+              }
+            },
+            {
+              "value": "70%",
+              "text": {
+                "es": "70%",
+                "ca": "70%"
+              }
+            },
+            {
+              "value": "80%",
+              "text": {
+                "es": "80%",
+                "ca": "80%"
+              }
+            },
+            {
+              "value": "90%",
+              "text": {
+                "es": "90%",
+                "ca": "90%"
+              }
+            },
+            {
+              "value": "100%",
+              "text": {
+                "es": "100%",
+                "ca": "100%"
+              }
+            }
+          ]
+        },
+        {
+          "type": "comment",
+          "name": "outdoor_comments",
+          "title": {
+            "default": "Comments about neighbours and outdoor facilities (optional)",
+            "es": "Comentarios sobre los vecinos y las instalaciones al aire libre (opcional)",
+            "ca": "Comentaris sobre veïns i instal·lacions exteriors (opcional)"
+          },
+          "validators": [
+            {
+              "type": "regex",
+              "text": {
+                "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+              },
+              "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+            }
+          ],
+          "autoGrow": true
+        }
+      ]
+    },
+    {
+      "name": "pasture",
+      "title": {
+        "default": "Seasonal movements",
+        "es": "Movimientos estacionales",
+        "ca": "Moviments estacionals"
+      },
+      "navigationTitle": {
+        "default": "Pasture",
+        "es": "Pasto",
+        "ca": "Pastura"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "pasture_goes",
+          "title": {
+            "default": "Do livestock go seasonally to pasture? (transhumance)",
+            "es": "¿El ganado va estacionalmente a pastar? (trashumancia)",
+            "ca": "El bestiar va estacionalment a pasturar? (transhumància)"
+          }
+        },
+        {
+          "type": "boolean",
+          "name": "pasture_same",
+          "visibleIf": "{pasture_goes} = true",
+          "title": {
+            "default": "Do animals always go to the same pastures?",
+            "es": "¿Los animales van siempre a los mismos pastos?",
+            "ca": "Els animals sempre van a les mateixes pastures?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "pasture_n",
+          "visibleIf": "{pasture_same} = false",
+          "title": {
+            "default": "To how many diferent pastures do the animals go?",
+            "es": "¿A cuántos pastos diferentes van los animales?",
+            "ca": "A quantes pastures diferents van els animals?"
+          },
+          "setValueIf": "{pasture_same} = true",
+          "setValueExpression": "1",
+          "defaultValue": "1",
+          "clearIfInvisible": "none",
+          "inputType": "number",
+          "min": 2,
+          "max": 10,
+          "maxErrorText": {
+            "default": "You can only register up to {0} pastures. Please register the {0} pastures you go to most often.",
+            "es": "Solo se pueden registrar hasta {0} pastos. Por favor, registre los {0} pastos a los que va con más frecuencia.",
+            "ca": "Només es poden registrar fins a {0} pastures. Si us plau, registreu les {0} pastures a les quals aneu més sovint."
+          }
+        },
+        {
+          "type": "paneldynamic",
+          "name": "pasture_info",
+          "visibleIf": "{pasture_goes} = true",
+          "title": {
+            "default": "Information about pasture",
+            "es": "Información sobre pastos",
+            "ca": "Informació sobre pastures"
+          },
+          "bindings": {
+            "pos": {
+              "pos": {
+                "pos": {
+                  "pos": {
+                    "pos": {
+                      "pos": {
+                        "pos": {
+                          "pos": {
+                            "pos": {
+                              "pos": {
+                                "pos": {
+                                  "pos": {
+                                    "pos": {
+                                      "pos": {
+                                        "pos": {
+                                          "pos": {
+                                            "pos": {
+                                              "pos": {
+                                                "pos": {
+                                                  "pos": {
+                                                    "pos": {
+                                                      "pos": {
+                                                        "pos": {
+                                                          "pos": {
+                                                            "start": 93820,
+                                                            "end": 93940
+                                                          },
+                                                          "start": 90020,
+                                                          "end": 94058
+                                                        },
+                                                        "start": 89959,
+                                                        "end": 94173
+                                                      },
+                                                      "start": 89924,
+                                                      "end": 94285
+                                                    },
+                                                    "start": 93649,
+                                                    "end": 94394
+                                                  },
+                                                  "start": 93411,
+                                                  "end": 94500
+                                                },
+                                                "start": 92486,
+                                                "end": 94603
+                                              },
+                                              "start": 88659,
+                                              "end": 94703
+                                            },
+                                            "start": 92303,
+                                            "end": 94800
+                                          },
+                                          "start": 92273,
+                                          "end": 94894
+                                        },
+                                        "start": 87700,
+                                        "end": 94985
+                                      },
+                                      "start": 58862,
+                                      "end": 95073
+                                    },
+                                    "start": 88470,
+                                    "end": 95158
+                                  },
+                                  "start": 92163,
+                                  "end": 95240
+                                },
+                                "start": 92060,
+                                "end": 95319
+                              },
+                              "start": 90429,
+                              "end": 95395
+                            },
+                            "start": 85416,
+                            "end": 95468
+                          },
+                          "start": 85663,
+                          "end": 95538
+                        },
+                        "start": 85643,
+                        "end": 95605
+                      },
+                      "start": 84862,
+                      "end": 95669
+                    },
+                    "start": 56650,
+                    "end": 95730
+                  },
+                  "start": 85589,
+                  "end": 95788
+                },
+                "start": 89216,
+                "end": 95843
+              },
+              "start": 35755,
+              "end": 95885
+            },
+            "panelCount": "pasture_n"
+          },
+          "templateElements": [
+            {
+              "type": "dropdown",
+              "name": "pasture_id",
+              "title": {
+                "default": "Pasture key",
+                "es": "Llave de pasto",
+                "ca": "Clau de pastura"
+              },
+              "description": {
+                "default": "Remember this key to identify this pasture in the movements survey",
+                "es": "Recuerde esta clave para identificar este pasto en la encuesta de movimientos",
+                "ca": "Recordeu aquesta clau per identificar aquesta pastura en l'enquesta de moviments"
+              },
+              "requiredIf": "{pasture_goes} = true and {survey_mode} = true",
+              "choices": [
+                {
+                  "value": "a",
+                  "text": {
+                    "default": "🌿 Pasture A",
+                    "es": "🌿 Pasto: A",
+                    "ca": "🌿 Pastura A"
+                  }
+                },
+                {
+                  "value": "b",
+                  "text": {
+                    "default": "🍂 Pasture B",
+                    "es": "🍂 Pastos B",
+                    "ca": "🍂 Pastura B"
+                  }
+                },
+                {
+                  "value": "c",
+                  "text": {
+                    "default": "🌾 Pasture C",
+                    "es": "🌾 Pastos C",
+                    "ca": "🌾 Pastura C"
+                  }
+                },
+                {
+                  "value": "d",
+                  "text": {
+                    "default": "🌱 Pasture D",
+                    "es": "🌱 Pastos D",
+                    "ca": "🌱 Pastura D"
+                  }
+                },
+                {
+                  "value": "e",
+                  "text": {
+                    "default": "☘️ Pasture E",
+                    "es": "☘️ Pastos E",
+                    "ca": "☘️ Pastura E"
+                  }
+                },
+                {
+                  "value": "f",
+                  "text": {
+                    "default": "🍁 Pasture F",
+                    "es": "🍁 Pastos F",
+                    "ca": "🍁 Pastura F"
+                  }
+                },
+                {
+                  "value": "g",
+                  "text": {
+                    "default": "🍃 Pasture G",
+                    "es": "🍃 Pastos G",
+                    "ca": "🍃 Pastura G"
+                  }
+                },
+                {
+                  "value": "h",
+                  "text": {
+                    "default": "🏞️ Pasture H",
+                    "es": "🏞️ Pasto H",
+                    "ca": "🏞️ Pastura H"
+                  }
+                },
+                {
+                  "value": "i",
+                  "text": {
+                    "default": "⛰️ Pasture I",
+                    "es": "⛰️ Pastos I",
+                    "ca": "⛰️ Pastura I"
+                  }
+                },
+                {
+                  "value": "j",
+                  "text": {
+                    "default": "🌄 Pasture J",
+                    "es": "🌄 Pastos J",
+                    "ca": "🌄 Pastura J"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "pasture_name",
+              "title": {
+                "default": "Pasture name",
+                "es": "Nombre de la pastura",
+                "ca": "Nom de la pastura"
+              },
+              "description": {
+                "default": "Open field to clarify which pasture you are referring to",
+                "es": "Campo abierto para aclarar a qué pasto se refiere",
+                "ca": "Camp obert per aclarir a quina pastura us referiu"
+              }
+            },
+            {
+              "type": "dropdown",
+              "name": "pasture_gid1",
+              "visibleIf": "{pasture_goes} = true",
+              "title": {
+                "default": "Region",
+                "es": "Región",
+                "ca": "Regió"
+              },
+              "choicesFromQuestion": "gid1",
+              "hideIfChoicesEmpty": true
+            },
+            {
+              "type": "dropdown",
+              "name": "pasture_gid2",
+              "visibleIf": "{panel.pasture_gid1} notempty",
+              "title": {
+                "default": "Province",
+                "es": "Provincia",
+                "ca": "Província"
+              },
+              "choices": [
+                {
+                  "value": "ESP.1.1_1",
+                  "text": {
+                    "default": "Almería",
+                    "ca": "Almeria"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.2_1",
+                  "text": {
+                    "default": "Cádiz",
+                    "ca": "Cadis"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.3_1",
+                  "text": {
+                    "default": "Córdoba",
+                    "ca": "Còrdova"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.4_1",
+                  "text": "Granada",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.5_1",
+                  "text": "Huelva",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.6_1",
+                  "text": "Jaén",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.7_1",
+                  "text": {
+                    "default": "Málaga",
+                    "ca": "Màlaga"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.8_1",
+                  "text": "Sevilla",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.2.1_1",
+                  "text": {
+                    "default": "Huesca",
+                    "ca": "Osca"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.2.2_1",
+                  "text": {
+                    "default": "Teruel",
+                    "ca": "Terol"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.2.3_1",
+                  "text": {
+                    "default": "Zaragoza",
+                    "ca": "Saragossa"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.3.1_1",
+                  "text": {
+                    "default": "Cantabria",
+                    "ca": "Cantàbria"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.3_1'"
+                },
+                {
+                  "value": "ESP.4.1_1",
+                  "text": "Albacete",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.2_1",
+                  "text": "Ciudad Real",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.3_1",
+                  "text": {
+                    "default": "Cuenca",
+                    "es": "Conquense"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.4_1",
+                  "text": "Guadalajara",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.5_1",
+                  "text": "Toledo",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.5.1_1",
+                  "text": {
+                    "default": "Ávila",
+                    "ca": "Àvila"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.2_1",
+                  "text": "Burgos",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.3_1",
+                  "text": {
+                    "default": "León",
+                    "ca": "Lleó"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.4_1",
+                  "text": {
+                    "default": "Palencia",
+                    "ca": "Palència"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.5_1",
+                  "text": "Salamanca",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.6_1",
+                  "text": {
+                    "default": "Segovia",
+                    "ca": "Segòvia"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.7_1",
+                  "text": {
+                    "default": "Soria",
+                    "ca": "Sòria"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.8_1",
+                  "text": "Valladolid",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.9_1",
+                  "text": "Zamora",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.6.1_1",
+                  "text": "Barcelona",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.2_1",
+                  "text": "Girona",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.3_1",
+                  "text": "Lleida",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.4_1",
+                  "text": "Tarragona",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.7.1_1",
+                  "text": "Ceuta",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.7_1'"
+                },
+                {
+                  "value": "ESP.7.2_1",
+                  "text": "Melilla",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.7_1'"
+                },
+                {
+                  "value": "ESP.8.1_1",
+                  "text": "Madrid",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.8_1'"
+                },
+                {
+                  "value": "ESP.9.1_1",
+                  "text": "Navarra",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.9_1'"
+                },
+                {
+                  "value": "ESP.10.1_1",
+                  "text": {
+                    "default": "Alicante",
+                    "es": "Alicantino",
+                    "ca": "Alacant"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.10.2_1",
+                  "text": {
+                    "default": "Castellón",
+                    "ca": "Castelló"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.10.3_1",
+                  "text": {
+                    "default": "Valencia",
+                    "ca": "València"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.11.1_1",
+                  "text": "Badajoz",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.11_1'"
+                },
+                {
+                  "value": "ESP.11.2_1",
+                  "text": {
+                    "default": "Cáceres",
+                    "ca": "Càceres"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.11_1'"
+                },
+                {
+                  "value": "ESP.12.1_1",
+                  "text": {
+                    "default": "A Coruña",
+                    "ca": "A Corunya"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.2_1",
+                  "text": "Lugo",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.3_1",
+                  "text": "Ourense",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.4_1",
+                  "text": "Pontevedra",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.13.1_1",
+                  "text": {
+                    "default": "Baleares",
+                    "ca": "Balears"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.13_1'"
+                },
+                {
+                  "value": "ESP.14.1_1",
+                  "text": "Las Palmas",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.14_1'"
+                },
+                {
+                  "value": "ESP.14.2_1",
+                  "text": "Santa Cruz de Tenerife",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.14_1'"
+                },
+                {
+                  "value": "ESP.15.1_1",
+                  "text": "La Rioja",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.15_1'"
+                },
+                {
+                  "value": "ESP.16.1_1",
+                  "text": {
+                    "default": "Álava",
+                    "ca": "Àlaba"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.16.2_1",
+                  "text": "Guipúzcoa",
+                  "visibleIf": "{panel.pasture_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.16.3_1",
+                  "text": {
+                    "default": "Vizcaya",
+                    "ca": "Biscaia"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.17.1_1",
+                  "text": {
+                    "default": "Asturias",
+                    "ca": "Astúries"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.17_1'"
+                },
+                {
+                  "value": "ESP.18.1_1",
+                  "text": {
+                    "default": "Murcia",
+                    "ca": "Múrcia"
+                  },
+                  "visibleIf": "{panel.pasture_gid1}='ESP.18_1'"
+                }
+              ],
+              "hideIfChoicesEmpty": true
+            },
+            {
+              "type": "checkbox",
+              "name": "pasture_waterpoints",
+              "visibleIf": "{pasture_goes} = true",
+              "title": {
+                "default": "What type of water points are available?",
+                "es": "¿Qué tipo de puntos de agua están disponibles?",
+                "ca": "Quin tipus de punts d'aigua hi ha disponibles?"
+              },
+              "choices": [
+                {
+                  "value": "low",
+                  "text": {
+                    "default": "Low waterer (<90cm)",
+                    "es": "Agua baja (<90cm)",
+                    "ca": "Abeurador baix (<90cm)"
+                  }
+                },
+                {
+                  "value": "high",
+                  "text": {
+                    "default": "High waterer (>90cm)",
+                    "es": "Bebedero alto (>90cm)",
+                    "ca": "Aigua alta (>90cm)"
+                  }
+                },
+                {
+                  "value": "waterhole",
+                  "text": {
+                    "default": "Waterhole",
+                    "es": "Pozo de agua",
+                    "ca": "Pou d'aigua"
+                  }
+                },
+                {
+                  "value": "river",
+                  "text": {
+                    "default": "River",
+                    "es": "Río",
+                    "ca": "Riu"
+                  }
+                },
+                {
+                  "value": "stream",
+                  "text": {
+                    "default": "Stream (seasonal flow)",
+                    "es": "Arroyo (caudal estacional)",
+                    "ca": "Rierol (cabal estacional)"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "pasture_waterpoints_types_n",
+              "title": {
+                "default": "Number of visit water point types",
+                "es": "Número de tipos de puntos de agua visitados",
+                "ca": "Nombre de tipus de punts d'aigua de visita"
+              },
+              "expression": "count({panel.pasture_waterpoints})"
+            },
+            {
+              "type": "panel",
+              "name": "pasture_waterpoints_p",
+              "visible": false,
+              "visibleIf": "{pasture_goes} = true",
+              "title": {
+                "default": "What percentage of the time do the cows use each type of water point? ",
+                "es": "¿Qué porcentaje del tiempo utilizan las vacas cada tipo de punto de agua? ",
+                "ca": "Quin percentatge del temps utilitzen les vaques cada tipus de punt d'aigua? "
+              },
+              "elements": [
+                {
+                  "type": "expression",
+                  "name": "pasture_sum_p",
+                  "title": {
+                    "default": "Sum percentage",
+                    "es": "Porcentaje de suma",
+                    "ca": "Percentatge de suma"
+                  },
+                  "titleLocation": "left",
+                  "hideNumber": true,
+                  "validators": [
+                    {
+                      "type": "expression",
+                      "text": {
+                        "default": "Must add up to 100%",
+                        "es": "Debe sumar hasta el 100%",
+                        "ca": "S'ha de sumar fins al 100%"
+                      },
+                      "expression": "{panel.pasture_sum_p} = 100 or {survey_mode} = false"
+                    }
+                  ],
+                  "expression": "{panel.pasture_low_p}+{panel.pasture_high_p}+{panel.pasture_waterhole_p}+{panel.pasture_river_p}+{panel.pasture_stream_p}",
+                  "format": "{0}%",
+                  "displayStyle": "decimal"
+                },
+                {
+                  "type": "text",
+                  "name": "pasture_low_p",
+                  "visibleIf": "{panel.pasture_waterpoints} contains 'low'",
+                  "title": {
+                    "default": "Low waterer (<90cm)",
+                    "es": "Agua baja (<90cm)",
+                    "ca": "Abeurador baix (<90cm)"
+                  },
+                  "titleLocation": "left",
+                  "resetValueIf": "{panel.pasture_waterpoints} contains 'low'",
+                  "setValueIf": "{panel.pasture_waterpoints} notcontains 'low'",
+                  "setValueExpression": "0",
+                  "defaultValueExpression": "100/{panel.pasture_waterpoints_types_n}",
+                  "inputType": "number",
+                  "min": 0,
+                  "max": 100,
+                  "step": 5
+                },
+                {
+                  "type": "text",
+                  "name": "pasture_high_p",
+                  "visibleIf": "{panel.pasture_waterpoints} contains 'high'",
+                  "title": {
+                    "default": "High waterer (<90cm)",
+                    "es": "Agua alta (<90cm)",
+                    "ca": "Aigua alta (<90cm)"
+                  },
+                  "titleLocation": "left",
+                  "resetValueIf": "{panel.pasture_waterpoints} contains 'high'",
+                  "setValueIf": "{panel.pasture_waterpoints} notcontains 'high'",
+                  "setValueExpression": "0",
+                  "defaultValueExpression": "100/{panel.pasture_waterpoints_types_n}",
+                  "inputType": "number",
+                  "min": 0,
+                  "max": 100,
+                  "step": 5
+                },
+                {
+                  "type": "text",
+                  "name": "pasture_waterhole_p",
+                  "visibleIf": "{panel.pasture_waterpoints} contains 'waterhole'",
+                  "title": {
+                    "default": "Waterhole",
+                    "es": "Pozo de agua",
+                    "ca": "Pou d'aigua"
+                  },
+                  "titleLocation": "left",
+                  "resetValueIf": "{panel.pasture_waterpoints} contains 'waterhole'",
+                  "setValueIf": "{panel.pasture_waterpoints} notcontains 'waterhole'",
+                  "setValueExpression": "0",
+                  "defaultValueExpression": "100/{panel.pasture_waterpoints_types_n}",
+                  "inputType": "number",
+                  "min": 0,
+                  "max": 100,
+                  "step": 5
+                },
+                {
+                  "type": "text",
+                  "name": "pasture_river_p",
+                  "visibleIf": "{panel.pasture_waterpoints} contains 'river'",
+                  "title": {
+                    "default": "River",
+                    "es": "Río",
+                    "ca": "Riu"
+                  },
+                  "titleLocation": "left",
+                  "resetValueIf": "{panel.pasture_waterpoints} contains 'river'",
+                  "setValueIf": "{panel.pasture_waterpoints} notcontains 'river'",
+                  "setValueExpression": "0",
+                  "defaultValueExpression": "100/{panel.pasture_waterpoints_types_n}",
+                  "inputType": "number",
+                  "min": 0,
+                  "max": 100,
+                  "step": 5
+                },
+                {
+                  "type": "text",
+                  "name": "pasture_stream_p",
+                  "visibleIf": "{panel.pasture_waterpoints} contains 'stream'",
+                  "title": {
+                    "default": "Stream (seasonal flow)",
+                    "es": "Arroyo (caudal estacional)",
+                    "ca": "Rierol (cabal estacional)"
+                  },
+                  "titleLocation": "left",
+                  "resetValueIf": "{panel.pasture_waterpoints} contains 'stream'",
+                  "setValueIf": "{panel.pasture_waterpoints} notcontains 'stream'",
+                  "setValueExpression": "0",
+                  "defaultValueExpression": "100/{panel.pasture_waterpoints_types_n}",
+                  "inputType": "number",
+                  "min": 0,
+                  "max": 100,
+                  "step": 5
+                }
+              ]
+            },
+            {
+              "type": "boolean",
+              "name": "pasture_mud",
+              "visibleIf": "{panel.pasture_waterpoints} anyof ['low', 'high']",
+              "title": {
+                "default": "Is there usually mud around the waterers?",
+                "es": "¿Suele haber barro alrededor de los bebederos?",
+                "ca": "Normalment hi ha fang al voltant dels abeuradors?"
+              }
+            },
+            {
+              "type": "dropdown",
+              "name": "pasture_mud_p",
+              "visibleIf": "{panel.pasture_mud}  = true",
+              "title": {
+                "default": "What is the percentage of waterers with mud around them?",
+                "es": "¿Cuál es el porcentaje de bebederos con barro a su alrededor?",
+                "ca": "Quin és el percentatge d'abeuradors amb fang al seu voltant?"
+              },
+              "choices": [
+                {
+                  "value": "10%",
+                  "text": {
+                    "es": "10%",
+                    "ca": "10%"
+                  }
+                },
+                {
+                  "value": "20%",
+                  "text": {
+                    "es": "20%",
+                    "ca": "20%"
+                  }
+                },
+                {
+                  "value": "30%",
+                  "text": {
+                    "es": "30%",
+                    "ca": "30%"
+                  }
+                },
+                {
+                  "value": "40%",
+                  "text": {
+                    "es": "40%",
+                    "ca": "40%"
+                  }
+                },
+                {
+                  "value": "50%",
+                  "text": {
+                    "es": "50%",
+                    "ca": "50%"
+                  }
+                },
+                {
+                  "value": "60%",
+                  "text": {
+                    "es": "60%",
+                    "ca": "60%"
+                  }
+                },
+                {
+                  "value": "70%",
+                  "text": {
+                    "es": "70%",
+                    "ca": "70%"
+                  }
+                },
+                {
+                  "value": "80%",
+                  "text": {
+                    "es": "80%",
+                    "ca": "80%"
+                  }
+                },
+                {
+                  "value": "90%",
+                  "text": {
+                    "es": "90%",
+                    "ca": "90%"
+                  }
+                },
+                {
+                  "value": "100%",
+                  "text": {
+                    "es": "100%",
+                    "ca": "100%"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "comment",
+              "name": "pasture_comments",
+              "title": {
+                "default": "Comments about pasture (optional)",
+                "es": "Comentarios sobre el pasto (opcional)",
+                "ca": "Comentaris sobre pastures (opcional)"
+              },
+              "validators": [
+                {
+                  "type": "expression",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                  },
+                  "expression": "\"^[a-zA-Z0-9\\\\\\\\s.,!?()\\\\\\\\\\\\\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$\""
+                }
+              ],
+              "autoGrow": true
+            }
+          ],
+          "templateTitle": {
+            "default": "Pasture {panelIndex}",
+            "es": "Pastos {panelIndex}",
+            "ca": "Pastura {panelIndex}"
+          },
+          "templateTabTitle": "",
+          "panelCount": 1,
+          "maxPanelCount": 10
+        }
+      ]
+    },
+    {
+      "name": "visit",
+      "title": {
+        "default": "People visits",
+        "es": "Visitas de personas",
+        "ca": "Visites de persones"
+      },
+      "elements": [
+        {
+          "type": "paneldynamic",
+          "name": "visit_info",
+          "title": {
+            "default": "Farm visitors",
+            "es": "Visitantes de la granja",
+            "ca": "Visitants de la granja"
+          },
+          "description": {
+            "default": "People entering the barn or having direct contact with the animals",
+            "es": "Personas que ingresan al establo o tienen contacto directo con los animales",
+            "ca": "Persones que entren al graner o tenen contacte directe amb els animals"
+          },
+          "templateElements": [
+            {
+              "type": "expression",
+              "name": "visit_panel_n",
+              "visible": false,
+              "title": "visit_panel_n",
+              "expression": "{panelIndex}"
+            },
+            {
+              "type": "text",
+              "name": "visit_name",
+              "title": {
+                "default": "Visitor",
+                "es": "Visitante",
+                "ca": "Visitant"
+              },
+              "description": {
+                "default": "Open field to clarify which visitor you are referring to",
+                "es": "Campo abierto para aclarar a qué visitante se refiere",
+                "ca": "Camp obert per aclarir a quin visitant et refereixes"
+              },
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                  },
+                  "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "visit_type",
+              "title": {
+                "default": "Type of visitor",
+                "es": "Tipo de visitante",
+                "ca": "Tipus de visitant"
+              },
+              "choices": [
+                {
+                  "value": "vet",
+                  "text": {
+                    "default": "External veterinarians",
+                    "es": "Veterinarios externos",
+                    "ca": "Veterinaris externs"
+                  }
+                },
+                {
+                  "value": "other_farmer",
+                  "text": {
+                    "default": "Other farmers",
+                    "es": "Otros agricultores",
+                    "ca": "Altres agricultors"
+                  }
+                },
+                {
+                  "value": "animal_professional",
+                  "text": {
+                    "default": "Other animal professionals (e.g. hoof trimmer)",
+                    "es": "Otros profesionales de la ganadería (por ejemplo, recortador de pezuñas)",
+                    "ca": "Altres professionals dels animals (per exemple, tallador de peülles)"
+                  }
+                },
+                {
+                  "value": "other_professional",
+                  "text": {
+                    "default": "Other professionals (e.g. electrician, plumber...)",
+                    "es": "Otros profesionales (por ejemplo, electricista, fontanero...)",
+                    "ca": "Altres professionals (per exemple, electricista, lampista...)"
+                  }
+                },
+                {
+                  "value": "farm_worker",
+                  "text": {
+                    "default": "Farm workers who visit or work with other livestock",
+                    "es": "Trabajadores agrícolas que visitan o trabajan con otros animales",
+                    "ca": "Treballadors agrícoles que visiten o treballen amb altres ramaders"
+                  }
+                }
+              ],
+              "choicesFromQuestionMode": "selected",
+              "allowClear": false
+            },
+            {
+              "type": "text",
+              "name": "visit_frequency",
+              "title": {
+                "default": "Annual frequency (times/year)",
+                "es": "Frecuencia anual (veces/año)",
+                "ca": "Periodicitat anual (èpoques/any)"
+              },
+              "description": {
+                "default": "i.e. each two days =180 , weekly = 52,  monthly = 12,  each two years = 0.5",
+                "es": "es decir, cada dos días = 180, semanalmente = 52, mensual = 12, cada dos años = 0,5",
+                "ca": "és a dir, cada dos dies = 180, setmanal = 52, mensual = 12, cada dos anys = 0,5"
+              },
+              "inputType": "number",
+              "min": 0,
+              "max": 365
+            },
+            {
+              "type": "checkbox",
+              "name": "visit_livestock_type",
+              "visibleIf": "{panel.visit_type} anyof ['other_farmer', 'farm_worker', 'other', 'farmer_visit']",
+              "title": {
+                "default": "What type of livestock do they have contact with?",
+                "es": "¿Con qué tipo de ganado tienen contacto?",
+                "ca": "Amb quin tipus de bestiar tenen contacte?"
+              },
+              "setValueIf": "{panel.visit_panel_n} anyof ['vet', 'animal_professional ']",
+              "setValueExpression": "cattle",
+              "choices": [
+                {
+                  "value": "cattle",
+                  "text": {
+                    "default": "Cattle",
+                    "es": "Ganado",
+                    "ca": "Bestiar"
+                  }
+                },
+                {
+                  "value": "sheep",
+                  "text": {
+                    "default": "Sheep",
+                    "es": "Oveja",
+                    "ca": "Ovella"
+                  }
+                },
+                {
+                  "value": "goats",
+                  "text": {
+                    "default": "Goats",
+                    "es": "Caprinos",
+                    "ca": "Cabres"
+                  }
+                },
+                {
+                  "value": "pigs",
+                  "text": {
+                    "default": "Pigs",
+                    "es": "Cerdos",
+                    "ca": "Porcs"
+                  }
+                },
+                {
+                  "value": "poultry",
+                  "text": {
+                    "default": "Poultry",
+                    "es": "Ave de corral",
+                    "ca": "Aviram"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "panel",
+              "name": "visit_routine",
+              "title": {
+                "default": "When they enter the barn or come in contact with your animals...",
+                "es": "Cuando entran en el establo o entran en contacto con sus animales...",
+                "ca": "Quan entren al graner o entren en contacte amb els teus animals..."
+              },
+              "elements": [
+                {
+                  "type": "radiogroup",
+                  "name": "visit_boots_enter",
+                  "title": {
+                    "default": "Do they wear boots that are only used on this farm?\n",
+                    "es": "¿Usan botas que solo se usan en esta granja?\n",
+                    "ca": "Porten botes que només s'utilitzen en aquesta granja?\n"
+                  },
+                  "choices": [
+                    {
+                      "value": "never",
+                      "text": {
+                        "default": "🟢 Always",
+                        "es": "🟢 Siempre",
+                        "ca": "🟢 Sempre"
+                      }
+                    },
+                    {
+                      "value": "sometimes",
+                      "text": {
+                        "default": "🟡 Sometimes",
+                        "es": "🟡 A veces",
+                        "ca": "🟡 De vegades"
+                      }
+                    },
+                    {
+                      "value": "always",
+                      "text": {
+                        "default": "🔴 Never",
+                        "es": "🔴 Nunca",
+                        "ca": "🔴 Mai"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "radiogroup",
+                  "name": "visit_boots_cleaning",
+                  "visibleIf": "{panel.visit_boots_enter} anyof ['sometimes', 'always']",
+                  "title": {
+                    "default": "If they wear boots used on other farms, are they clean and disinfected when they enter the farm?",
+                    "es": "Si usan botas que se usan en otras granjas, ¿están limpias y desinfectadas cuando ingresan a la granja?",
+                    "ca": "Si porten botes utilitzades en altres granges, estan netes i desinfectades quan entren a la granja?"
+                  },
+                  "choices": [
+                    {
+                      "value": "always",
+                      "text": {
+                        "default": "🟢 Always",
+                        "es": "🟢 Siempre",
+                        "ca": "🟢 Sempre"
+                      }
+                    },
+                    {
+                      "value": "sometimes",
+                      "text": {
+                        "default": "🟡 Sometimes",
+                        "es": "🟡 A veces",
+                        "ca": "🟡 De vegades"
+                      }
+                    },
+                    {
+                      "value": "never",
+                      "text": {
+                        "default": "🔴 Never",
+                        "es": "🔴 Nunca",
+                        "ca": "🔴 Mai"
+                      }
+                    },
+                    {
+                      "value": "unk",
+                      "text": {
+                        "default": "Don't know",
+                        "es": "No sé",
+                        "ca": "No sé"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "radiogroup",
+                  "name": "visit_equipment_enter",
+                  "title": {
+                    "default": "Do they use equipment that is only used on this farm?\n",
+                    "es": "¿Utilizan equipos que solo se utilizan en esta granja?\n",
+                    "ca": "Utilitzen equips que només s'utilitzen en aquesta granja?\n"
+                  },
+                  "choices": [
+                    {
+                      "value": "never",
+                      "text": {
+                        "default": "🟢 Always",
+                        "es": "🟢 Siempre",
+                        "ca": "🟢 Sempre"
+                      }
+                    },
+                    {
+                      "value": "sometimes",
+                      "text": {
+                        "default": "🟡 Sometimes",
+                        "es": "🟡 A veces",
+                        "ca": "🟡 De vegades"
+                      }
+                    },
+                    {
+                      "value": "always",
+                      "text": {
+                        "default": "🔴 Never",
+                        "es": "🔴 Nunca",
+                        "ca": "🔴 Mai"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "radiogroup",
+                  "name": "visit_equipment_cleaning",
+                  "visibleIf": "{panel.visit_equipment_enter} anyof ['always', 'sometimes']",
+                  "title": {
+                    "default": "If they bring equipment used on other farms, is it clean and disinfected?",
+                    "es": "Si traen equipos usados en otras granjas, ¿están limpios y desinfectados?",
+                    "ca": "Si porten equips utilitzats en altres granges, estan nets i desinfectats?"
+                  },
+                  "choices": [
+                    {
+                      "value": "always",
+                      "text": {
+                        "default": "🟢 Always",
+                        "es": "🟢 Siempre",
+                        "ca": "🟢 Sempre"
+                      }
+                    },
+                    {
+                      "value": "sometimes",
+                      "text": {
+                        "default": "🟡 Sometimes",
+                        "es": "🟡 A veces",
+                        "ca": "🟡 De vegades"
+                      }
+                    },
+                    {
+                      "value": "never",
+                      "text": {
+                        "default": "🔴 Never",
+                        "es": "🔴 Nunca",
+                        "ca": "🔴 Mai"
+                      }
+                    },
+                    {
+                      "value": "unk",
+                      "text": {
+                        "default": "Don't know",
+                        "es": "No sé",
+                        "ca": "No sé"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "templateTabTitle": "",
+          "maxPanelCount": 10,
+          "panelAddText": {
+            "default": "Add new",
+            "es": "Agregar nuevo",
+            "ca": "Afegeix nou"
+          }
+        }
+      ]
+    },
+    {
+      "name": "visits_veh",
+      "title": {
+        "default": "Vehicle visits",
+        "es": "Visitas en vehículos",
+        "ca": "Visites de vehicles"
+      },
+      "elements": [
+        {
+          "type": "paneldynamic",
+          "name": "visit_veh_info",
+          "title": {
+            "default": "Vehicles entering the farm",
+            "es": "Vehículos que entran en la granja",
+            "ca": "Vehicles que entren a la granja"
+          },
+          "templateElements": [
+            {
+              "type": "expression",
+              "name": "visit_veh_panel_n",
+              "visible": false,
+              "title": "visit_veh_panel_n",
+              "expression": "{panelIndex}"
+            },
+            {
+              "type": "text",
+              "name": "visit_veh_name",
+              "title": {
+                "default": "Vehicle",
+                "es": "Vehículo"
+              },
+              "description": {
+                "default": "Open field to clarify which vehicle you are referring to",
+                "es": "Campo abierto para aclarar a qué vehículo se refiere",
+                "ca": "Camp obert per aclarir a quin vehicle et refereixes"
+              },
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                  },
+                  "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "visit_veh_type",
+              "title": {
+                "default": "Type of vehicle",
+                "es": "Tipo de vehículo",
+                "ca": "Tipus de vehicle"
+              },
+              "choices": [
+                {
+                  "value": "slaughter_veh",
+                  "text": {
+                    "default": "Slaughterhouse vehicle",
+                    "es": "Vehículo de matadero",
+                    "ca": "Vehicle d'escorxador"
+                  }
+                },
+                {
+                  "value": "rendering_veh",
+                  "text": {
+                    "default": "Rendering vehicle",
+                    "es": "Vehículo de renderizado",
+                    "ca": "Vehicle de renderització"
+                  }
+                },
+                {
+                  "value": "feed_veh",
+                  "text": {
+                    "default": "Feed vehicle",
+                    "es": "Vehículo de alimentación",
+                    "ca": "Vehicle d'alimentació"
+                  }
+                },
+                {
+                  "value": "milk_veh",
+                  "text": {
+                    "default": "Milk collection vehicle",
+                    "es": "Vehículo de recogida de leche",
+                    "ca": "Vehicle de recollida de llet"
+                  }
+                },
+                {
+                  "value": "calf_veh",
+                  "text": {
+                    "default": "Calf transport vehicle",
+                    "es": "Vehículo de transporte de terneros",
+                    "ca": "Vehicle de transport de vedells"
+                  }
+                },
+                {
+                  "value": "adult_veh",
+                  "text": {
+                    "default": "Adult cattle transport vehicle",
+                    "es": "Vehículo de transporte de ganado adulto",
+                    "ca": "Vehicle de transport de bestiar adult"
+                  }
+                }
+              ],
+              "choicesFromQuestionMode": "selected",
+              "allowClear": false
+            },
+            {
+              "type": "boolean",
+              "name": "visit_veh_own",
+              "visibleIf": "{panel.visit_veh_type} anyof ['slaughter_veh', 'calf_veh', 'adult_veh']",
+              "title": {
+                "default": "Is it a vehicle that you own and do not share with anyone?",
+                "es": "¿Es un vehículo que posee y no comparte con nadie?",
+                "ca": "És un vehicle que posseeixes i no comparteixes amb ningú?"
+              },
+              "description": {
+                "default": "i.e. only animals from your farm use it",
+                "es": "es decir, solo los animales de su granja lo utilizan",
+                "ca": "és a dir, només els animals de la vostra granja l'utilitzen"
+              },
+              "setValueIf": "{panel.visit_veh_type} anyof ['rendering_veh', 'feed_veh', 'milk_veh']",
+              "setValueExpression": "false"
+            },
+            {
+              "type": "text",
+              "name": "visit_veh_frequency",
+              "title": {
+                "default": "Annual frequency (times/year)",
+                "es": "Frecuencia anual (veces/año)",
+                "ca": "Periodicitat anual (èpoques/any)"
+              },
+              "description": {
+                "default": "i.e. each two days =180 , weekly = 52,  monthly = 12,  each two years = 0.5",
+                "es": "es decir, cada dos días = 180, semanalmente = 52, mensual = 12, cada dos años = 0,5",
+                "ca": "és a dir, cada dos dies = 180, setmanal = 52, mensual = 12, cada dos anys = 0,5"
+              },
+              "inputType": "number",
+              "min": 0,
+              "max": 365
+            },
+            {
+              "type": "boolean",
+              "name": "visit_veh_direct",
+              "visibleIf": "{panel.visit_veh_type} anyof ['slaughter_veh', 'calf_veh', 'adult_veh'] and {panel.visit_veh_own} = false",
+              "title": {
+                "default": "Does the driver come into contact with your animals?",
+                "es": "¿El conductor entra en contacto con sus animales?",
+                "ca": "El conductor entra en contacte amb els teus animals?"
+              }
+            },
+            {
+              "type": "boolean",
+              "name": "visit_veh_close",
+              "visibleIf": "{panel.visit_veh_type} anyof ['slaughter_veh', 'calf_veh', 'adult_veh'] and {panel.visit_veh_own} = false and {panel.visit_veh_direct} = false",
+              "title": {
+                "default": "Does the driver help to load the animals?",
+                "es": "¿El conductor ayuda a cargar los animales?",
+                "ca": "El conductor ajuda a carregar els animals?"
+              }
+            },
+            {
+              "type": "radiogroup",
+              "name": "visit_veh_boots_enter",
+              "visibleIf": "({panel.visit_veh_close} = true or {panel.visit_veh_direct} = true) and {panel.visit_veh_own} = false ",
+              "title": {
+                "default": "Do they wear boots that are only used on this farm?",
+                "es": "¿Usan botas que solo se usan en esta granja?",
+                "ca": "Porten botes que només s'utilitzen en aquesta granja?"
+              },
+              "choices": [
+                {
+                  "value": "never",
+                  "text": {
+                    "default": "🟢 Always",
+                    "es": "🟢 Siempre",
+                    "ca": "🟢 Sempre"
+                  }
+                },
+                {
+                  "value": "sometimes",
+                  "text": {
+                    "default": "🟡 Sometimes",
+                    "es": "🟡 A veces",
+                    "ca": "🟡 De vegades"
+                  }
+                },
+                {
+                  "value": "always",
+                  "text": {
+                    "default": "🔴 Never",
+                    "es": "🔴 Nunca",
+                    "ca": "🔴 Mai"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "visit_veh_boots_cleaning",
+              "visibleIf": "{panel.visit_veh_boots_enter} anyof ['sometimes', 'always'] and {panel.visit_veh_own} = false",
+              "title": {
+                "default": "If they wear boots used on other farms, are they clean and disinfected when they enter the farm?",
+                "es": "Si usan botas que se usan en otras granjas, ¿están limpias y desinfectadas cuando ingresan a la granja?",
+                "ca": "Si porten botes utilitzades en altres granges, estan netes i desinfectades quan entren a la granja?"
+              },
+              "choices": [
+                {
+                  "value": "always",
+                  "text": {
+                    "default": "🟢 Always",
+                    "es": "🟢 Siempre",
+                    "ca": "🟢 Sempre"
+                  }
+                },
+                {
+                  "value": "sometimes",
+                  "text": {
+                    "default": "🟡 Sometimes",
+                    "es": "🟡 A veces",
+                    "ca": "🟡 De vegades"
+                  }
+                },
+                {
+                  "value": "never",
+                  "text": {
+                    "default": "🔴 Never",
+                    "es": "🔴 Nunca",
+                    "ca": "🔴 Mai"
+                  }
+                },
+                {
+                  "value": "unk",
+                  "text": {
+                    "default": "Don't know",
+                    "es": "No sé",
+                    "ca": "No sé"
+                  }
+                }
+              ]
+            }
+          ],
+          "templateTabTitle": "",
+          "maxPanelCount": 10
+        }
+      ]
+    },
+    {
+      "name": "trasnport",
+      "title": {
+        "default": "Animal transport",
+        "es": "Transporte de animales",
+        "ca": "Transport d'animals"
+      },
+      "navigationTitle": {
+        "default": "Animal transport",
+        "es": "Transporte de animales",
+        "ca": "Transport d'animals"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "veh_farm",
+          "title": {
+            "default": "Does the farm have its own vehicles for animal transport?",
+            "es": "¿La granja dispone de vehículos propios para el transporte de animales?",
+            "ca": "La granja disposa de vehicles propis per al transport d'animals?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "veh_n",
+          "visibleIf": "{veh_farm} = true",
+          "title": {
+            "default": "Number of vehicles",
+            "es": "Número de vehículos",
+            "ca": "Nombre de vehicles"
+          },
+          "defaultValue": 1,
+          "inputType": "number",
+          "min": 1,
+          "max": 10,
+          "maxErrorText": {
+            "default": "You can only register up to {0} vehicles. Please register the {0} vehicles you use most often.",
+            "es": "Solo se pueden matricular hasta {0} vehículos. Registre los {0} vehículos que utiliza con más frecuencia.",
+            "ca": "Només es poden registrar fins a {0} vehicles. Si us plau, registreu els vehicles {0} que utilitzeu més sovint."
+          },
+          "step": 1
+        },
+        {
+          "type": "paneldynamic",
+          "name": "veh_info",
+          "visibleIf": "{veh_farm} = true",
+          "title": {
+            "default": "Vehicle information",
+            "es": "Información del vehículo",
+            "ca": "Informació del vehicle"
+          },
+          "templateElements": [
+            {
+              "type": "text",
+              "name": "veh_name",
+              "title": {
+                "default": "Vehicle name",
+                "es": "Nombre del vehículo",
+                "ca": "Nom del vehicle"
+              },
+              "description": {
+                "default": "Open field to clarify which vehicle you are referring to",
+                "es": "Campo abierto para aclarar a qué vehículo se refiere",
+                "ca": "Camp obert per aclarir a quin vehicle et refereixes"
+              },
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": {
+                    "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                    "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                    "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+                  },
+                  "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "veh_id",
+              "title": {
+                "default": "Vehicle key ",
+                "es": "Llave del vehículo ",
+                "ca": "Clau del vehicle "
+              },
+              "description": {
+                "default": "Remember this key to identify this vehicle in the movements survey",
+                "es": "Recuerde esta clave para identificar este vehículo en el levantamiento de movimientos",
+                "ca": "Recorda aquesta clau per identificar aquest vehicle a l'enquesta de moviments"
+              },
+              "requiredIf": "{veh_farm} = true and {survey_mode} = true",
+              "choices": [
+                {
+                  "value": "a",
+                  "text": {
+                    "default": "🚚 Vehicle A",
+                    "es": "🚚 Vehículo A"
+                  }
+                },
+                {
+                  "value": "b",
+                  "text": {
+                    "default": "🛻 Vehicle B",
+                    "es": "🛻 Vehículo B"
+                  }
+                },
+                {
+                  "value": "c",
+                  "text": {
+                    "default": "🚛 Vehicle C",
+                    "es": "🚛 Vehículo C"
+                  }
+                },
+                {
+                  "value": "d",
+                  "text": {
+                    "default": "🚌 Vehicle D",
+                    "es": "🚌 Vehículo D"
+                  }
+                },
+                {
+                  "value": "e",
+                  "text": {
+                    "default": "🛺 Vehicle E",
+                    "es": "🛺 Vehículo E"
+                  }
+                },
+                {
+                  "value": "f",
+                  "text": {
+                    "default": "🚜 Vehicle F",
+                    "es": "🚜 Vehículo F"
+                  }
+                },
+                {
+                  "value": "g",
+                  "text": {
+                    "default": "🚙 Vehicle G",
+                    "es": "🚙 Vehículo G"
+                  }
+                },
+                {
+                  "value": "h",
+                  "text": {
+                    "default": "🚐 Vehicle H",
+                    "es": "🚐 Vehículo H"
+                  }
+                },
+                {
+                  "value": "i",
+                  "text": {
+                    "default": "🚗 Vehicle H",
+                    "es": "🚗 Vehículo H"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "name": "veh_size",
+              "title": {
+                "default": "Vehicle size (m2)",
+                "es": "Tamaño del vehículo (m2)",
+                "ca": "Mida del vehicle (m2)"
+              },
+              "inputType": "number",
+              "min": 1,
+              "max": 100
+            },
+            {
+              "type": "boolean",
+              "name": "veh_otherfarms",
+              "title": {
+                "default": "Is the vehicle shared with other ruminant farms?",
+                "es": "¿Se comparte el vehículo con otras granjas de rumiantes?",
+                "ca": "El vehicle es comparteix amb altres granges de remugants?"
+              }
+            },
+            {
+              "type": "checkbox",
+              "name": "veh_otherfarms_species",
+              "visibleIf": "{panel.veh_otherfarms} = TRUE",
+              "title": {
+                "default": "With farms of which species?",
+                "es": "¿Con granjas de qué especie?",
+                "ca": "Amb granges de quines espècies?"
+              },
+              "choices": [
+                {
+                  "value": "cattle",
+                  "text": {
+                    "default": "Cattle",
+                    "es": "Ganado",
+                    "ca": "Bestiar"
+                  }
+                },
+                {
+                  "value": "sheep",
+                  "text": {
+                    "default": "Sheep",
+                    "es": "Oveja",
+                    "ca": "Ovella"
+                  }
+                },
+                {
+                  "value": "goats",
+                  "text": {
+                    "default": "Goats",
+                    "es": "Caprinos",
+                    "ca": "Cabres"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "panel",
+              "name": "veh_otherfarms_n",
+              "visibleIf": "{panel.veh_otherfarms} = TRUE",
+              "title": {
+                "default": "Number of farms",
+                "es": "Número de explotaciones",
+                "ca": "Nombre de granges"
+              },
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "veh_otherfarms_cattle_n",
+                  "visibleIf": "{panel.veh_otherfarms_species} contains 'cattle'",
+                  "title": {
+                    "default": "Cattle farms",
+                    "es": "Explotaciones ganaderas",
+                    "ca": "Granges ramaderes"
+                  },
+                  "inputType": "number",
+                  "step": 1
+                },
+                {
+                  "type": "text",
+                  "name": "veh_otherfarms_sruminants_n",
+                  "visibleIf": "{panel.veh_otherfarms_species} anyof ['sheep', 'goats']",
+                  "title": {
+                    "default": "Small ruminants farms",
+                    "es": "Pequeñas granjas de rumiantes",
+                    "ca": "Granges de petits remugants"
+                  },
+                  "inputType": "number"
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "veh_cleaning",
+              "title": {
+                "default": "When is the vehicle cleaned?",
+                "es": "¿Cuándo se limpia el vehículo?",
+                "ca": "Quan es neteja el vehicle?"
+              },
+              "choices": [
+                {
+                  "value": "each",
+                  "text": {
+                    "default": "Each time the vehicle is used",
+                    "es": "Cada vez que se utiliza el vehículo",
+                    "ca": "Cada vegada que s'utilitza el vehicle"
+                  }
+                },
+                {
+                  "value": "frequency",
+                  "text": {
+                    "default": "From time to  time",
+                    "es": "De vez en cuando",
+                    "ca": "De tant en tant"
+                  }
+                },
+                {
+                  "value": "never",
+                  "text": {
+                    "default": "Never",
+                    "es": "Nunca",
+                    "ca": "Mai"
+                  }
+                }
+              ]
+            }
+          ],
+          "templateTitle": {
+            "default": "Vehicle {panelIndex}",
+            "es": "Vehículo {panelIndex}"
+          },
+          "panelCount": 1,
+          "maxPanelCount": 10
+        }
+      ]
+    },
+    {
+      "name": "complete_survey",
+      "title": {
+        "default": "Complete survey",
+        "es": "Encuesta completa",
+        "ca": "Completa l'enquesta"
+      },
+      "elements": [
+        {
+          "type": "comment",
+          "name": "complete_comments",
+          "title": {
+            "default": "Additional comments and feedback",
+            "es": "Comentarios y opiniones adicionales",
+            "ca": "Comentaris i comentaris addicionals"
+          },
+          "validators": [
+            {
+              "type": "regex",
+              "text": {
+                "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+              },
+              "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+            }
+          ],
+          "autoGrow": true
+        }
+      ]
+    },
+    {
+      "name": "gid_regions",
+      "visible": false,
+      "elements": [
+        {
+          "type": "expression",
+          "name": "gid_version",
+          "visible": false,
+          "title": {
+            "default": "Gid version",
+            "es": "Versión Gid",
+            "ca": "Versió Gid"
+          },
+          "clearIfInvisible": "none",
+          "expression": "v1_1"
+        },
+        {
+          "type": "dropdown",
+          "name": "gid0",
+          "title": {
+            "default": "Country",
+            "es": "País",
+            "ca": "País"
+          },
+          "setValueIf": "{farm_gid0} notempty",
+          "setValueExpression": "{farm_gid0} ",
+          "choices": [
+            {
+              "value": "CWL",
+              "text": {
+                "default": "Cowland",
+                "es": "Tierras de vacas"
+              }
+            },
+            {
+              "value": "ESP",
+              "text": {
+                "default": "Spain",
+                "es": "España",
+                "ca": "Espanya"
+              }
+            },
+            {
+              "value": "FRA",
+              "text": {
+                "default": "France",
+                "es": "Francia",
+                "ca": "França"
+              }
+            },
+            {
+              "value": "AND",
+              "text": "Andorra"
+            },
+            {
+              "value": "AUT",
+              "text": {
+                "default": "Austria",
+                "ca": "Àustria"
+              }
+            },
+            {
+              "value": "BEL",
+              "text": {
+                "default": "Belgium",
+                "es": "Bélgica",
+                "ca": "Bèlgica"
+              }
+            },
+            {
+              "value": "DEU",
+              "text": {
+                "default": "Germany",
+                "es": "Alemania",
+                "ca": "Alemanya"
+              }
+            },
+            {
+              "value": "FIN",
+              "text": {
+                "default": "Finland",
+                "es": "Finlandia",
+                "ca": "Finlàndia"
+              }
+            },
+            {
+              "value": "EST",
+              "text": {
+                "default": "Estonia",
+                "ca": "Estònia"
+              }
+            },
+            {
+              "value": "GRC",
+              "text": {
+                "default": "Greece",
+                "es": "Grecia",
+                "ca": "Grècia"
+              }
+            },
+            {
+              "value": "ITA",
+              "text": {
+                "default": "Italy",
+                "es": "Italia",
+                "ca": "Itàlia"
+              }
+            },
+            {
+              "value": "LUX",
+              "text": {
+                "default": "Luxembourg",
+                "es": "Luxemburgo",
+                "ca": "Luxemburg"
+              }
+            },
+            {
+              "value": "POL",
+              "text": {
+                "default": "Poland",
+                "es": "Polonia",
+                "ca": "Polònia"
+              }
+            },
+            {
+              "value": "PRT",
+              "text": "Portugal"
+            }
+          ]
+        },
+        {
+          "type": "dropdown",
+          "name": "gid1",
+          "visibleIf": "{gid0} notempty",
+          "title": {
+            "default": "Region",
+            "es": "Región",
+            "ca": "Regió"
+          },
+          "setValueIf": "{farm_gid1} notempty",
+          "setValueExpression": "{farm_gid1} ",
+          "choices": [
+            {
+              "value": "AUT.1_1",
+              "text": "Burgenland",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.2_1",
+              "text": "Kärnten",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.3_1",
+              "text": "Niederösterreich",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.4_1",
+              "text": "Oberösterreich",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.5_1",
+              "text": {
+                "default": "Salzburg",
+                "es": "Salzburgo"
+              },
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.6_1",
+              "text": "Steiermark",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.7_1",
+              "text": "Tirol",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.8_1",
+              "text": "Vorarlberg",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "AUT.9_1",
+              "text": "Wien",
+              "visibleIf": "{gid0}='AUT'"
+            },
+            {
+              "value": "BEL.1_1",
+              "text": "Bruxelles",
+              "visibleIf": "{gid0}='BEL'"
+            },
+            {
+              "value": "BEL.2_1",
+              "text": "Vlaanderen",
+              "visibleIf": "{gid0}='BEL'"
+            },
+            {
+              "value": "BEL.3_1",
+              "text": {
+                "default": "Wallonie",
+                "es": "Valonia",
+                "ca": "Valònia"
+              },
+              "visibleIf": "{gid0}='BEL'"
+            },
+            {
+              "value": "DEU.1_1",
+              "text": {
+                "default": "Baden-Württemberg",
+                "es": "Baden-Wurtemberg"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.2_1",
+              "text": "Bayern",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.3_1",
+              "text": {
+                "default": "Berlin",
+                "es": "Berlín",
+                "ca": "Berlín"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.4_1",
+              "text": {
+                "default": "Brandenburg",
+                "es": "Brandeburgo"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.5_1",
+              "text": "Bremen",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.6_1",
+              "text": {
+                "default": "Hamburg",
+                "es": "Hamburgo"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.7_1",
+              "text": "Hessen",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.8_1",
+              "text": {
+                "default": "Mecklenburg-Vorpommern",
+                "es": "Mecklemburgo-Pomerania Occidental",
+                "ca": "Mecklenburg-Pomerania Occidental"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.9_1",
+              "text": "Niedersachsen",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.10_1",
+              "text": {
+                "default": "Nordrhein-Westfalen",
+                "es": "Renania del Norte-Westfalia",
+                "ca": "Renània Septentrional-Westfàlia"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.11_1",
+              "text": {
+                "default": "Rheinland-Pfalz",
+                "es": "Renania-Palatinado",
+                "ca": "Renània-Palatinat"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.12_1",
+              "text": {
+                "default": "Saarland",
+                "es": "Sarre",
+                "ca": "Sarre"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.14_1",
+              "text": "Sachsen",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.13_1",
+              "text": {
+                "default": "Sachsen-Anhalt",
+                "es": "Sajonia-Anhalt",
+                "ca": "Sassonia-Anhalt"
+              },
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.15_1",
+              "text": "Schleswig-Holstein",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "DEU.16_1",
+              "text": "Thüringen",
+              "visibleIf": "{gid0}='DEU'"
+            },
+            {
+              "value": "ESP.1_1",
+              "text": {
+                "default": "Andalucía",
+                "ca": "Andalusia"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.2_1",
+              "text": {
+                "default": "Aragón",
+                "ca": "Aragó"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.3_1",
+              "text": {
+                "default": "Cantabria",
+                "ca": "Cantàbria"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.4_1",
+              "text": {
+                "default": "Castilla-La Mancha",
+                "ca": "Castella-la Manxa"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.5_1",
+              "text": {
+                "default": "Castilla y León",
+                "ca": "Castella i Lleó"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.6_1",
+              "text": {
+                "default": "Cataluña",
+                "ca": "Catalunya"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.7_1",
+              "text": {
+                "default": "Ceuta y Melilla",
+                "ca": "Ceuta i Melilla"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.8_1",
+              "text": {
+                "default": "Comunidad de Madrid",
+                "ca": "Comunitat de Madrid"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.9_1",
+              "text": {
+                "default": "Comunidad Foral de Navarra",
+                "ca": "Comunitat Foral de Navarra"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.10_1",
+              "text": {
+                "default": "Comunidad Valenciana",
+                "ca": "Comunitat Valenciana"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.11_1",
+              "text": "Extremadura",
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.12_1",
+              "text": {
+                "default": "Galicia",
+                "ca": "Galícia"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.13_1",
+              "text": {
+                "default": "Islas Baleares",
+                "ca": "Illes Balears"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.14_1",
+              "text": {
+                "default": "Islas Canarias",
+                "ca": "Illes Canàries"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.15_1",
+              "text": "La Rioja",
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.16_1",
+              "text": {
+                "default": "País Vasco",
+                "ca": "País Basc"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.17_1",
+              "text": {
+                "default": "Principado de Asturias",
+                "ca": "Principat d'Astúries"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "ESP.18_1",
+              "text": {
+                "default": "Región de Murcia",
+                "ca": "Regió de Múrcia"
+              },
+              "visibleIf": "{gid0}='ESP'"
+            },
+            {
+              "value": "EST.1_1",
+              "text": "Harju",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.2_1",
+              "text": "Hiiu",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.3_1",
+              "text": "Ida-Viru",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.4_1",
+              "text": "Järva",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.5_1",
+              "text": "Jõgeva",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.7_1",
+              "text": "Lääne",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.6_1",
+              "text": {
+                "default": "Lääne-Viru",
+                "es": "Lääne-viru"
+              },
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.8_1",
+              "text": "Pärnu",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.9_1",
+              "text": "Peipsi",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.10_1",
+              "text": "Põlva",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.11_1",
+              "text": "Rapla",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.12_1",
+              "text": "Saare",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.13_1",
+              "text": "Tartu",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.14_1",
+              "text": "Valga",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.15_1",
+              "text": "Viljandi",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "EST.16_1",
+              "text": "Võru",
+              "visibleIf": "{gid0}='EST'"
+            },
+            {
+              "value": "FIN.1_1",
+              "text": {
+                "default": "Eastern Finland",
+                "es": "Finlandia oriental",
+                "ca": "Finlàndia Oriental"
+              },
+              "visibleIf": "{gid0}='FIN'"
+            },
+            {
+              "value": "FIN.2_1",
+              "text": {
+                "default": "Lapland",
+                "es": "Laponia"
+              },
+              "visibleIf": "{gid0}='FIN'"
+            },
+            {
+              "value": "FIN.3_1",
+              "text": "Oulu",
+              "visibleIf": "{gid0}='FIN'"
+            },
+            {
+              "value": "FIN.4_1",
+              "text": {
+                "default": "Southern Finland",
+                "es": "Finlandia Meridional",
+                "ca": "Sud de Finlàndia"
+              },
+              "visibleIf": "{gid0}='FIN'"
+            },
+            {
+              "value": "FIN.5_1",
+              "text": {
+                "default": "Western Finland",
+                "es": "Finlandia Occidental",
+                "ca": "Finlàndia Occidental"
+              },
+              "visibleIf": "{gid0}='FIN'"
+            },
+            {
+              "value": "FRA.1_1",
+              "text": {
+                "default": "Auvergne-Rhône-Alpes",
+                "es": "Auvernia-Ródano-Alpes",
+                "ca": "Alvèrnia-Roine-Alps"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.2_1",
+              "text": {
+                "default": "Bourgogne-Franche-Comté",
+                "es": "Borgoña-Franco Condado",
+                "ca": "Borgonya-Franc Comtat"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.3_1",
+              "text": {
+                "default": "Bretagne",
+                "es": "Bretaña"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.4_1",
+              "text": "Centre-Val de Loire",
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.5_1",
+              "text": "Corse",
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.6_1",
+              "text": "Grand Est",
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.7_1",
+              "text": {
+                "default": "Hauts-de-France",
+                "es": "Altos de Francia",
+                "ca": "Alts de França"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.8_1",
+              "text": {
+                "default": "Île-de-France",
+                "ca": "Illa de França"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.9_1",
+              "text": {
+                "default": "Normandie",
+                "es": "Normandía",
+                "ca": "Normandia"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.10_1",
+              "text": {
+                "default": "Nouvelle-Aquitaine",
+                "es": "Nueva Aquitania",
+                "ca": "Nova Aquitània"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.11_1",
+              "text": {
+                "default": "Occitanie",
+                "es": "Occitania",
+                "ca": "Occitània"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.12_1",
+              "text": "Pays de la Loire",
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "FRA.13_1",
+              "text": {
+                "default": "Provence-Alpes-Côte d'Azur",
+                "es": "Provenza-Alpes-Costa Azul",
+                "ca": "Provença-Alps-Costa Blava"
+              },
+              "visibleIf": "{gid0}='FRA'"
+            },
+            {
+              "value": "GRC.1_1",
+              "text": {
+                "default": "Aegean",
+                "es": "Egeo",
+                "ca": "Egeu"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.2_1",
+              "text": "Athos",
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.3_1",
+              "text": {
+                "default": "Attica",
+                "es": "Ática",
+                "ca": "Àtica"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.4_1",
+              "text": {
+                "default": "Crete",
+                "es": "Creta",
+                "ca": "Creta"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.5_1",
+              "text": {
+                "default": "Epirus and Western Macedonia",
+                "es": "Epiro y Macedonia Occidental",
+                "ca": "Epir i Macedònia Occidental"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.6_1",
+              "text": {
+                "default": "Macedonia and Thrace",
+                "es": "Macedonia y Tracia",
+                "ca": "Macedònia i Tràcia"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.7_1",
+              "text": {
+                "default": "Peloponnese, Western Greece and the Ionian Islands",
+                "es": "Peloponeso, Grecia occidental y las islas Jónicas",
+                "ca": "Peloponès, Grècia Occidental i Illes Jòniques"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "GRC.8_1",
+              "text": {
+                "default": "Thessaly and Central Greece",
+                "es": "Tesalia y Grecia Central",
+                "ca": "Tessàlia i Grècia Central"
+              },
+              "visibleIf": "{gid0}='GRC'"
+            },
+            {
+              "value": "ITA.1_1",
+              "text": {
+                "default": "Abruzzo",
+                "ca": "Abruços"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.2_1",
+              "text": {
+                "default": "Apulia",
+                "ca": "Pulla"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.3_1",
+              "text": "Basilicata",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.4_1",
+              "text": {
+                "default": "Calabria",
+                "ca": "Calàbria"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.5_1",
+              "text": {
+                "default": "Campania",
+                "ca": "Campània"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.6_1",
+              "text": {
+                "default": "Emilia-Romagna",
+                "es": "Emilia-Romaña",
+                "ca": "Emília-Romanya"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.7_1",
+              "text": "Friuli-Venezia Giulia",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.8_1",
+              "text": {
+                "default": "Lazio",
+                "ca": "Laci"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.9_1",
+              "text": {
+                "default": "Liguria",
+                "ca": "Ligúria"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.10_1",
+              "text": {
+                "default": "Lombardia",
+                "es": "Lombardía",
+                "ca": "Llombardia"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.11_1",
+              "text": "Marche",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.12_1",
+              "text": "Molise",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.13_1",
+              "text": "Piemonte",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.14_1",
+              "text": "Sardegna",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.15_1",
+              "text": {
+                "default": "Sicily",
+                "es": "Sicilia",
+                "ca": "Sicília"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.16_1",
+              "text": "Toscana",
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.17_1",
+              "text": {
+                "default": "Trentino-Alto Adige",
+                "es": "Trentino-Alto Adigio"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.18_1",
+              "text": {
+                "default": "Umbria",
+                "es": "Umbría"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.19_1",
+              "text": {
+                "default": "Valle d'Aosta",
+                "es": "Valle de Aosta",
+                "ca": "Vall d'Aosta"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "ITA.20_1",
+              "text": {
+                "default": "Veneto",
+                "es": "Véneto",
+                "ca": "Vèneto"
+              },
+              "visibleIf": "{gid0}='ITA'"
+            },
+            {
+              "value": "LUX.1_1",
+              "text": "Diekirch",
+              "visibleIf": "{gid0}='LUX'"
+            },
+            {
+              "value": "LUX.2_1",
+              "text": "Grevenmacher",
+              "visibleIf": "{gid0}='LUX'"
+            },
+            {
+              "value": "LUX.3_1",
+              "text": {
+                "default": "Luxembourg",
+                "es": "Luxemburgo",
+                "ca": "Luxemburg"
+              },
+              "visibleIf": "{gid0}='LUX'"
+            },
+            {
+              "value": "POL.1_1",
+              "text": "Dolnośląskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.2_1",
+              "text": {
+                "default": "Kujawsko-Pomorskie",
+                "es": "Kujawsko-Pomerania"
+              },
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.3_1",
+              "text": "Łódzkie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.4_1",
+              "text": "Lubelskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.5_1",
+              "text": "Lubuskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.6_1",
+              "text": "Małopolskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.7_1",
+              "text": "Mazowieckie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.8_1",
+              "text": "Opolskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.9_1",
+              "text": "Podkarpackie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.10_1",
+              "text": "Podlaskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.11_1",
+              "text": {
+                "default": "Pomorskie",
+                "es": "Pomerania"
+              },
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.12_1",
+              "text": "Śląskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.13_1",
+              "text": "Świętokrzyskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.14_1",
+              "text": "Warmińsko-Mazurskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.15_1",
+              "text": "Wielkopolskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "POL.16_1",
+              "text": "Zachodniopomorskie",
+              "visibleIf": "{gid0}='POL'"
+            },
+            {
+              "value": "PRT.1_1",
+              "text": "Aveiro",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.2_1",
+              "text": {
+                "default": "Azores",
+                "ca": "Açores"
+              },
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.3_1",
+              "text": "Beja",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.4_1",
+              "text": "Braga",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.5_1",
+              "text": "Bragança",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.6_1",
+              "text": "Castelo Branco",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.7_1",
+              "text": "Coimbra",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.8_1",
+              "text": "Évora",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.9_1",
+              "text": "Faro",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.10_1",
+              "text": "Guarda",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.11_1",
+              "text": "Leiria",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.12_1",
+              "text": "Lisboa",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.13_1",
+              "text": "Madeira",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.14_1",
+              "text": "Portalegre",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.15_1",
+              "text": {
+                "default": "Porto",
+                "es": "Oporto"
+              },
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.16_1",
+              "text": "Santarém",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.17_1",
+              "text": "Setúbal",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.18_1",
+              "text": "Viana do Castelo",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.19_1",
+              "text": "Vila Real",
+              "visibleIf": "{gid0}='PRT'"
+            },
+            {
+              "value": "PRT.20_1",
+              "text": "Viseu",
+              "visibleIf": "{gid0}='PRT'"
+            }
+          ],
+          "hideIfChoicesEmpty": true
+        },
+        {
+          "type": "dropdown",
+          "name": "gid2",
+          "visibleIf": "{gid1} notempty",
+          "title": {
+            "default": "Province",
+            "es": "Provincia",
+            "ca": "Província"
+          },
+          "setValueIf": "{farm_gid2} notempty",
+          "setValueExpression": "{farm_gid2}",
+          "choices": [
+            {
+              "value": "ESP.1.1_1",
+              "text": {
+                "default": "Almería",
+                "ca": "Almeria"
+              },
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.2_1",
+              "text": {
+                "default": "Cádiz",
+                "ca": "Cadis"
+              },
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.3_1",
+              "text": {
+                "default": "Córdoba",
+                "ca": "Còrdova"
+              },
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.4_1",
+              "text": "Granada",
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.5_1",
+              "text": "Huelva",
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.6_1",
+              "text": "Jaén",
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.7_1",
+              "text": {
+                "default": "Málaga",
+                "ca": "Màlaga"
+              },
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.1.8_1",
+              "text": "Sevilla",
+              "visibleIf": "{gid1}='ESP.1_1'"
+            },
+            {
+              "value": "ESP.2.1_1",
+              "text": {
+                "default": "Huesca",
+                "ca": "Osca"
+              },
+              "visibleIf": "{gid1}='ESP.2_1'"
+            },
+            {
+              "value": "ESP.2.2_1",
+              "text": {
+                "default": "Teruel",
+                "ca": "Terol"
+              },
+              "visibleIf": "{gid1}='ESP.2_1'"
+            },
+            {
+              "value": "ESP.2.3_1",
+              "text": {
+                "default": "Zaragoza",
+                "ca": "Saragossa"
+              },
+              "visibleIf": "{gid1}='ESP.2_1'"
+            },
+            {
+              "value": "ESP.3.1_1",
+              "text": {
+                "default": "Cantabria",
+                "ca": "Cantàbria"
+              },
+              "visibleIf": "{gid1}='ESP.3_1'"
+            },
+            {
+              "value": "ESP.4.1_1",
+              "text": "Albacete",
+              "visibleIf": "{gid1}='ESP.4_1'"
+            },
+            {
+              "value": "ESP.4.2_1",
+              "text": "Ciudad Real",
+              "visibleIf": "{gid1}='ESP.4_1'"
+            },
+            {
+              "value": "ESP.4.3_1",
+              "text": {
+                "default": "Cuenca",
+                "es": "Conquense"
+              },
+              "visibleIf": "{gid1}='ESP.4_1'"
+            },
+            {
+              "value": "ESP.4.4_1",
+              "text": "Guadalajara",
+              "visibleIf": "{gid1}='ESP.4_1'"
+            },
+            {
+              "value": "ESP.4.5_1",
+              "text": "Toledo",
+              "visibleIf": "{gid1}='ESP.4_1'"
+            },
+            {
+              "value": "ESP.5.1_1",
+              "text": {
+                "default": "Ávila",
+                "ca": "Àvila"
+              },
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.2_1",
+              "text": "Burgos",
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.3_1",
+              "text": {
+                "default": "León",
+                "ca": "Lleó"
+              },
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.4_1",
+              "text": {
+                "default": "Palencia",
+                "ca": "Palència"
+              },
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.5_1",
+              "text": "Salamanca",
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.6_1",
+              "text": {
+                "default": "Segovia",
+                "ca": "Segòvia"
+              },
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.7_1",
+              "text": {
+                "default": "Soria",
+                "ca": "Sòria"
+              },
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.8_1",
+              "text": "Valladolid",
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.5.9_1",
+              "text": "Zamora",
+              "visibleIf": "{gid1}='ESP.5_1'"
+            },
+            {
+              "value": "ESP.6.1_1",
+              "text": "Barcelona",
+              "visibleIf": "{gid1}='ESP.6_1'"
+            },
+            {
+              "value": "ESP.6.2_1",
+              "text": "Girona",
+              "visibleIf": "{gid1}='ESP.6_1'"
+            },
+            {
+              "value": "ESP.6.3_1",
+              "text": "Lleida",
+              "visibleIf": "{gid1}='ESP.6_1'"
+            },
+            {
+              "value": "ESP.6.4_1",
+              "text": "Tarragona",
+              "visibleIf": "{gid1}='ESP.6_1'"
+            },
+            {
+              "value": "ESP.7.1_1",
+              "text": "Ceuta",
+              "visibleIf": "{gid1}='ESP.7_1'"
+            },
+            {
+              "value": "ESP.7.2_1",
+              "text": "Melilla",
+              "visibleIf": "{gid1}='ESP.7_1'"
+            },
+            {
+              "value": "ESP.8.1_1",
+              "text": "Madrid",
+              "visibleIf": "{gid1}='ESP.8_1'"
+            },
+            {
+              "value": "ESP.9.1_1",
+              "text": "Navarra",
+              "visibleIf": "{gid1}='ESP.9_1'"
+            },
+            {
+              "value": "ESP.10.1_1",
+              "text": {
+                "default": "Alicante",
+                "es": "Alicantino",
+                "ca": "Alacant"
+              },
+              "visibleIf": "{gid1}='ESP.10_1'"
+            },
+            {
+              "value": "ESP.10.2_1",
+              "text": {
+                "default": "Castellón",
+                "ca": "Castelló"
+              },
+              "visibleIf": "{gid1}='ESP.10_1'"
+            },
+            {
+              "value": "ESP.10.3_1",
+              "text": {
+                "default": "Valencia",
+                "ca": "València"
+              },
+              "visibleIf": "{gid1}='ESP.10_1'"
+            },
+            {
+              "value": "ESP.11.1_1",
+              "text": "Badajoz",
+              "visibleIf": "{gid1}='ESP.11_1'"
+            },
+            {
+              "value": "ESP.11.2_1",
+              "text": {
+                "default": "Cáceres",
+                "ca": "Càceres"
+              },
+              "visibleIf": "{gid1}='ESP.11_1'"
+            },
+            {
+              "value": "ESP.12.1_1",
+              "text": {
+                "default": "A Coruña",
+                "ca": "A Corunya"
+              },
+              "visibleIf": "{gid1}='ESP.12_1'"
+            },
+            {
+              "value": "ESP.12.2_1",
+              "text": "Lugo",
+              "visibleIf": "{gid1}='ESP.12_1'"
+            },
+            {
+              "value": "ESP.12.3_1",
+              "text": "Ourense",
+              "visibleIf": "{gid1}='ESP.12_1'"
+            },
+            {
+              "value": "ESP.12.4_1",
+              "text": "Pontevedra",
+              "visibleIf": "{gid1}='ESP.12_1'"
+            },
+            {
+              "value": "ESP.13.1_1",
+              "text": {
+                "default": "Baleares",
+                "ca": "Balears"
+              },
+              "visibleIf": "{gid1}='ESP.13_1'"
+            },
+            {
+              "value": "ESP.14.1_1",
+              "text": "Las Palmas",
+              "visibleIf": "{gid1}='ESP.14_1'"
+            },
+            {
+              "value": "ESP.14.2_1",
+              "text": "Santa Cruz de Tenerife",
+              "visibleIf": "{gid1}='ESP.14_1'"
+            },
+            {
+              "value": "ESP.15.1_1",
+              "text": "La Rioja",
+              "visibleIf": "{gid1}='ESP.15_1'"
+            },
+            {
+              "value": "ESP.16.1_1",
+              "text": {
+                "default": "Álava",
+                "ca": "Àlaba"
+              },
+              "visibleIf": "{gid1}='ESP.16_1'"
+            },
+            {
+              "value": "ESP.16.2_1",
+              "text": "Guipúzcoa",
+              "visibleIf": "{gid1}='ESP.16_1'"
+            },
+            {
+              "value": "ESP.16.3_1",
+              "text": {
+                "default": "Vizcaya",
+                "ca": "Biscaia"
+              },
+              "visibleIf": "{gid1}='ESP.16_1'"
+            },
+            {
+              "value": "ESP.17.1_1",
+              "text": {
+                "default": "Asturias",
+                "ca": "Astúries"
+              },
+              "visibleIf": "{gid1}='ESP.17_1'"
+            },
+            {
+              "value": "ESP.18.1_1",
+              "text": {
+                "default": "Murcia",
+                "ca": "Múrcia"
+              },
+              "visibleIf": "{gid1}='ESP.18_1'"
+            }
+          ],
+          "hideIfChoicesEmpty": true
+        }
+      ]
+    }
+  ],
+  "sendResultOnPageNext": true,
+  "progressBarType": "buttons",
+  "progressBarShowPageTitles": true,
+  "showTOC": true,
+  "checkErrorsMode": "onValueChanged",
+  "autoGrowComment": true
+}

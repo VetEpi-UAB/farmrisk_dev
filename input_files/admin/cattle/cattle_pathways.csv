@@ -1,0 +1,10 @@
+﻿pathway_lit;pathway;pathway_1;pathway_2
+Neigbouring farms;farm_neigbour;farm_neigbour;farm
+Farm wildlife;farm_wildlife;farm_wildlife;farm
+People vistis;visit_people;farm_visits;farm
+Vehicle visits;visit_veh;farm_visits;farm
+Purchase origin;purchase_origin;purchase;mov
+Purchase transport;purchase_veh;purchase;mov
+Pasture mix with other animals;pasture_mix;pasture;mov
+Pasture transport;pasture_veh;pasture;mov
+Pasture wildlife;pasture_wildlife;pasture;mov

@@ -1,0 +1,381 @@
+#' ---
+#' title: "Export outputs"
+#' author: "Natalia Ciria"
+#' editor: visual
+#' bibliography: references.bib
+#' execute:
+#'   output: false
+#' ---
+#' 
+#' ### Combine all pathways
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+message("\nOUTPUTS: ")
+
+#' 
+#' #### Surroundings
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+message("\nMerging mcmodules: ")
+#rm(wildlife)
+#message("\nWILDLIFE MODULE REMOVED UNTIL #143 BUG IS SOLVED")
+if(exists("wildlife")){
+  message("\n- wildlife: YES")
+  surroundings<-mcmodule::combine_modules(neighbour, wildlife)
+  
+  surroundings<-mcmodule::at_least_one(
+    mcmodule=surroundings, 
+    mc_names=c("neighbour_inf_agg","wildlife_inf_agg"),
+    name="surroundings_inf_agg",
+    prefix="surroundings")
+  
+  outputs_surroundings<-c(
+    neighbour_total="neighbour_inf_agg",
+    farm_wildlife="wildlife_inf_agg")
+  
+  outputs_detail_surroundings<-c(
+    farm_neigbour="neighbour_inf",
+    farm_wildlife_contact="wildlife_water_indir_contact_herd",
+    farm_wildlife_area= "wildlife_area_inf")
+  
+  outputs_agg_surroundings<-c(
+    farm_wildlife_contact_point="wildlife_contact_indir_contact_herd_point")
+
+}else{
+  message("\n- Farm wildlife: NO")
+
+  surroundings<-neighbour
+  
+  surroundings$node_list$surroundings_inf_agg<-
+    surroundings$node_list$neighbour_inf_agg
+  
+  outputs_surroundings<-c(neighbour_total="neighbour_inf_agg")
+  outputs_detail_surroundings<-c(farm_neigbour="neighbour_inf")
+  
+  outputs_agg_surroundings<-c()
+}
+
+#' 
+#' #### Visits
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+if(exists("visit")){
+  message("\n- visit: YES")
+
+  #TODO Update with n_frequency as n_times trial_totals in farm_visits_v2.qmd #189
+  no_movement<-mcmodule::combine_modules(surroundings, visit)
+  
+  no_movement<-mcmodule::at_least_one(
+    mcmodule=no_movement,
+    mc_names=c("visit_indir_contact_all_agg","surroundings_inf_agg"),
+    name="no_mov_inf_agg")
+  
+
+  outputs_visits<-c(visit_total="visit_indir_contact_all_agg")
+
+  outputs_detail_visits<-c(farm_visits="visit_indir_contact_all")
+  
+  outputs_agg_visits<-c(visit_type="visit_indir_contact_all_type",
+                        visit_name="visit_indir_contact_all_name",
+                        visit_veh="visit_indir_contact_all_veh")
+  
+}else{
+  message("\n- visit: NO")
+  
+  no_movement<-surroundings
+  
+  no_movement$node_list$no_mov_inf_agg<-
+    surroundings$node_list$surroundings_inf_agg
+  
+  outputs_visits<-c()
+  outputs_detail_visits<-c()
+  outputs_agg_visits<-c()
+
+}
+
+#' 
+#' #### Movements
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+#If farm has movement movements
+if(exists("movement")){
+  message("\n- movement: YES")
+
+  intro<-mcmodule::combine_modules(movement, no_movement)
+
+  intro<-mcmodule::at_least_one(
+    mcmodule=intro,
+    mc_names=c("no_mov_inf_agg","mov_quarantine_entry_all_hag_year_agg"), 
+    name="total_agg")
+  
+    
+  outputs_movement<-c(
+    mov_prequaran="mov_inf_all_hag_year_agg",
+    mov_total="mov_quarantine_entry_all_hag_year_agg",
+    mov_livestock="mov_livestock_all_hag_year_weight_agg",
+    mov_transport="mov_transport_contact_all_allherds_hag_year_weight_agg")
+  
+  
+  outputs_agg_movement<-c(
+    #mov_by_mov ="mov_quarantine_entry_all_hag_mov",
+    mov_by_mov_year ="mov_quarantine_entry_all_hag_year_mov")
+  
+  if(exists("wildlife")&exists("mov_wildlife")){
+    intro<-at_least_one(
+      mcmodule=intro,
+      mc_names=c("wildlife_inf_agg","mov_wildlife_inf_year_agg"),
+      name="total_wildlife")
+    
+    outputs_movement<-c(
+      outputs_movement,
+      mov_wildlife="mov_wildlife_inf_year_agg",
+      total_wildlife="total_wildlife")
+    
+  }else if(exists("mov_wildlife")){
+    intro$node_list[["total_wildlife"]]<-intro$node_list$mov_wildlife_inf_year_agg
+    
+    outputs_movement<-c(
+      outputs_movement,
+      mov_wildlife="mov_wildlife_inf_year_agg",
+      total_wildlife="total_wildlife")
+    
+  }else if(exists("wildlife")){
+    
+    intro$node_list[["total_wildlife"]]<-intro$node_list$wildlife_inf_agg
+    
+    outputs_surroundings<-c(outputs_surroundings,total_wildlife="total_wildlife")
+
+  }
+  
+  if(exists_pasture){
+    outputs_movement<-c(
+      outputs_movement,
+      mov_wildlife="mov_wildlife_inf_year_agg")
+    
+    outputs_agg_movement<-c(
+      outputs_agg_movement,
+      mov_wildlife_by_mov="mov_wildlife_inf_year_mov")
+    
+  }
+  
+}else{
+  message("\n- movement: NO")
+  
+  intro<-no_movement
+  
+  intro$node_list[["total_agg"]]<-intro$node_list$no_mov_inf_agg
+  
+  if(exists("wildlife")){
+    intro$node_list[["total_wildlife"]]<-intro$node_list$wildlife_inf_agg
+    outputs_surroundings<-c(outputs_surroundings,total_wildlife="total_wildlife")
+
+  }
+
+  outputs_movement<-c()
+  
+  outputs_detail_movement<-c()
+  
+  outputs_agg_movement<-c()
+}
+
+#Reassure class
+class(intro)<-"mcmodule"
+
+#' 
+#' ### Select result mcnodes
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+#TODO
+outputs_all<-c(neighbour_total="neighbour_inf_agg",
+               farm_wildlife="wildlife_inf_agg",
+               visit_total="visit_indir_contact_all_agg",
+               mov_wildlife="visit_indir_contact_all_agg",
+               mov_livestock="mov_livestock_all_hag_year_weight_agg",
+               mov_transport="mov_transport_contact_all_allherds_hag_year_weight_agg",
+               mov_prequaran="mov_inf_all_hag_year_agg",
+               mov_total="mov_entry_year_agg",
+               total_wildlife="total_wildlife",
+               no_mov_total="no_mov_inf_agg",
+               total="total_agg")
+
+outputs_agg<-c(outputs_agg_surroundings, outputs_agg_visits,outputs_agg_movement)
+
+outputs<-c(outputs_movement,
+           outputs_visits,
+           outputs_surroundings,
+           no_mov_total="no_mov_inf_agg",
+           total="total_agg")
+
+#' 
+#' ### Output by hg (all simulations)
+#' 
+
+#' 
+#' ### Output medians
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+#Create a table with the mean of the selected mcnodes
+wif_median<-intro$node_list[[outputs["total"]]][["summary"]]%>%
+  select(pathogen, scenario_id, median = `50%`)
+
+names(wif_median)[names(wif_median)=="median"]<-names(outputs["total"])
+
+
+
+for(i in 1:length(outputs[!names(outputs)=="total"])){
+  wif_median_i<-intro$node_list[[outputs[i]]][["summary"]]%>%
+    select(pathogen, scenario_id, median = `50%`)
+  names(wif_median_i)[names(wif_median_i)=="median"]<-names(outputs[i])
+  
+  wif_median<-left_join(wif_median, wif_median_i, by = c("pathogen", "scenario_id"))
+}
+
+#Add outputs that have not been calculated (probability equals zero)
+wif_median[names(outputs_all[!outputs_all%in%outputs])]<-0
+wif_median[is.na(wif_median)]<-0
+
+
+
+#Create a table with the mean of the selected mcnodes
+wif_median<-intro$node_list[[outputs["total"]]][["summary"]]%>%
+  select(pathogen, scenario_id, median = `50%`)
+
+names(wif_median)[names(wif_median)=="median"]<-names(outputs["total"])
+
+
+
+for(i in 1:length(outputs[!names(outputs)=="total"])){
+  wif_median_i<-intro$node_list[[outputs[i]]][["summary"]]%>%
+  select(pathogen, scenario_id, median = `50%`)
+  names(wif_median_i)[names(wif_median_i)=="median"]<-names(outputs[i])
+
+  wif_median<-left_join(wif_median, wif_median_i, by = c("pathogen", "scenario_id"))
+}
+
+#Add outputs that have not been calculated (probability equals zero)
+wif_median[names(outputs_all[!outputs_all%in%outputs])]<-0
+wif_median[is.na(wif_median)]<-0
+
+
+#' 
+#' #### Output by scenario
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+
+#Current risk table
+current_median <- wif_median%>%
+  filter(scenario_id=="0")%>%
+  mutate(scenario_id=NULL)
+
+#Calculate relative risk
+wif_median<-wif_median%>%
+  left_join(current_median[c("pathogen","total")], by="pathogen",suffix=c("_wif","_current"))%>%
+  mutate(
+    relative=total_wif/total_current,
+    relative=ifelse(relative>=1&scenario_id!="Current",
+                             1-(1*10^-6),
+                             relative),
+  )
+
+#Create table to plot risk reduction
+wif_median_plot<-wif_median%>%
+  select(pathogen,scenario_id,total=relative)%>%
+  mutate(yes=total,
+         no=1-total)%>%
+  pivot_longer(
+    cols = c(yes, no), 
+    names_to = "yesno", 
+    values_to = "value",
+  )
+
+
+#Current risk table
+current_median <- wif_median%>%
+  mutate(total=total_wif)%>%
+  select(pathogen, scenario_id, total, 
+         mov_livestock, mov_transport,
+         visit_total, neighbour_total,total_wildlife)%>%
+  pivot_longer(cols=-c(pathogen, scenario_id, total))%>%
+  filter(scenario_id=="0")%>%
+  transmute(pathogen,
+            pathway=name,
+            abs_total=total,
+            rel_pathway=value/total,
+            abs_pathway=value)
+
+
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+summary_median<-wif_median%>%
+  arrange(relative)%>%
+  transmute(Pathogen=pathogen,
+            Scenario=ifelse(scenario_id=="0","Current",scenario_id),
+         `Risk disease entry`=paste0(Signif(total_wif*100,2),"%"),
+         `Risk animal infected from origin`=paste0(Signif(mov_livestock*100,2),"%"),
+         `Risk animal infected during movement transport`=paste0(Signif(mov_transport*100,2),"%"),
+         `Risk disease entry by visits`=paste0(Signif(visit_total*100,2),"%"),
+         `Risk disease entry by neigbour farms`=paste0(Signif(neighbour_total*100,2),"%"),
+          `Risk disease entry by wildlife`=paste0(Signif(total_wildlife*100,2),"%"))
+
+summary_median[summary_median=="NA%"]<-"-"
+
+
+#' 
+#' #### Save summary tables
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+if(exists("save_tables")&&save_tables){
+
+  save_table_summary(list(wif_median=wif_median, 
+                          wif_median_plot=wif_median_plot, 
+                          current_median=current_median,
+                          summary_median=summary_median))
+}
+
+#' 
+#' ### Print-cat summary
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+cat("\nResults")
+print_summary<-unique(summary_median[summary_median$Scenario=="Current",
+                                     !names(summary_median)%in%"Scenario"])
+cat("\n\nIBR current median:\n")
+print.table(print_summary[print_summary$Pathogen=="IBR",
+                          !names(print_summary)%in%"Pathogen"])
+
+cat("\n\nBVD current median:\n")
+print.table(print_summary[print_summary$Pathogen=="BVD",
+                          !names(print_summary)%in%"Pathogen"])
+
+cat("\n\nTB current median:\n")
+print.table(print_summary[print_summary$Pathogen=="TB",
+                          !names(print_summary)%in%"Pathogen"])
+
+
+  message("\n
+\n####################################
+\n FARM ", farm_id, " COMPLETED!
+\n####################################
+\n")
+
+#' 
+## ------------------------------------------------------------------------------------------------------------------------------------
+# Export compact JSON summary (saved to output_path/output_<farm_id>.json
+# and printed to stdout so it can be captured when running from CLI).
+export_results_json(
+  output_dir = output_path,
+  farm_id = farm_id,
+  intro = intro,
+  outputs = outputs,
+  wif_median = wif_median,
+  summary_median = summary_median,
+  bsg = bsg,
+  model_id = model_id,
+  script_date = script_date,
+  repo = repo,
+  last_commit = last_commit,
+  commit_date = commit_date,
+  risk_days = risk_days,
+  write_stdout = TRUE
+)
+

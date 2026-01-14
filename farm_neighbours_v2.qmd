@@ -1,0 +1,84 @@
+---
+title: "Farm surroundings introduction pathway"
+author: "Natalia Ciria"
+editor: visual
+bibliography: references.bib
+execute:
+  output: false
+---
+
+```{r}
+#| purl:  false
+# This chunk is excluded from the unified script
+
+# Convert the latest version of "set_up" qmd file to a plain R script
+knitr::purl("set_up_v2.qmd", documentation = 2, output = "unified_script/set_up_v2.R")
+# Specify farm_id
+farm_id<-"bc6_v2"
+# Source the setup script
+source("unified_script/set_up_v2.R")
+```
+
+```{r}
+message("\nNEIGHBOURS PATHWAY: ")
+```
+
+## Neighbour farms module
+
+### Prepare data
+
+```{r, message=FALSE}
+neighbour_data<-get_region_code(bsg, pathway = "farm")
+neighbour_data<-neighbour_data%>%
+  left_join(tidy_prefix(bsg, "neighbour", rm_prefix = FALSE))%>%
+  hjoin_region(pathogen_region)%>%
+  left_join(pathogen)%>%
+  left_join(filter(pathogen_status, health_status == "unk"))
+```
+
+### Admin what-if
+
+```{r}
+if(admin_wif){
+  #Do not allow direct contact with neighbour farms
+  neighbour_data<-wif_no_dc(neighbour_data, scenario="Do not allow direct contact with neighbour farms")
+  
+}
+```
+
+### Evaluate
+
+```{r}
+neighbour_exp<-c(neighbour_herd_select = herd_select_exp,
+                 neighbour_link = neighbour_link_exp,
+                 neighbour_dir_contact = dir_contact_exp,
+                 neighbour_area = area_exp)
+
+neighbour<-mcmodule::eval_module(
+  exp = neighbour_exp,
+  data = neighbour_data)
+
+neighbour<-mcmodule::at_least_one(
+  mcmodule = neighbour,
+  mc_names = c("dir_contact","dir_contact_pi"))
+
+neighbour<-mcmodule::at_least_one(
+  mcmodule = neighbour,
+  mc_names = c("dir_contact_all","area_inf"),
+  name = "neighbour_inf")
+
+neighbour<-mcmodule::agg_totals(
+  mcmodule=neighbour,
+  mc_name=c("dir_contact_all"),
+  agg_keys = c("pathogen", "scenario_id", "farm_id"))
+
+neighbour<-mcmodule::agg_totals(
+  mcmodule=neighbour,
+  mc_name=c("neighbour_inf"),
+  agg_keys = c("pathogen", "scenario_id", "farm_id"))
+
+neighbour<-mcmodule::add_prefix(neighbour)
+
+print_pathway_risk(neighbour, "neighbour_inf_agg")
+message("\nNEIGHBOURS PATHWAY OK!")
+```

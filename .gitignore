@@ -1,0 +1,15 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# exclude database keys
+db_keys.txt
+
+# exclude user output and inputs files
+input_files/user/*
+output_files/*
+
+# but keep output and inputs files folder
+!output_files/gitkeep.txt
+!input_files/user/gitkeep.txt

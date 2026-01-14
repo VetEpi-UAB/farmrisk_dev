@@ -1,0 +1,21 @@
+animal_category;region_code;veh_m2animal;veh_size_ext;veh_farms_from_n_min;veh_farms_from_n_mode;veh_farms_from_n_max;veh_farms_to_n_min;veh_farms_to_n_mode;veh_farms_to_n_max;veh_time_between_min;veh_time_between_mode;veh_time_between_max;veh_share_p_min;veh_share_p_mode;veh_share_p_max;veh_mult_origin_p_min;veh_mult_origin_p_mode;veh_mult_origin_p_max;animal_region_notes;animal_region_ref
+cattleunder8;ESP;0.5;15;2;3;6;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattle8to24;ESP;1.1;15;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattlefrom24;ESP;1.4;15;1;2;3;1;1;4;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattlebull;ESP;1.6;15;2;2;2;1;1;1;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattleunder8;AND;0.5;10;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.01;0.05;0.1;Based on Andorra farms visits;
+cattle8to24;AND;1.1;10;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.01;0.05;0.1;Based on Andorra farms visits;
+cattlefrom24;AND;1.4;10;1;2;3;1;1;4;4;8;12;0.5;0.6;0.7;0.01;0.05;0.1;Based on Andorra farms visits;
+cattlebull;AND;1.6;10;1;2;3;1;1;1;4;8;12;0.5;0.6;0.7;0.01;0.05;0.1;Based on Andorra farms visits;
+cattleunder8;FRA;0.5;15;2;3;6;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattle8to24;FRA;1.1;15;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattlefrom24;FRA;1.4;15;1;2;3;1;1;4;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattlebull;FRA;1.6;15;2;2;2;1;1;1;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattleunder8;AUT;0.5;15;2;3;6;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattle8to24;AUT;1.1;15;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattlefrom24;AUT;1.4;15;1;2;3;1;1;4;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattlebull;AUT;1.6;15;2;2;2;1;1;1;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;Copied from ESP;
+cattleunder8;CWL;0.5;15;2;3;6;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattle8to24;CWL;1.1;15;1;2;3;1;1;2;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattlefrom24;CWL;1.4;15;1;2;3;1;1;4;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138
+cattlebull;CWL;1.6;15;2;2;2;1;1;1;4;8;12;0.5;0.6;0.7;0.3;0.4;0.5;;veh_m2animal: https://eur-lex.europa.eu/eli/reg/2005/1/oj, veh_size_ext: own, veh_farms_from_n & veh_farms_to_n & veh_time_between & veh_share_p & veh_mult_origin_p: https://doi.org/10.1016/j.prevetmed.2024.106138

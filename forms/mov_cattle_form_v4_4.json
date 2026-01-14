@@ -1,0 +1,3739 @@
+{
+  "title": {
+    "default": "🚚 Cattle movements",
+    "es": "🚚 Movimientos de bovino",
+    "ca": "🚚 Moviments de boví"
+  },
+  "description": {
+    "default": "Movements of live animals to the farm. Movements of animals leaving the holding and not returning (slaughterhouse, fattening...) are recorded in the farm survey.\n",
+    "es": "Traslados de animales vivos a la granja. Los movimientos de los animales que salen de la explotación y no regresan (matadero, engorde...) se registran en la encuesta de explotación.\n",
+    "ca": "Moviments d'animals vius a la granja. Els moviments d'animals que surten de l'explotació i no tornen (escorxador, engreix...) es registren a l'enquesta de la granja.\n"
+  },
+  "logoPosition": "right",
+  "completedHtml": {
+    "default": "<p>Thank you for completing this \n survey!</p>\n<p>Complete again the <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\">Animal Movements Survey</a> to add another animal movement to the risk assessment.</p>\n<p>To ensure an accurate risk assessment, please remember to update the <a href=\"https://nataliaciria.com/biosecurity-survey-cattle/\"> Biosecurity Survey</a> if there are any changes on your farm.</p>",
+    "es": "<p>¡Gracias por completar esta encuesta!</p><p>Complete de nuevo la <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\">Encuesta de Movimientos de Animales</a> para agregar otro movimiento de animales a la evaluación de riesgos.</p><p>Para garantizar una evaluación de riesgos precisa, recuerde actualizar la encuesta de bioseguridad <a href=\"https://nataliaciria.com/biosecurity-survey-cattle/\"></a> si hay algún cambio en su granja.</p>",
+    "ca": "<p>Gràcies per completar aquesta enquesta!</p><p>Completeu de nou el <a href=\"https://nataliaciria.com/animal-movements-survey-cattle/\">Enquesta de moviments d'animals</a> per afegir un altre moviment d'animals a l'avaluació de riscos.</p><p>Per garantir una avaluació precisa del risc, recordeu actualitzar l'enquesta de bioseguretat <a href=\"https://nataliaciria.com/biosecurity-survey-cattle/\"></a> si hi ha algun canvi a la vostra granja.</p>"
+  },
+  "pages": [
+    {
+      "name": "general",
+      "title": {
+        "default": "General information",
+        "es": "Información general",
+        "ca": "Informació general"
+      },
+      "navigationTitle": {
+        "default": "General information",
+        "es": "Información general",
+        "ca": "Informació general"
+      },
+      "elements": [
+        {
+          "type": "expression",
+          "name": "survey_id",
+          "visible": false,
+          "title": {
+            "default": "Survey id",
+            "es": "ID de la encuesta",
+            "ca": "Identificador de l'enquesta"
+          },
+          "titleLocation": "hidden",
+          "clearIfInvisible": "none",
+          "expression": "mov_cattle"
+        },
+        {
+          "type": "expression",
+          "name": "version",
+          "visible": false,
+          "title": {
+            "default": "Survey version",
+            "es": "Versión de la encuesta",
+            "ca": "Versió de l'enquesta"
+          },
+          "titleLocation": "hidden",
+          "clearIfInvisible": "none",
+          "expression": "v4_4"
+        },
+        {
+          "type": "panel",
+          "name": "mov_info_panel",
+          "title": {
+            "default": "Movement description",
+            "es": "Descripción del movimiento",
+            "ca": "Descripció del moviment"
+          },
+          "elements": [
+            {
+              "type": "text",
+              "name": "mov_name",
+              "title": "Movement name",
+              "validators": [
+                {
+                  "type": "regex",
+                  "text": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                  "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_type",
+              "title": {
+                "default": "Type of movement",
+                "es": "Tipo de movimiento",
+                "ca": "Tipus de moviment"
+              },
+              "isRequired": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "One way (enter the farm)",
+                    "es": "Un solo trayecto (entrar en la granja)",
+                    "ca": "Anada (entra a la granja)"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Round (leave and enter the farm)",
+                    "es": "Redondo (salir y entrar en la granja)",
+                    "ca": "Ronda (sortir i entrar a la granja)"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_recurrent",
+              "title": {
+                "default": "Is it a one-off or a recurring movement?",
+                "es": "¿Es un movimiento puntual o recurrente?",
+                "ca": "És un moviment puntual o recurrent?"
+              },
+              "isRequired": true,
+              "choices": [
+                {
+                  "value": "one",
+                  "text": {
+                    "default": "One-off movement",
+                    "es": "Movimiento puntual",
+                    "ca": "Moviment únic"
+                  }
+                },
+                {
+                  "value": "recurrent",
+                  "text": {
+                    "default": "Recurrent movement (repeats periodically)",
+                    "es": "Movimiento recurrente (se repite periódicamente)",
+                    "ca": "Moviment recurrent (es repeteix periòdicament)"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_out_date_title",
+              "visible": false,
+              "title": {
+                "es": "mov_out_date_title",
+                "ca": "mov_out_date_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": "NA"
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Departure date",
+                    "es": "Fecha de salida",
+                    "ca": "Data de sortida"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_out_date_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_out_date_expression",
+                "ca": "mov_out_date_expression"
+              },
+              "expression": "displayValue(\"mov_out_date_title\")"
+            },
+            {
+              "type": "text",
+              "name": "mov_out_date",
+              "visibleIf": "{mov_type} = 'round' and {mov_recurrent} = 'one'",
+              "title": "{mov_out_date_expression}",
+              "isRequired": true,
+              "inputType": "date"
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_in_date_title",
+              "visible": false,
+              "title": {
+                "es": "mov_in_date_title",
+                "ca": "mov_in_date_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "Movement date",
+                    "es": "Fecha de movimiento",
+                    "ca": "Data de moviment"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Return date",
+                    "es": "Fecha de regreso",
+                    "ca": "Data de devolució"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_in_date_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_in_date_expression",
+                "ca": "mov_in_date_expression"
+              },
+              "expression": "displayValue(\"mov_in_date_title\")"
+            },
+            {
+              "type": "text",
+              "name": "mov_in_date",
+              "visibleIf": "{mov_recurrent} = 'one'",
+              "title": "{mov_in_date_expression}",
+              "isRequired": true,
+              "inputType": "date"
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_frequency_title",
+              "visible": false,
+              "title": {
+                "es": "mov_frequency_title",
+                "ca": "mov_frequency_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "Annual frequency (times/year)",
+                    "es": "Frecuencia anual (veces/año)",
+                    "ca": "Periodicitat anual (èpoques/any)"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Return annual frequency (times/year)",
+                    "es": "Frecuencia anual de retorno (veces/año)",
+                    "ca": "Periodicitat anual de devolució (temps/any)"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_frequency_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_frequency_expression",
+                "ca": "mov_frequency_expression"
+              },
+              "expression": "displayValue(\"mov_frequency_title\")"
+            },
+            {
+              "type": "text",
+              "name": "mov_frequency",
+              "visibleIf": "{mov_recurrent} = 'recurrent'",
+              "title": "{mov_frequency_expression}",
+              "description": {
+                "default": "Weekly = 52 times/year, monthly = 12 times/year, each two years = 0.5 times/year ",
+                "es": "Semanal = 52 veces/año, mensual = 12 veces/año, cada dos años = 0,5 veces/año ",
+                "ca": "Setmanal = 52 vegades/any, mensual = 12 vegades/any, cada dos anys = 0,5 vegades/any "
+              },
+              "isRequired": true,
+              "inputType": "number",
+              "min": 0,
+              "max": 1001
+            },
+            {
+              "type": "text",
+              "name": "recurrent_days",
+              "visibleIf": "{mov_recurrent} = 'recurrent' and {mov_type} = 'round'",
+              "title": {
+                "default": "Number of days the animals are outside the farm",
+                "es": "Número de días que los animales están fuera de la granja",
+                "ca": "Nombre de dies que els animals estan fora de la granja"
+              },
+              "description": {
+                "default": "One week = 7, one month = 30, three months = 90, one year = 365, two years = 730",
+                "es": "Una semana = 7, un mes = 30, tres meses = 90, un año = 365, dos años = 730",
+                "ca": "Una setmana = 7, un mes = 30, tres mesos = 90, un any = 365, dos anys = 730"
+              },
+              "isRequired": true,
+              "inputType": "number",
+              "min": 0,
+              "step": 1
+            },
+            {
+              "type": "text",
+              "name": "recurrent_period_from",
+              "visibleIf": "{mov_recurrent} = 'recurrent'",
+              "title": "When did this recurrent movement start?",
+              "isRequired": true,
+              "inputType": "month"
+            },
+            {
+              "type": "boolean",
+              "name": "recurrent_ongoing",
+              "visibleIf": "{mov_recurrent} = 'recurrent'",
+              "title": "Is it still ongoing?",
+              "isRequired": true
+            },
+            {
+              "type": "text",
+              "name": "recurrent_period_to",
+              "visibleIf": "{mov_recurrent} = 'recurrent' and {recurrent_ongoing} = false",
+              "title": "When did it finish?",
+              "isRequired": true,
+              "validators": [
+                {
+                  "type": "expression",
+                  "text": "Finish date must be posterior to start date",
+                  "expression": "{recurrent_period_to} >= {recurrent_period_from}"
+                }
+              ],
+              "inputType": "month"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "livestock",
+      "title": "{livestock_page_title}",
+      "description": {
+        "default": "E.g. replacement, bull loan...",
+        "es": "Por ejemplo, sustitución, préstamo alcista...",
+        "ca": "Per exemple, substitució, préstec alcista..."
+      },
+      "navigationTitle": {
+        "default": "Livestock",
+        "es": "Ganado",
+        "ca": "Bestiar"
+      },
+      "elements": [
+        {
+          "type": "expression",
+          "name": "livestock_page_title",
+          "visible": false,
+          "title": {
+            "es": "livestock_page_title",
+            "ca": "livestock_page_title"
+          },
+          "expression": "iif({mov_type} = 'oneway', 'New animals introduced to the farm', 'Animals taken back to the farm')"
+        },
+        {
+          "type": "panel",
+          "name": "mov_animals_panel",
+          "title": {
+            "default": "Animals transported",
+            "es": "Animales transportados",
+            "ca": "Animals transportats"
+          },
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "mov_category_title",
+              "visible": false,
+              "title": {
+                "es": "mov_category_title",
+                "ca": "mov_category_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "Animals introduced to the farm",
+                    "es": "Animales introducidos en la granja",
+                    "ca": "Animals introduïts a la granja"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Animals returning to the farm",
+                    "es": "Animales que regresan a la granja",
+                    "ca": "Animals que tornen a la granja"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_category_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_category_expression",
+                "ca": "mov_category_expression"
+              },
+              "expression": "displayValue(\"mov_category_title\")"
+            },
+            {
+              "type": "checkbox",
+              "name": "mov_category",
+              "title": "{mov_category_expression}",
+              "choices": [
+                {
+                  "value": "cattlefrom24",
+                  "text": {
+                    "default": "Adult cows (>24 m)",
+                    "es": "Vacas adultas (>24 m)",
+                    "ca": "Vaques adultes (>24 m)"
+                  }
+                },
+                {
+                  "value": "cattle8to24",
+                  "text": {
+                    "default": "Heifers (8 - 24 m)",
+                    "es": "Vaquillonas (8 - 24 m)",
+                    "ca": "Vaquetes (8 - 24 m)"
+                  }
+                },
+                {
+                  "value": "cattleunder8",
+                  "text": {
+                    "default": "Calves ( <8 m)",
+                    "es": "Terneros ( <8 m)",
+                    "ca": "Vedells ( <8 m)"
+                  }
+                },
+                {
+                  "value": "cattlebull",
+                  "text": {
+                    "default": "Bulls",
+                    "es": "Toros",
+                    "ca": "Toros"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_animals_n_title",
+              "visible": false,
+              "title": {
+                "es": "mov_animals_n_title",
+                "ca": "mov_animals_n_title"
+              },
+              "setValueExpression": "iif({mov_recurrent} = 'recurrent', iif({mov_type} = 'oneway', 'oneway-recurrent', 'round-recurrent')\n, iif({mov_type} = 'oneway', 'oneway-one', 'round-one'))",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway-one",
+                  "text": {
+                    "default": "Number of animals introduced to the farm",
+                    "es": "Número de animales introducidos en la granja",
+                    "ca": "Nombre d'animals introduïts a la granja"
+                  }
+                },
+                {
+                  "value": "round-one",
+                  "text": {
+                    "default": "Number of animals returning to the farm",
+                    "es": "Número de animales que regresan a la granja",
+                    "ca": "Nombre d'animals que tornen a la granja"
+                  }
+                },
+                {
+                  "value": "oneway-recurrent",
+                  "text": "Average number of animals introduced to the farm"
+                },
+                {
+                  "value": "round-recurrent",
+                  "text": "Average number of animals returning to the farm"
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_animals_n_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_animals_n_expression",
+                "ca": "mov_animals_n_expression"
+              },
+              "expression": "displayValue(\"mov_animals_n_title\")"
+            },
+            {
+              "type": "panel",
+              "name": "mov_animals_n",
+              "title": "{mov_animals_n_expression}",
+              "isRequired": true,
+              "elements": [
+                {
+                  "type": "text",
+                  "name": "mov_cattlefrom24_n",
+                  "visibleIf": "{mov_category} anyof ['cattlefrom24']",
+                  "title": {
+                    "default": "Number of adult cows (>24 m)",
+                    "es": "Número de vacas adultas (>24 m)",
+                    "ca": "Nombre de vaques adultes (>24 m)"
+                  },
+                  "titleLocation": "left",
+                  "validators": [
+                    {
+                      "type": "expression",
+                      "text": {
+                        "default": "Enter a valid number",
+                        "es": "Ingresa un número válido",
+                        "ca": "Introduïu un número vàlid"
+                      },
+                      "expression": "^[0-9]\\d*$"
+                    }
+                  ],
+                  "inputType": "number"
+                },
+                {
+                  "type": "text",
+                  "name": "mov_cattle8to24_n",
+                  "visibleIf": "{mov_category} anyof ['cattle8to24']",
+                  "title": {
+                    "default": "Number of heifers (8 - 24 m)",
+                    "es": "Número de novillas (8 - 24 m)",
+                    "ca": "Nombre de vaquetes (8 - 24 m)"
+                  },
+                  "titleLocation": "left",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "text": {
+                        "default": "Enter a valid number",
+                        "es": "Ingresa un número válido",
+                        "ca": "Introduïu un número vàlid"
+                      },
+                      "regex": "^[0-9]\\d*$"
+                    }
+                  ],
+                  "inputType": "number"
+                },
+                {
+                  "type": "text",
+                  "name": "mov_cattleunder8_n",
+                  "visibleIf": "{mov_category} anyof ['cattleunder8']",
+                  "title": {
+                    "default": "Number of calves ( <8 m)",
+                    "es": "Número de terneros ( <8 m)",
+                    "ca": "Nombre de vedells ( <8 m)"
+                  },
+                  "titleLocation": "left",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "text": {
+                        "default": "Enter a valid number",
+                        "es": "Ingresa un número válido",
+                        "ca": "Introduïu un número vàlid"
+                      },
+                      "regex": "^[0-9]\\d*$"
+                    }
+                  ],
+                  "inputType": "number"
+                },
+                {
+                  "type": "text",
+                  "name": "mov_cattlebull_n",
+                  "visibleIf": "{mov_category} anyof ['cattlebull']",
+                  "title": {
+                    "default": "Number of bulls",
+                    "es": "Número de toros",
+                    "ca": "Nombre de bous"
+                  },
+                  "titleLocation": "left",
+                  "validators": [
+                    {
+                      "type": "regex",
+                      "text": {
+                        "default": "Enter a valid number",
+                        "es": "Ingresa un número válido",
+                        "ca": "Introduïu un número vàlid"
+                      },
+                      "regex": "^[0-9]\\d*$"
+                    }
+                  ],
+                  "inputType": "number"
+                }
+              ]
+            },
+            {
+              "type": "boolean",
+              "name": "mov_pregnant",
+              "visibleIf": "{mov_category} anyof ['cattlefrom24', 'cattle8to24']",
+              "title": {
+                "default": "Are any cows pregnant?",
+                "es": "¿Hay vacas preñadas?",
+                "ca": "Hi ha vaques embarassades?"
+              }
+            },
+            {
+              "type": "text",
+              "name": "mov_pregnant_n",
+              "visibleIf": "{mov_pregnant} = true",
+              "title": {
+                "default": "Number of pregnant cows",
+                "es": "Número de vacas preñadas",
+                "ca": "Nombre de vaques embarassades"
+              },
+              "inputType": "number"
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "mov_site_panel",
+          "title": {
+            "default": "Site information",
+            "es": "Información del sitio",
+            "ca": "Informació del lloc"
+          },
+          "elements": [
+            {
+              "type": "radiogroup",
+              "name": "mov_origin_title",
+              "visible": false,
+              "title": {
+                "es": "mov_origin_title",
+                "ca": "mov_origin_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "Site where the animals came from",
+                    "es": "Sitio de donde procedían los animales",
+                    "ca": "Lloc d'on provenien els animals"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Site where the animals went",
+                    "es": "Sitio donde fueron los animales",
+                    "ca": "Lloc on anaven els animals"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_origin_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_origin_expression",
+                "ca": "mov_origin_expression"
+              },
+              "expression": "displayValue(\"mov_origin_title\")"
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_origin",
+              "title": "{mov_origin_expression}",
+              "choices": [
+                {
+                  "value": "site",
+                  "text": {
+                    "default": "Other site of your farm (close location)",
+                    "es": "Otro sitio de su granja (ubicación cercana)",
+                    "ca": "Un altre lloc de la seva granja (ubicació propera)"
+                  },
+                  "visibleIf": "{mov_type} = 'round'"
+                },
+                {
+                  "value": "farm",
+                  "text": {
+                    "default": "Other farm/s",
+                    "es": "Otra granja",
+                    "ca": "Una altra granja"
+                  }
+                },
+                {
+                  "value": "pasture",
+                  "text": {
+                    "default": "Pasture",
+                    "es": "Pasto",
+                    "ca": "Pastura"
+                  },
+                  "visibleIf": "{mov_type} = 'round'"
+                },
+                {
+                  "value": "trader",
+                  "text": {
+                    "default": "Animal trader farm",
+                    "es": "Granja de comerciantes de animales",
+                    "ca": "Granja de comerciants d'animals"
+                  }
+                },
+                {
+                  "value": "center",
+                  "text": {
+                    "default": "Animal assembly centre",
+                    "es": "Centro de concentración de animales",
+                    "ca": "Centre de concentració d'animals"
+                  }
+                },
+                {
+                  "value": "shared_rearing",
+                  "text": {
+                    "default": "Shared external rearing centre",
+                    "es": "Centro de cría externo compartido",
+                    "ca": "Centre de cria extern compartit"
+                  }
+                },
+                {
+                  "value": "genetic",
+                  "text": {
+                    "default": "Genetic selection centre",
+                    "es": "Centro de selección genética",
+                    "ca": "Centre de selecció genètica"
+                  },
+                  "visibleIf": "{mov_type} = 'oneway'"
+                },
+                {
+                  "value": "fair",
+                  "text": {
+                    "default": "Livestock fair",
+                    "es": "Feria ganadera",
+                    "ca": "Fira ramadera"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "mov_pasture_id",
+              "visibleIf": "{mov_origin} = 'pasture'",
+              "title": {
+                "default": "Pasture key",
+                "es": "Llave de pasto",
+                "ca": "Clau de pastura"
+              },
+              "description": {
+                "default": "You can add new pastures in the biosecurity survey.",
+                "es": "Puede agregar nuevos pastos en la encuesta de bioseguridad.",
+                "ca": "Podeu afegir noves pastures a l'enquesta de bioseguretat."
+              },
+              "requiredIf": "({mov_type} == 'recurrent')",
+              "choices": [
+                {
+                  "value": "a",
+                  "text": {
+                    "default": "🌿 Pasture A",
+                    "es": "🌿 Pasto: A",
+                    "ca": "🌿 Pastura A"
+                  }
+                },
+                {
+                  "value": "b",
+                  "text": {
+                    "default": "🍂 Pasture B",
+                    "es": "🍂 Pastos B",
+                    "ca": "🍂 Pastura B"
+                  }
+                },
+                {
+                  "value": "c",
+                  "text": {
+                    "default": "🌾 Pasture C",
+                    "es": "🌾 Pastos C",
+                    "ca": "🌾 Pastura C"
+                  }
+                },
+                {
+                  "value": "d",
+                  "text": {
+                    "default": "🌱 Pasture D",
+                    "es": "🌱 Pastos D",
+                    "ca": "🌱 Pastura D"
+                  }
+                },
+                {
+                  "value": "e",
+                  "text": {
+                    "default": "☘️ Pasture E",
+                    "es": "☘️ Pastos E",
+                    "ca": "☘️ Pastura E"
+                  }
+                },
+                {
+                  "value": "f",
+                  "text": {
+                    "default": "🍁 Pasture F",
+                    "es": "🍁 Pastos F",
+                    "ca": "🍁 Pastura F"
+                  }
+                },
+                {
+                  "value": "g",
+                  "text": {
+                    "default": "🍃 Pasture G",
+                    "es": "🍃 Pastos G",
+                    "ca": "🍃 Pastura G"
+                  }
+                },
+                {
+                  "value": "h",
+                  "text": {
+                    "default": "🏞️ Pasture H",
+                    "es": "🏞️ Pasto H",
+                    "ca": "🏞️ Pastura H"
+                  }
+                },
+                {
+                  "value": "i",
+                  "text": {
+                    "default": "⛰️ Pasture I",
+                    "es": "⛰️ Pastos I",
+                    "ca": "⛰️ Pastura I"
+                  }
+                },
+                {
+                  "value": "j",
+                  "text": {
+                    "default": "🌄 Pasture J",
+                    "es": "🌄 Pastos J",
+                    "ca": "🌄 Pastura J"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "mov_gid0",
+              "visibleIf": "(({mov_origin} != 'pasture') and ({mov_origin} != 'site'))",
+              "title": {
+                "default": "Country",
+                "es": "País",
+                "ca": "País"
+              },
+              "requiredIf": "(({mov_origin} != 'pasture') and ({mov_origin} != 'site'))",
+              "choices": [
+                {
+                  "value": "CWL",
+                  "text": {
+                    "default": "Cowland",
+                    "es": "Tierras de vacas"
+                  }
+                },
+                {
+                  "value": "AND",
+                  "text": "Andorra"
+                },
+                {
+                  "value": "ESP",
+                  "text": {
+                    "default": "Spain",
+                    "es": "España",
+                    "ca": "Espanya"
+                  }
+                },
+                {
+                  "value": "AUT",
+                  "text": {
+                    "default": "Austria",
+                    "ca": "Àustria"
+                  }
+                },
+                {
+                  "value": "FRA",
+                  "text": {
+                    "default": "France",
+                    "es": "Francia",
+                    "ca": "França"
+                  }
+                },
+                {
+                  "value": "BEL",
+                  "text": {
+                    "default": "Belgium",
+                    "es": "Bélgica",
+                    "ca": "Bèlgica"
+                  }
+                },
+                {
+                  "value": "DEU",
+                  "text": {
+                    "default": "Germany",
+                    "es": "Alemania",
+                    "ca": "Alemanya"
+                  }
+                },
+                {
+                  "value": "EST",
+                  "text": {
+                    "default": "Estonia",
+                    "ca": "Estònia"
+                  }
+                },
+                {
+                  "value": "FIN",
+                  "text": {
+                    "default": "Finland",
+                    "es": "Finlandia",
+                    "ca": "Finlàndia"
+                  }
+                },
+                {
+                  "value": "GRC",
+                  "text": {
+                    "default": "Greece",
+                    "es": "Grecia",
+                    "ca": "Grècia"
+                  }
+                },
+                {
+                  "value": "ITA",
+                  "text": {
+                    "default": "Italy",
+                    "es": "Italia",
+                    "ca": "Itàlia"
+                  }
+                },
+                {
+                  "value": "LUX",
+                  "text": {
+                    "default": "Luxembourg",
+                    "es": "Luxemburgo",
+                    "ca": "Luxemburg"
+                  }
+                },
+                {
+                  "value": "POL",
+                  "text": {
+                    "default": "Poland",
+                    "es": "Polonia",
+                    "ca": "Polònia"
+                  }
+                },
+                {
+                  "value": "PRT",
+                  "text": "Portugal"
+                }
+              ]
+            },
+            {
+              "type": "dropdown",
+              "name": "mov_gid1",
+              "visibleIf": "((notempty {mov_gid0} and ({mov_origin} != 'pasture')) and ({mov_origin} != 'site'))",
+              "title": {
+                "default": "Region",
+                "es": "Región",
+                "ca": "Regió"
+              },
+              "choices": [
+                {
+                  "value": "AUT.1_1",
+                  "text": "Burgenland",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.2_1",
+                  "text": "Kärnten",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.3_1",
+                  "text": "Niederösterreich",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.4_1",
+                  "text": "Oberösterreich",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.5_1",
+                  "text": {
+                    "default": "Salzburg",
+                    "es": "Salzburgo"
+                  },
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.6_1",
+                  "text": "Steiermark",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.7_1",
+                  "text": "Tirol",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.8_1",
+                  "text": "Vorarlberg",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "AUT.9_1",
+                  "text": "Wien",
+                  "visibleIf": "{mov_gid0}='AUT'"
+                },
+                {
+                  "value": "BEL.1_1",
+                  "text": "Bruxelles",
+                  "visibleIf": "{mov_gid0}='BEL'"
+                },
+                {
+                  "value": "BEL.2_1",
+                  "text": "Vlaanderen",
+                  "visibleIf": "{mov_gid0}='BEL'"
+                },
+                {
+                  "value": "BEL.3_1",
+                  "text": {
+                    "default": "Wallonie",
+                    "es": "Valonia",
+                    "ca": "Valònia"
+                  },
+                  "visibleIf": "{mov_gid0}='BEL'"
+                },
+                {
+                  "value": "DEU.1_1",
+                  "text": {
+                    "default": "Baden-Württemberg",
+                    "es": "Baden-Wurtemberg"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.2_1",
+                  "text": "Bayern",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.3_1",
+                  "text": {
+                    "default": "Berlin",
+                    "es": "Berlín",
+                    "ca": "Berlín"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.4_1",
+                  "text": {
+                    "default": "Brandenburg",
+                    "es": "Brandeburgo"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.5_1",
+                  "text": "Bremen",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.6_1",
+                  "text": {
+                    "default": "Hamburg",
+                    "es": "Hamburgo"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.7_1",
+                  "text": "Hessen",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.8_1",
+                  "text": {
+                    "default": "Mecklenburg-Vorpommern",
+                    "es": "Mecklemburgo-Pomerania Occidental",
+                    "ca": "Mecklenburg-Pomerania Occidental"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.9_1",
+                  "text": "Niedersachsen",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.10_1",
+                  "text": {
+                    "default": "Nordrhein-Westfalen",
+                    "es": "Renania del Norte-Westfalia",
+                    "ca": "Renània Septentrional-Westfàlia"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.11_1",
+                  "text": {
+                    "default": "Rheinland-Pfalz",
+                    "es": "Renania-Palatinado",
+                    "ca": "Renània-Palatinat"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.12_1",
+                  "text": {
+                    "default": "Saarland",
+                    "es": "Sarre",
+                    "ca": "Sarre"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.14_1",
+                  "text": "Sachsen",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.13_1",
+                  "text": {
+                    "default": "Sachsen-Anhalt",
+                    "es": "Sajonia-Anhalt",
+                    "ca": "Sassonia-Anhalt"
+                  },
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.15_1",
+                  "text": "Schleswig-Holstein",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "DEU.16_1",
+                  "text": "Thüringen",
+                  "visibleIf": "{mov_gid0}='DEU'"
+                },
+                {
+                  "value": "ESP.1_1",
+                  "text": {
+                    "default": "Andalucía",
+                    "ca": "Andalusia"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.2_1",
+                  "text": {
+                    "default": "Aragón",
+                    "ca": "Aragó"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.3_1",
+                  "text": {
+                    "default": "Cantabria",
+                    "ca": "Cantàbria"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.4_1",
+                  "text": {
+                    "default": "Castilla-La Mancha",
+                    "ca": "Castella-la Manxa"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.5_1",
+                  "text": {
+                    "default": "Castilla y León",
+                    "ca": "Castella i Lleó"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.6_1",
+                  "text": {
+                    "default": "Cataluña",
+                    "ca": "Catalunya"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.7_1",
+                  "text": {
+                    "default": "Ceuta y Melilla",
+                    "ca": "Ceuta i Melilla"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.8_1",
+                  "text": {
+                    "default": "Comunidad de Madrid",
+                    "ca": "Comunitat de Madrid"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.9_1",
+                  "text": {
+                    "default": "Comunidad Foral de Navarra",
+                    "ca": "Comunitat Foral de Navarra"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.10_1",
+                  "text": {
+                    "default": "Comunidad Valenciana",
+                    "ca": "Comunitat Valenciana"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.11_1",
+                  "text": "Extremadura",
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.12_1",
+                  "text": {
+                    "default": "Galicia",
+                    "ca": "Galícia"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.13_1",
+                  "text": {
+                    "default": "Islas Baleares",
+                    "ca": "Illes Balears"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.14_1",
+                  "text": {
+                    "default": "Islas Canarias",
+                    "ca": "Illes Canàries"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.15_1",
+                  "text": "La Rioja",
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.16_1",
+                  "text": {
+                    "default": "País Vasco",
+                    "ca": "País Basc"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.17_1",
+                  "text": {
+                    "default": "Principado de Asturias",
+                    "ca": "Principat d'Astúries"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "ESP.18_1",
+                  "text": {
+                    "default": "Región de Murcia",
+                    "ca": "Regió de Múrcia"
+                  },
+                  "visibleIf": "{mov_gid0}='ESP'"
+                },
+                {
+                  "value": "EST.1_1",
+                  "text": "Harju",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.2_1",
+                  "text": "Hiiu",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.3_1",
+                  "text": "Ida-Viru",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.4_1",
+                  "text": "Järva",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.5_1",
+                  "text": "Jõgeva",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.7_1",
+                  "text": "Lääne",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.6_1",
+                  "text": {
+                    "default": "Lääne-Viru",
+                    "es": "Lääne-viru"
+                  },
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.8_1",
+                  "text": "Pärnu",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.9_1",
+                  "text": "Peipsi",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.10_1",
+                  "text": "Põlva",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.11_1",
+                  "text": "Rapla",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.12_1",
+                  "text": "Saare",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.13_1",
+                  "text": "Tartu",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.14_1",
+                  "text": "Valga",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.15_1",
+                  "text": "Viljandi",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "EST.16_1",
+                  "text": "Võru",
+                  "visibleIf": "{mov_gid0}='EST'"
+                },
+                {
+                  "value": "FIN.1_1",
+                  "text": {
+                    "default": "Eastern Finland",
+                    "es": "Finlandia oriental",
+                    "ca": "Finlàndia Oriental"
+                  },
+                  "visibleIf": "{mov_gid0}='FIN'"
+                },
+                {
+                  "value": "FIN.2_1",
+                  "text": {
+                    "default": "Lapland",
+                    "es": "Laponia"
+                  },
+                  "visibleIf": "{mov_gid0}='FIN'"
+                },
+                {
+                  "value": "FIN.3_1",
+                  "text": "Oulu",
+                  "visibleIf": "{mov_gid0}='FIN'"
+                },
+                {
+                  "value": "FIN.4_1",
+                  "text": {
+                    "default": "Southern Finland",
+                    "es": "Finlandia Meridional",
+                    "ca": "Sud de Finlàndia"
+                  },
+                  "visibleIf": "{mov_gid0}='FIN'"
+                },
+                {
+                  "value": "FIN.5_1",
+                  "text": {
+                    "default": "Western Finland",
+                    "es": "Finlandia Occidental",
+                    "ca": "Finlàndia Occidental"
+                  },
+                  "visibleIf": "{mov_gid0}='FIN'"
+                },
+                {
+                  "value": "FRA.1_1",
+                  "text": {
+                    "default": "Auvergne-Rhône-Alpes",
+                    "es": "Auvernia-Ródano-Alpes",
+                    "ca": "Alvèrnia-Roine-Alps"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.2_1",
+                  "text": {
+                    "default": "Bourgogne-Franche-Comté",
+                    "es": "Borgoña-Franco Condado",
+                    "ca": "Borgonya-Franc Comtat"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.3_1",
+                  "text": {
+                    "default": "Bretagne",
+                    "es": "Bretaña"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.4_1",
+                  "text": "Centre-Val de Loire",
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.5_1",
+                  "text": "Corse",
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.6_1",
+                  "text": "Grand Est",
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.7_1",
+                  "text": {
+                    "default": "Hauts-de-France",
+                    "es": "Altos de Francia",
+                    "ca": "Alts de França"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.8_1",
+                  "text": {
+                    "default": "Île-de-France",
+                    "ca": "Illa de França"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.9_1",
+                  "text": {
+                    "default": "Normandie",
+                    "es": "Normandía",
+                    "ca": "Normandia"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.10_1",
+                  "text": {
+                    "default": "Nouvelle-Aquitaine",
+                    "es": "Nueva Aquitania",
+                    "ca": "Nova Aquitània"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.11_1",
+                  "text": {
+                    "default": "Occitanie",
+                    "es": "Occitania",
+                    "ca": "Occitània"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.12_1",
+                  "text": "Pays de la Loire",
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "FRA.13_1",
+                  "text": {
+                    "default": "Provence-Alpes-Côte d'Azur",
+                    "es": "Provenza-Alpes-Costa Azul",
+                    "ca": "Provença-Alps-Costa Blava"
+                  },
+                  "visibleIf": "{mov_gid0}='FRA'"
+                },
+                {
+                  "value": "GRC.1_1",
+                  "text": {
+                    "default": "Aegean",
+                    "es": "Egeo",
+                    "ca": "Egeu"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.2_1",
+                  "text": "Athos",
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.3_1",
+                  "text": {
+                    "default": "Attica",
+                    "es": "Ática",
+                    "ca": "Àtica"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.4_1",
+                  "text": {
+                    "default": "Crete",
+                    "es": "Creta",
+                    "ca": "Creta"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.5_1",
+                  "text": {
+                    "default": "Epirus and Western Macedonia",
+                    "es": "Epiro y Macedonia Occidental",
+                    "ca": "Epir i Macedònia Occidental"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.6_1",
+                  "text": {
+                    "default": "Macedonia and Thrace",
+                    "es": "Macedonia y Tracia",
+                    "ca": "Macedònia i Tràcia"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.7_1",
+                  "text": {
+                    "default": "Peloponnese, Western Greece and the Ionian Islands",
+                    "es": "Peloponeso, Grecia occidental y las islas Jónicas",
+                    "ca": "Peloponès, Grècia Occidental i Illes Jòniques"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "GRC.8_1",
+                  "text": {
+                    "default": "Thessaly and Central Greece",
+                    "es": "Tesalia y Grecia Central",
+                    "ca": "Tessàlia i Grècia Central"
+                  },
+                  "visibleIf": "{mov_gid0}='GRC'"
+                },
+                {
+                  "value": "ITA.1_1",
+                  "text": {
+                    "default": "Abruzzo",
+                    "ca": "Abruços"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.2_1",
+                  "text": {
+                    "default": "Apulia",
+                    "ca": "Pulla"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.3_1",
+                  "text": "Basilicata",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.4_1",
+                  "text": {
+                    "default": "Calabria",
+                    "ca": "Calàbria"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.5_1",
+                  "text": {
+                    "default": "Campania",
+                    "ca": "Campània"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.6_1",
+                  "text": {
+                    "default": "Emilia-Romagna",
+                    "es": "Emilia-Romaña",
+                    "ca": "Emília-Romanya"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.7_1",
+                  "text": "Friuli-Venezia Giulia",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.8_1",
+                  "text": {
+                    "default": "Lazio",
+                    "ca": "Laci"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.9_1",
+                  "text": {
+                    "default": "Liguria",
+                    "ca": "Ligúria"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.10_1",
+                  "text": {
+                    "default": "Lombardia",
+                    "es": "Lombardía",
+                    "ca": "Llombardia"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.11_1",
+                  "text": "Marche",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.12_1",
+                  "text": "Molise",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.13_1",
+                  "text": "Piemonte",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.14_1",
+                  "text": "Sardegna",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.15_1",
+                  "text": {
+                    "default": "Sicily",
+                    "es": "Sicilia",
+                    "ca": "Sicília"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.16_1",
+                  "text": "Toscana",
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.17_1",
+                  "text": {
+                    "default": "Trentino-Alto Adige",
+                    "es": "Trentino-Alto Adigio"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.18_1",
+                  "text": {
+                    "default": "Umbria",
+                    "es": "Umbría"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.19_1",
+                  "text": {
+                    "default": "Valle d'Aosta",
+                    "es": "Valle de Aosta",
+                    "ca": "Vall d'Aosta"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "ITA.20_1",
+                  "text": {
+                    "default": "Veneto",
+                    "es": "Véneto",
+                    "ca": "Vèneto"
+                  },
+                  "visibleIf": "{mov_gid0}='ITA'"
+                },
+                {
+                  "value": "LUX.1_1",
+                  "text": "Diekirch",
+                  "visibleIf": "{mov_gid0}='LUX'"
+                },
+                {
+                  "value": "LUX.2_1",
+                  "text": "Grevenmacher",
+                  "visibleIf": "{mov_gid0}='LUX'"
+                },
+                {
+                  "value": "LUX.3_1",
+                  "text": {
+                    "default": "Luxembourg",
+                    "es": "Luxemburgo",
+                    "ca": "Luxemburg"
+                  },
+                  "visibleIf": "{mov_gid0}='LUX'"
+                },
+                {
+                  "value": "POL.1_1",
+                  "text": "Dolnośląskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.2_1",
+                  "text": {
+                    "default": "Kujawsko-Pomorskie",
+                    "es": "Kujawsko-Pomerania"
+                  },
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.3_1",
+                  "text": "Łódzkie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.4_1",
+                  "text": "Lubelskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.5_1",
+                  "text": "Lubuskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.6_1",
+                  "text": "Małopolskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.7_1",
+                  "text": "Mazowieckie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.8_1",
+                  "text": "Opolskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.9_1",
+                  "text": "Podkarpackie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.10_1",
+                  "text": "Podlaskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.11_1",
+                  "text": {
+                    "default": "Pomorskie",
+                    "es": "Pomerania"
+                  },
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.12_1",
+                  "text": "Śląskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.13_1",
+                  "text": "Świętokrzyskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.14_1",
+                  "text": "Warmińsko-Mazurskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.15_1",
+                  "text": "Wielkopolskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "POL.16_1",
+                  "text": "Zachodniopomorskie",
+                  "visibleIf": "{mov_gid0}='POL'"
+                },
+                {
+                  "value": "PRT.1_1",
+                  "text": "Aveiro",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.2_1",
+                  "text": {
+                    "default": "Azores",
+                    "ca": "Açores"
+                  },
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.3_1",
+                  "text": "Beja",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.4_1",
+                  "text": "Braga",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.5_1",
+                  "text": "Bragança",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.6_1",
+                  "text": "Castelo Branco",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.7_1",
+                  "text": "Coimbra",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.8_1",
+                  "text": "Évora",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.9_1",
+                  "text": "Faro",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.10_1",
+                  "text": "Guarda",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.11_1",
+                  "text": "Leiria",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.12_1",
+                  "text": "Lisboa",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.13_1",
+                  "text": "Madeira",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.14_1",
+                  "text": "Portalegre",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.15_1",
+                  "text": {
+                    "default": "Porto",
+                    "es": "Oporto"
+                  },
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.16_1",
+                  "text": "Santarém",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.17_1",
+                  "text": "Setúbal",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.18_1",
+                  "text": "Viana do Castelo",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.19_1",
+                  "text": "Vila Real",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                },
+                {
+                  "value": "PRT.20_1",
+                  "text": "Viseu",
+                  "visibleIf": "{mov_gid0}='PRT'"
+                }
+              ],
+              "hideIfChoicesEmpty": true
+            },
+            {
+              "type": "dropdown",
+              "name": "mov_gid2",
+              "visibleIf": "{mov_origin} = 'farm' and {mov_gid1} notempty and {mov_origin} <> 'pasture'and {mov_origin} <> 'site'",
+              "title": {
+                "default": "Province",
+                "es": "Provincia",
+                "ca": "Província"
+              },
+              "choices": [
+                {
+                  "value": "ESP.1.1_1",
+                  "text": {
+                    "default": "Almería",
+                    "ca": "Almeria"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.2_1",
+                  "text": {
+                    "default": "Cádiz",
+                    "ca": "Cadis"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.3_1",
+                  "text": {
+                    "default": "Córdoba",
+                    "ca": "Còrdova"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.4_1",
+                  "text": "Granada",
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.5_1",
+                  "text": "Huelva",
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.6_1",
+                  "text": "Jaén",
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.7_1",
+                  "text": {
+                    "default": "Málaga",
+                    "ca": "Màlaga"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.1.8_1",
+                  "text": "Sevilla",
+                  "visibleIf": "{mov_gid1}='ESP.1_1'"
+                },
+                {
+                  "value": "ESP.2.1_1",
+                  "text": {
+                    "default": "Huesca",
+                    "ca": "Osca"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.2.2_1",
+                  "text": {
+                    "default": "Teruel",
+                    "ca": "Terol"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.2.3_1",
+                  "text": {
+                    "default": "Zaragoza",
+                    "ca": "Saragossa"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.2_1'"
+                },
+                {
+                  "value": "ESP.3.1_1",
+                  "text": {
+                    "default": "Cantabria",
+                    "ca": "Cantàbria"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.3_1'"
+                },
+                {
+                  "value": "ESP.4.1_1",
+                  "text": "Albacete",
+                  "visibleIf": "{mov_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.2_1",
+                  "text": "Ciudad Real",
+                  "visibleIf": "{mov_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.3_1",
+                  "text": {
+                    "default": "Cuenca",
+                    "es": "Conquense"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.4_1",
+                  "text": "Guadalajara",
+                  "visibleIf": "{mov_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.4.5_1",
+                  "text": "Toledo",
+                  "visibleIf": "{mov_gid1}='ESP.4_1'"
+                },
+                {
+                  "value": "ESP.5.1_1",
+                  "text": {
+                    "default": "Ávila",
+                    "ca": "Àvila"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.2_1",
+                  "text": "Burgos",
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.3_1",
+                  "text": {
+                    "default": "León",
+                    "ca": "Lleó"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.4_1",
+                  "text": {
+                    "default": "Palencia",
+                    "ca": "Palència"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.5_1",
+                  "text": "Salamanca",
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.6_1",
+                  "text": {
+                    "default": "Segovia",
+                    "ca": "Segòvia"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.7_1",
+                  "text": {
+                    "default": "Soria",
+                    "ca": "Sòria"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.8_1",
+                  "text": "Valladolid",
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.5.9_1",
+                  "text": "Zamora",
+                  "visibleIf": "{mov_gid1}='ESP.5_1'"
+                },
+                {
+                  "value": "ESP.6.1_1",
+                  "text": "Barcelona",
+                  "visibleIf": "{mov_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.2_1",
+                  "text": "Girona",
+                  "visibleIf": "{mov_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.3_1",
+                  "text": "Lleida",
+                  "visibleIf": "{mov_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.6.4_1",
+                  "text": "Tarragona",
+                  "visibleIf": "{mov_gid1}='ESP.6_1'"
+                },
+                {
+                  "value": "ESP.7.1_1",
+                  "text": "Ceuta",
+                  "visibleIf": "{mov_gid1}='ESP.7_1'"
+                },
+                {
+                  "value": "ESP.7.2_1",
+                  "text": "Melilla",
+                  "visibleIf": "{mov_gid1}='ESP.7_1'"
+                },
+                {
+                  "value": "ESP.8.1_1",
+                  "text": "Madrid",
+                  "visibleIf": "{mov_gid1}='ESP.8_1'"
+                },
+                {
+                  "value": "ESP.9.1_1",
+                  "text": "Navarra",
+                  "visibleIf": "{mov_gid1}='ESP.9_1'"
+                },
+                {
+                  "value": "ESP.10.1_1",
+                  "text": {
+                    "default": "Alicante",
+                    "es": "Alicantino",
+                    "ca": "Alacant"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.10.2_1",
+                  "text": {
+                    "default": "Castellón",
+                    "ca": "Castelló"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.10.3_1",
+                  "text": {
+                    "default": "Valencia",
+                    "ca": "València"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.10_1'"
+                },
+                {
+                  "value": "ESP.11.1_1",
+                  "text": "Badajoz",
+                  "visibleIf": "{mov_gid1}='ESP.11_1'"
+                },
+                {
+                  "value": "ESP.11.2_1",
+                  "text": {
+                    "default": "Cáceres",
+                    "ca": "Càceres"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.11_1'"
+                },
+                {
+                  "value": "ESP.12.1_1",
+                  "text": {
+                    "default": "A Coruña",
+                    "ca": "A Corunya"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.2_1",
+                  "text": "Lugo",
+                  "visibleIf": "{mov_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.3_1",
+                  "text": "Ourense",
+                  "visibleIf": "{mov_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.12.4_1",
+                  "text": "Pontevedra",
+                  "visibleIf": "{mov_gid1}='ESP.12_1'"
+                },
+                {
+                  "value": "ESP.13.1_1",
+                  "text": {
+                    "default": "Baleares",
+                    "ca": "Balears"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.13_1'"
+                },
+                {
+                  "value": "ESP.14.1_1",
+                  "text": "Las Palmas",
+                  "visibleIf": "{mov_gid1}='ESP.14_1'"
+                },
+                {
+                  "value": "ESP.14.2_1",
+                  "text": "Santa Cruz de Tenerife",
+                  "visibleIf": "{mov_gid1}='ESP.14_1'"
+                },
+                {
+                  "value": "ESP.15.1_1",
+                  "text": "La Rioja",
+                  "visibleIf": "{mov_gid1}='ESP.15_1'"
+                },
+                {
+                  "value": "ESP.16.1_1",
+                  "text": {
+                    "default": "Álava",
+                    "ca": "Àlaba"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.16.2_1",
+                  "text": "Guipúzcoa",
+                  "visibleIf": "{mov_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.16.3_1",
+                  "text": {
+                    "default": "Vizcaya",
+                    "ca": "Biscaia"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.16_1'"
+                },
+                {
+                  "value": "ESP.17.1_1",
+                  "text": {
+                    "default": "Asturias",
+                    "ca": "Astúries"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.17_1'"
+                },
+                {
+                  "value": "ESP.18.1_1",
+                  "text": {
+                    "default": "Murcia",
+                    "ca": "Múrcia"
+                  },
+                  "visibleIf": "{mov_gid1}='ESP.18_1'"
+                }
+              ],
+              "hideIfChoicesEmpty": true
+            },
+            {
+              "type": "boolean",
+              "name": "mov_same",
+              "visibleIf": "{mov_origin} anyof ['farm', 'fair', 'trader', 'center'] and {mov_type} = 'oneway'",
+              "title": {
+                "default": "Were all animals introduced from the same farm?",
+                "es": "¿Todos los animales fueron introducidos de la misma granja?",
+                "ca": "Tots els animals van ser introduïts de la mateixa granja?"
+              },
+              "setValueIf": "{mov_origin} anyof ['trader', 'center', 'shared_rearing', 'genetic', 'fair']",
+              "setValueExpression": "TRUE"
+            },
+            {
+              "type": "boolean",
+              "name": "site_share",
+              "visibleIf": "{mov_type} = 'round'",
+              "title": {
+                "default": "Is the site shared with cattle from different farms?",
+                "es": "¿El sitio se comparte con ganado de diferentes granjas?",
+                "ca": "El lloc es comparteix amb bestiar de diferents granges?"
+              },
+              "setValueIf": "{mov_origin} anyof ['trader', 'center', 'shared_rearing', 'genetic', 'fair'] and {mov_type} = 'round'",
+              "setValueExpression": "true"
+            },
+            {
+              "type": "text",
+              "name": "site_cattle_n",
+              "visibleIf": "{site_share} = true or {mov_same} = false",
+              "title": {
+                "default": "Number of cattle from other farms",
+                "es": "Número de cabezas de ganado",
+                "ca": "Nombre de bestiar"
+              },
+              "titleLocation": "left",
+              "description": {
+                "es": "De otras granjas",
+                "ca": "D'altres granges"
+              },
+              "inputType": "number",
+              "min": 1,
+              "max": 300,
+              "step": -1
+            },
+            {
+              "type": "text",
+              "name": "mov_farms_n",
+              "visibleIf": "{site_share} = true and {mov_type} = 'round'",
+              "title": {
+                "default": "From how many farms?",
+                "es": "¿De cuántas granjas?",
+                "ca": "De quantes granges?"
+              },
+              "titleLocation": "left",
+              "inputType": "number",
+              "min": 1,
+              "max": 10
+            },
+            {
+              "type": "boolean",
+              "name": "site_bulls",
+              "visibleIf": "{site_share} = true and {mov_origin} anyof ['pasture', 'farm']",
+              "title": {
+                "default": "Are bulls in contact with cows?",
+                "es": "¿Los toros están en contacto con las vacas?",
+                "ca": "Els toros estan en contacte amb les vaques?"
+              }
+            }
+          ]
+        },
+        {
+          "type": "panel",
+          "name": "mov_health_panel",
+          "title": {
+            "default": "Health status",
+            "es": "Estado de salud",
+            "ca": "Estat de salut"
+          },
+          "elements": [
+            {
+              "type": "boolean",
+              "name": "mov_health_know",
+              "visibleIf": "{site_share} = true",
+              "title": {
+                "default": "Do you know the health status of the animals from those other farms?",
+                "es": "¿Conoces el estado de salud de los animales de esas granjas?",
+                "ca": "Coneixes l'estat de salut dels animals d'aquestes granges?"
+              }
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "mov_health",
+              "visibleIf": "{site_share} = true or {mov_health_know} = true or {mov_type} = 'oneway'",
+              "title": {
+                "default": "Disease control plan\r\n",
+                "es": "Plan de control de enfermedades de las granjas",
+                "ca": "Pla de control de malalties de les granges"
+              },
+              "description": {
+                "default": "TB -Tuberculosis, IBR - Infectious bovine rhinotracheitis/Bovine herpesvirus (BoHV-1), BVD - Bovine viral diarrhoea",
+                "es": "TB - Tuberculosis, IBR - Rinotraqueítis infecciosa bovina/Herpesvirus bovino (BoHV-1), BVD - Diarrea viral bovina",
+                "ca": "TB - Tuberculosi, IBR - Rinotraqueïtis infecciosa bovina/Herpesvirus boví (BoHV-1), BVD - Diarrea vírica bovina"
+              },
+              "columns": [
+                {
+                  "name": "mov_health_farm",
+                  "title": {
+                    "default": "Farm",
+                    "es": "Granja",
+                    "ca": "Granja"
+                  },
+                  "cellType": "tagbox",
+                  "visibleIf": "{site_share} = true or {mov_same} = false",
+                  "choices": [
+                    {
+                      "value": "all",
+                      "text": {
+                        "default": "All farms",
+                        "es": "Todas las granjas",
+                        "ca": "Totes les granges"
+                      }
+                    },
+                    {
+                      "value": "farm1",
+                      "text": {
+                        "default": "Farm 1",
+                        "es": "Granja 1",
+                        "ca": "Finca 1"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 1"
+                    },
+                    {
+                      "value": "farm2",
+                      "text": {
+                        "default": "Farm 2",
+                        "es": "Granja 2",
+                        "ca": "Granja 2"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 2"
+                    },
+                    {
+                      "value": "farm3",
+                      "text": {
+                        "default": "Farm 3",
+                        "es": "Granja 3",
+                        "ca": "Granja 3"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 3"
+                    },
+                    {
+                      "value": "farm4",
+                      "text": {
+                        "default": "Farm 4",
+                        "es": "Granja 4",
+                        "ca": "Finca 4"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 4"
+                    },
+                    {
+                      "value": "farm5",
+                      "text": {
+                        "default": "Farm 5",
+                        "es": "Granja 5",
+                        "ca": "Finca 5"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 5"
+                    },
+                    {
+                      "value": "farm6",
+                      "text": {
+                        "default": "Farm 6",
+                        "es": "Granja 6",
+                        "ca": "Finca 6"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 6"
+                    },
+                    {
+                      "value": "farm7",
+                      "text": {
+                        "default": "Farm 7",
+                        "es": "Granja 7",
+                        "ca": "Granja 7"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 7"
+                    },
+                    {
+                      "value": "farm8",
+                      "text": {
+                        "default": "Farm 8",
+                        "es": "Granja 8",
+                        "ca": "Granja 8"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 8"
+                    }
+                  ]
+                },
+                {
+                  "name": "mov_health_disease",
+                  "title": {
+                    "default": "Disease",
+                    "es": "Enfermedad",
+                    "ca": "Malaltia"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "TB",
+                      "text": {
+                        "es": "TUBERCULOSIS",
+                        "ca": "TB"
+                      }
+                    },
+                    {
+                      "value": "IBR",
+                      "text": {
+                        "es": "IBR",
+                        "ca": "IBR"
+                      }
+                    },
+                    {
+                      "value": "BVD",
+                      "text": {
+                        "es": "BVD",
+                        "ca": "BVD"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "mov_health_status",
+                  "title": {
+                    "default": "Disease control plan",
+                    "es": "Plan de control de enfermedades",
+                    "ca": "Pla de control de malalties"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "unk_plan",
+                      "text": {
+                        "default": "Unknown",
+                        "es": "Desconocido",
+                        "ca": "Desconegut"
+                      }
+                    },
+                    {
+                      "value": "no_plan",
+                      "text": {
+                        "default": "No control plan",
+                        "es": "Sin plan de control",
+                        "ca": "Sense pla de control"
+                      }
+                    },
+                    {
+                      "value": "T3H",
+                      "text": {
+                        "default": "T3H (Long-term officially free)",
+                        "es": "T3H (Gratis oficialmente a largo plazo)",
+                        "ca": "T3H (Gratuït oficial de llarga durada)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T3",
+                      "text": {
+                        "default": "T3 (Officially free)",
+                        "es": "T3 (Oficialmente gratis)",
+                        "ca": "T3 (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T2neg",
+                      "text": "T2-",
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T2pos",
+                      "text": "T2+",
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T1",
+                      "text": {
+                        "es": "T1",
+                        "ca": "T1"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "Ts",
+                      "text": {
+                        "es": "Ts",
+                        "ca": "Ts"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "Tr",
+                      "text": {
+                        "es": "Tr",
+                        "ca": "Tr"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "IBR1",
+                      "text": {
+                        "default": "IBR1 (Control programme, disease present)",
+                        "es": "IBR1 (Programa de control, enfermedad presente)",
+                        "ca": "IBR1 (Programa de control, malaltia present)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR1neg",
+                      "text": "IBR1-",
+                      "visibleIf": "{row.mov_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR2",
+                      "text": {
+                        "es": "IBR2",
+                        "ca": "IBR2"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR3",
+                      "text": {
+                        "es": "IBR3",
+                        "ca": "IBR3"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR4",
+                      "text": {
+                        "default": "IBR4 (Officially free)",
+                        "es": "IBR4 (Oficialmente gratis)",
+                        "ca": "IBR4 (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'IBR'"
+                    },
+                    {
+                      "value": "BVDneg",
+                      "text": {
+                        "default": "BVD- (Officially free)",
+                        "es": "BVD- (Oficialmente gratis)",
+                        "ca": "BVD- (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'BVD'"
+                    },
+                    {
+                      "value": "BVDpos",
+                      "text": {
+                        "default": "BVD+ Control plan (Not Officially Free)",
+                        "es": "Plan de control BVD+ (no oficialmente gratuito)",
+                        "ca": "Pla de control BVD+ (no oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.mov_health_disease} = 'BVD'"
+                    }
+                  ]
+                }
+              ],
+              "rowCount": 3,
+              "maxRowCount": 12
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_quarantine_title",
+              "visible": false,
+              "title": {
+                "es": "mov_quarantine_title",
+                "ca": "mov_quarantine_title"
+              },
+              "setValueExpression": "iif({mov_type} = 'oneway', 'oneway', 'round')",
+              "readOnly": true,
+              "choices": [
+                {
+                  "value": "oneway",
+                  "text": {
+                    "default": "Were these animals quarantined before entering your herd?",
+                    "es": "¿Estos animales fueron puestos en cuarentena antes de ingresar a su rebaño?",
+                    "ca": "Aquests animals van ser posats en quarantena abans d'entrar al vostre ramat?"
+                  }
+                },
+                {
+                  "value": "round",
+                  "text": {
+                    "default": "Were returning animals quarantined before reintroduction?",
+                    "es": "¿Se puso en cuarentena a los animales que regresaban antes de la reintroducción?",
+                    "ca": "Els animals que tornaven estaven en quarantena abans de la reintroducció?"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "name": "mov_quarantine_expression",
+              "visible": false,
+              "title": {
+                "es": "mov_quarantine_expression",
+                "ca": "mov_quarantine_expression"
+              },
+              "expression": "displayValue(\"mov_quarantine_title\")"
+            },
+            {
+              "type": "boolean",
+              "name": "mov_quarantine",
+              "title": "{mov_quarantine_expression}",
+              "description": {
+                "default": "Quarantine details specified in the biosecurity survey",
+                "es": "Detalles de la cuarentena especificados en la encuesta de bioseguridad",
+                "ca": "Detalls de quarantena especificats a l'enquesta de bioseguretat"
+              }
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "mov_test",
+              "title": {
+                "default": "Tests required before or after transport",
+                "es": "Pruebas necesarias antes o después del transporte",
+                "ca": "Proves necessàries abans o després del transport"
+              },
+              "description": {
+                "default": "TB -Tuberculosis, IBR - Infectious bovine rhinotracheitis/Bovine herpesvirus (BoHV-1), BVD - Bovine viral diarrhoea",
+                "es": "TB - Tuberculosis, IBR - Rinotraqueítis infecciosa bovina/Herpesvirus bovino (BoHV-1), BVD - Diarrea viral bovina",
+                "ca": "TB - Tuberculosi, IBR - Rinotraqueïtis infecciosa bovina/Herpesvirus boví (BoHV-1), BVD - Diarrea vírica bovina"
+              },
+              "columns": [
+                {
+                  "name": "mov_test_farm",
+                  "title": {
+                    "default": "Farm",
+                    "es": "Granja",
+                    "ca": "Granja"
+                  },
+                  "cellType": "tagbox",
+                  "visibleIf": "{mov_same} = false or {site_share} = true",
+                  "choices": [
+                    {
+                      "value": "all",
+                      "text": {
+                        "default": "All farms",
+                        "es": "Todas las granjas",
+                        "ca": "Totes les granges"
+                      }
+                    },
+                    {
+                      "value": "farm1",
+                      "text": {
+                        "default": "Farm 1",
+                        "es": "Granja 1",
+                        "ca": "Finca 1"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 1"
+                    },
+                    {
+                      "value": "farm2",
+                      "text": {
+                        "default": "Farm 2",
+                        "es": "Granja 2",
+                        "ca": "Granja 2"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 2"
+                    },
+                    {
+                      "value": "farm3",
+                      "text": {
+                        "default": "Farm 3",
+                        "es": "Granja 3",
+                        "ca": "Granja 3"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 3"
+                    },
+                    {
+                      "value": "farm4",
+                      "text": {
+                        "default": "Farm 4",
+                        "es": "Granja 4",
+                        "ca": "Finca 4"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 4"
+                    },
+                    {
+                      "value": "farm5",
+                      "text": {
+                        "default": "Farm 5",
+                        "es": "Granja 5",
+                        "ca": "Finca 5"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 5"
+                    },
+                    {
+                      "value": "farm6",
+                      "text": {
+                        "default": "Farm 6",
+                        "es": "Granja 6",
+                        "ca": "Finca 6"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 6"
+                    },
+                    {
+                      "value": "farm7",
+                      "text": {
+                        "default": "Farm 7",
+                        "es": "Granja 7",
+                        "ca": "Granja 7"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 7"
+                    },
+                    {
+                      "value": "farm8",
+                      "text": {
+                        "default": "Farm 8",
+                        "es": "Granja 8",
+                        "ca": "Granja 8"
+                      },
+                      "visibleIf": "{mov_farms_n} >= 8"
+                    }
+                  ]
+                },
+                {
+                  "name": "mov_test_disease",
+                  "title": {
+                    "default": "Disease",
+                    "es": "Enfermedad",
+                    "ca": "Malaltia"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "TB",
+                      "text": {
+                        "es": "TUBERCULOSIS",
+                        "ca": "TB"
+                      }
+                    },
+                    {
+                      "value": "IBR",
+                      "text": {
+                        "es": "IBR",
+                        "ca": "IBR"
+                      }
+                    },
+                    {
+                      "value": "BVD",
+                      "text": {
+                        "es": "BVD",
+                        "ca": "BVD"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "mov_test_origin",
+                  "title": {
+                    "default": "Test before transport",
+                    "es": "Prueba antes del transporte",
+                    "ca": "Prova abans del transport"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "sitt",
+                      "text": {
+                        "default": "Single intradermal tuberculin",
+                        "es": "Tuberculina intradérmica única",
+                        "ca": "Tuberculina intradèrmica única"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "sictt",
+                      "text": {
+                        "default": "Single comparative intradermal tuberculin",
+                        "es": "Tuberculina intradérmica comparativa única",
+                        "ca": "Tuberculina intradèrmica comparativa única"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "ifn",
+                      "text": {
+                        "default": "Interferon-gamma assay",
+                        "es": "Ensayo de interferón gamma",
+                        "ca": "Assaig d'interferó-gamma"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "elisa_abs",
+                      "text": {
+                        "default": "ELISA for antibody detection",
+                        "es": "ELISA para la detección de anticuerpos",
+                        "ca": "ELISA per a la detecció d'anticossos"
+                      }
+                    },
+                    {
+                      "value": "elisa_ag",
+                      "text": {
+                        "default": "ELISA for antigen detection",
+                        "es": "ELISA para la detección de antígenos",
+                        "ca": "ELISA per a la detecció d'antígens"
+                      }
+                    },
+                    {
+                      "value": "pcr",
+                      "text": {
+                        "default": "PCR for antigen detection",
+                        "es": "PCR para la detección de antígenos",
+                        "ca": "PCR per a la detecció d'antígens"
+                      }
+                    }
+                  ],
+                  "showNoneItem": true
+                },
+                {
+                  "name": "mov_test_quarantine",
+                  "title": {
+                    "default": "Test during quarantine",
+                    "es": "Prueba durante la cuarentena",
+                    "ca": "Prova durant la quarantena"
+                  },
+                  "cellType": "dropdown",
+                  "visibleIf": "{mov_quarantine} = true",
+                  "choices": [
+                    {
+                      "value": "sitt",
+                      "text": {
+                        "default": "Single intradermal tuberculin",
+                        "es": "Tuberculina intradérmica única",
+                        "ca": "Tuberculina intradèrmica única"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "sictt",
+                      "text": {
+                        "default": "Single comparative intradermal tuberculin",
+                        "es": "Tuberculina intradérmica comparativa única",
+                        "ca": "Tuberculina intradèrmica comparativa única"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "ifn",
+                      "text": {
+                        "default": "Interferon-gamma assay",
+                        "es": "Ensayo de interferón gamma",
+                        "ca": "Assaig d'interferó-gamma"
+                      },
+                      "visibleIf": "{row.mov_test_disease} = 'TB'"
+                    },
+                    {
+                      "value": "elisa_abs",
+                      "text": {
+                        "default": "ELISA for antibody detection",
+                        "es": "ELISA para la detección de anticuerpos",
+                        "ca": "ELISA per a la detecció d'anticossos"
+                      }
+                    },
+                    {
+                      "value": "elisa_ag",
+                      "text": {
+                        "default": "ELISA for antigen detection",
+                        "es": "ELISA para la detección de antígenos",
+                        "ca": "ELISA per a la detecció d'antígens"
+                      }
+                    },
+                    {
+                      "value": "pcr",
+                      "text": {
+                        "default": "PCR for antigen detection",
+                        "es": "PCR para la detección de antígenos",
+                        "ca": "PCR per a la detecció d'antígens"
+                      }
+                    }
+                  ],
+                  "showNoneItem": true
+                }
+              ],
+              "rowCount": 3,
+              "maxRowCount": 12
+            },
+            {
+              "type": "radiogroup",
+              "name": "mov_quarantine_test_time",
+              "visibleIf": "{mov_test[0].mov_test_quarantine} notempty",
+              "title": {
+                "default": "When were animals tested during quarantine?",
+                "es": "¿Cuándo se probaron los animales durante la cuarentena?",
+                "ca": "Quan es van fer proves als animals durant la quarantena?"
+              },
+              "choices": [
+                {
+                  "value": "start",
+                  "text": {
+                    "default": "At the beginning of quarantine",
+                    "es": "Al inicio de la cuarentena",
+                    "ca": "Al començament de la quarantena"
+                  }
+                },
+                {
+                  "value": "end",
+                  "text": {
+                    "default": "At the end of quarantine",
+                    "es": "Al final de la cuarentena",
+                    "ca": "Al final de la quarantena"
+                  }
+                },
+                {
+                  "value": "any",
+                  "text": {
+                    "default": "At any time",
+                    "es": "En cualquier momento",
+                    "ca": "En qualsevol moment"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "transport_oneway",
+      "visibleIf": "{mov_type} = 'oneway'",
+      "title": {
+        "default": "Transport one-way",
+        "es": "Transporte de ida",
+        "ca": "Transport d'anada"
+      },
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "oneway_veh_type",
+          "title": {
+            "default": "Type of vehicle used",
+            "es": "Tipo de vehículo utilizado",
+            "ca": "Tipus de vehicle utilitzat"
+          },
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "own",
+              "text": {
+                "default": "Own vehicle",
+                "es": "Vehículo propio",
+                "ca": "Vehicle propi"
+              }
+            },
+            {
+              "value": "ext",
+              "text": {
+                "default": "External vehicle (e.g. transport company)",
+                "es": "Vehículo externo (p. ej., empresa de transporte)",
+                "ca": "Vehicle extern (per exemple, empresa de transport)"
+              }
+            },
+            {
+              "value": "none",
+              "text": {
+                "default": "No vehicle (walking)",
+                "es": "Sin vehículo (caminando)",
+                "ca": "Sense vehicle (caminant)"
+              }
+            }
+          ],
+          "separateSpecialChoices": true
+        },
+        {
+          "type": "dropdown",
+          "name": "oneway_veh_id",
+          "visibleIf": "{oneway_veh_type} = 'own'",
+          "title": {
+            "default": "Vehicle key",
+            "es": "Llave del vehículo",
+            "ca": "Clau del vehicle"
+          },
+          "description": {
+            "default": "You can add new vehicles in the biosecurity survey",
+            "es": "Puede agregar nuevos vehículos en la encuesta de bioseguridad",
+            "ca": "Pots afegir nous vehicles a l'enquesta de bioseguretat"
+          },
+          "requiredIf": "({oneway_veh_type} == 'own')",
+          "choices": [
+            {
+              "value": "a",
+              "text": {
+                "default": "🚚 Vehicle A",
+                "es": "🚚 Vehículo A"
+              }
+            },
+            {
+              "value": "b",
+              "text": {
+                "default": "🛻 Vehicle B",
+                "es": "🛻 Vehículo B"
+              }
+            },
+            {
+              "value": "c",
+              "text": {
+                "default": "🚛 Vehicle C",
+                "es": "🚛 Vehículo C"
+              }
+            },
+            {
+              "value": "d",
+              "text": {
+                "default": "🚌 Vehicle D",
+                "es": "🚌 Vehículo D"
+              }
+            },
+            {
+              "value": "e",
+              "text": {
+                "default": "🛺 Vehicle E",
+                "es": "🛺 Vehículo E"
+              }
+            },
+            {
+              "value": "f",
+              "text": {
+                "default": "🚜 Vehicle F",
+                "es": "🚜 Vehículo F"
+              }
+            },
+            {
+              "value": "g",
+              "text": {
+                "default": "🚙 Vehicle G",
+                "es": "🚙 Vehículo G"
+              }
+            },
+            {
+              "value": "h",
+              "text": {
+                "default": "🚐 Vehicle H",
+                "es": "🚐 Vehículo H"
+              }
+            },
+            {
+              "value": "i",
+              "text": {
+                "default": "🚗 Vehicle H",
+                "es": "🚗 Vehículo H"
+              }
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "oneway_veh_exclusive",
+          "title": {
+            "default": "Were only the animals for this farm transported in this movement?",
+            "es": "¿Solo se transportaron los animales de esta granja en este movimiento?",
+            "ca": "Només es van transportar els animals d'aquesta granja en aquest moviment?"
+          },
+          "description": {
+            "default": " i.e. no animals that were going to another farm were on the same vehicle at the same time",
+            "es": " es decir, ningún animal que iba a otra granja estaba en el mismo vehículo al mismo tiempo",
+            "ca": " és a dir, cap animal que anés a una altra granja estigués al mateix vehicle al mateix temps"
+          },
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "oneway_veh_epiunit",
+          "visibleIf": "{oneway_veh_exclusive} = 'no' and {mov_type} anyof ['purchase', 'recurrent']",
+          "title": {
+            "default": "Did your animals and the others come from the same farm?",
+            "es": "¿Sus animales y los demás procedían de la misma granja?",
+            "ca": "Els teus animals i els altres provenien de la mateixa granja?"
+          },
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "transport_round_to",
+      "visibleIf": "{mov_type} = 'round'",
+      "title": {
+        "default": "Transport to leave the farm",
+        "es": "Transporte para salir de la finca",
+        "ca": "Transport per sortir de la finca"
+      },
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "round_to_veh_type",
+          "title": {
+            "default": "Type of vehicle used",
+            "es": "Tipo de vehículo utilizado",
+            "ca": "Tipus de vehicle utilitzat"
+          },
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "own",
+              "text": {
+                "default": "Own vehicle",
+                "es": "Vehículo propio",
+                "ca": "Vehicle propi"
+              }
+            },
+            {
+              "value": "ext",
+              "text": {
+                "default": "External vehicle (e.g. transport company)",
+                "es": "Vehículo externo (p. ej., empresa de transporte)",
+                "ca": "Vehicle extern (per exemple, empresa de transport)"
+              }
+            },
+            {
+              "value": "none",
+              "text": {
+                "default": "No vehicle (walking)",
+                "es": "Sin vehículo (caminando)",
+                "ca": "Sense vehicle (caminant)"
+              }
+            }
+          ],
+          "separateSpecialChoices": true
+        },
+        {
+          "type": "dropdown",
+          "name": "round_to_veh_id",
+          "visibleIf": "{round_to_veh_type} = 'own'",
+          "title": {
+            "default": "Vehicle key",
+            "es": "Llave del vehículo",
+            "ca": "Clau del vehicle"
+          },
+          "description": {
+            "default": "You can add new vehicles in the biosecurity survey",
+            "es": "Puede agregar nuevos vehículos en la encuesta de bioseguridad",
+            "ca": "Pots afegir nous vehicles a l'enquesta de bioseguretat"
+          },
+          "requiredIf": "({round_to_veh_type} == 'own')",
+          "choices": [
+            {
+              "value": "a",
+              "text": {
+                "default": "🚚 Vehicle A",
+                "es": "🚚 Vehículo A"
+              }
+            },
+            {
+              "value": "b",
+              "text": {
+                "default": "🛻 Vehicle B",
+                "es": "🛻 Vehículo B"
+              }
+            },
+            {
+              "value": "c",
+              "text": {
+                "default": "🚛 Vehicle C",
+                "es": "🚛 Vehículo C"
+              }
+            },
+            {
+              "value": "d",
+              "text": {
+                "default": "🚌 Vehicle D",
+                "es": "🚌 Vehículo D"
+              }
+            },
+            {
+              "value": "e",
+              "text": {
+                "default": "🛺 Vehicle E",
+                "es": "🛺 Vehículo E"
+              }
+            },
+            {
+              "value": "f",
+              "text": {
+                "default": "🚜 Vehicle F",
+                "es": "🚜 Vehículo F"
+              }
+            },
+            {
+              "value": "g",
+              "text": {
+                "default": "🚙 Vehicle G",
+                "es": "🚙 Vehículo G"
+              }
+            },
+            {
+              "value": "h",
+              "text": {
+                "default": "🚐 Vehicle H",
+                "es": "🚐 Vehículo H"
+              }
+            },
+            {
+              "value": "i",
+              "text": {
+                "default": "🚗 Vehicle H",
+                "es": "🚗 Vehículo H"
+              }
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "round_to_single",
+          "visibleIf": "{round_to_veh_type} <> 'none'",
+          "title": {
+            "default": "Were all animals transported in the same truck on a single journey?",
+            "es": "¿Todos los animales fueron transportados en el mismo camión en un solo viaje?",
+            "ca": "Tots els animals van ser transportats en el mateix camió en un sol viatge?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "round_to_days_n",
+          "visibleIf": "{round_to_single} = false",
+          "title": {
+            "default": "How many journeys did it take to transport all the animals?",
+            "es": "¿Cuántos viajes se necesitaron para transportar a todos los animales?",
+            "ca": "Quants viatges van trigar a transportar tots els animals?"
+          },
+          "inputType": "number",
+          "min": 1,
+          "max": 10,
+          "step": 1
+        },
+        {
+          "type": "boolean",
+          "name": "round_to_veh_days_exclusive",
+          "visibleIf": "{round_to_single} = false",
+          "title": {
+            "default": "Was the vehicle only used by the animals from your farm during those journeys?",
+            "es": "¿El vehículo solo lo utilizaban los animales de su granja durante esos trayectos?",
+            "ca": "El vehicle només va ser utilitzat pels animals de la vostra granja durant aquests viatges?"
+          }
+        },
+        {
+          "type": "radiogroup",
+          "name": "round_to_veh_each_exclusive",
+          "title": {
+            "default": "Were only the animals for this farm transported in each movement?",
+            "es": "¿Solo se transportaban los animales de esta granja en cada movimiento?",
+            "ca": "Només es transportaven els animals d'aquesta granja en cada moviment?"
+          },
+          "description": {
+            "default": " i.e. no animals that were going to another farm were on the same vehicle at the same time",
+            "es": " es decir, ningún animal que iba a otra granja estaba en el mismo vehículo al mismo tiempo",
+            "ca": " és a dir, cap animal que anés a una altra granja estigués al mateix vehicle al mateix temps"
+          },
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        },
+        {
+          "type": "expression",
+          "name": "round_to_veh_exclusive",
+          "visible": false,
+          "title": {
+            "es": "round_to_veh_exclusive",
+            "ca": "round_to_veh_exclusive"
+          },
+          "clearIfInvisible": "none",
+          "expression": "iif({round_to_veh_days_exclusive} = true,  \"yes\", \n{round_to_veh_each_exclusive})"
+        },
+        {
+          "type": "radiogroup",
+          "name": "round_to_veh_epiunit",
+          "visibleIf": "{round_to_veh_each_exclusive} = 'no' and {mov_type} = 'pasture'",
+          "title": {
+            "default": "Did your animals and the others go to the same place?",
+            "es": "¿Tus animales y los demás fueron al mismo lugar?",
+            "ca": "Els teus animals i els altres van anar al mateix lloc?"
+          },
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "transport_round_from",
+      "visibleIf": "{mov_type} = 'round'",
+      "title": {
+        "default": "Transport to return to the farm",
+        "es": "Transporte para regresar a la finca",
+        "ca": "Transport per tornar a la finca"
+      },
+      "elements": [
+        {
+          "type": "boolean",
+          "name": "round_from_veh_equal_to",
+          "title": {
+            "default": "Was the same as the transport to leave the farm?",
+            "es": "¿Era lo mismo que el transporte para salir de la finca?",
+            "ca": "Era el mateix que el transport per sortir de la granja?"
+          }
+        },
+        {
+          "type": "radiogroup",
+          "name": "round_from_veh_type",
+          "visibleIf": "{round_from_veh_equal_to} = false",
+          "title": {
+            "default": "Type of vehicle used",
+            "es": "Tipo de vehículo utilizado",
+            "ca": "Tipus de vehicle utilitzat"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_to_veh_type}",
+          "clearIfInvisible": "none",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "own",
+              "text": {
+                "default": "Own vehicle",
+                "es": "Vehículo propio",
+                "ca": "Vehicle propi"
+              }
+            },
+            {
+              "value": "ext",
+              "text": {
+                "default": "External vehicle (e.g. transport company)",
+                "es": "Vehículo externo (p. ej., empresa de transporte)",
+                "ca": "Vehicle extern (per exemple, empresa de transport)"
+              }
+            },
+            {
+              "value": "none",
+              "text": {
+                "default": "No vehicle (walking)",
+                "es": "Sin vehículo (caminando)",
+                "ca": "Sense vehicle (caminant)"
+              }
+            }
+          ],
+          "separateSpecialChoices": true
+        },
+        {
+          "type": "dropdown",
+          "name": "round_from_veh_id",
+          "visibleIf": "{round_from_veh_type} = 'own' and\n{round_from_veh_equal_to} = false",
+          "title": {
+            "default": "Vehicle key",
+            "es": "Llave del vehículo",
+            "ca": "Clau del vehicle"
+          },
+          "description": {
+            "default": "You can add new vehicles in the biosecurity survey",
+            "es": "Puede agregar nuevos vehículos en la encuesta de bioseguridad",
+            "ca": "Pots afegir nous vehicles a l'enquesta de bioseguretat"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_to_veh_id}",
+          "clearIfInvisible": "none",
+          "requiredIf": "({round_from_veh_type} == 'own')",
+          "choices": [
+            {
+              "value": "a",
+              "text": {
+                "default": "🚚 Vehicle A",
+                "es": "🚚 Vehículo A"
+              }
+            },
+            {
+              "value": "b",
+              "text": {
+                "default": "🛻 Vehicle B",
+                "es": "🛻 Vehículo B"
+              }
+            },
+            {
+              "value": "c",
+              "text": {
+                "default": "🚛 Vehicle C",
+                "es": "🚛 Vehículo C"
+              }
+            },
+            {
+              "value": "d",
+              "text": {
+                "default": "🚌 Vehicle D",
+                "es": "🚌 Vehículo D"
+              }
+            },
+            {
+              "value": "e",
+              "text": {
+                "default": "🛺 Vehicle E",
+                "es": "🛺 Vehículo E"
+              }
+            },
+            {
+              "value": "f",
+              "text": {
+                "default": "🚜 Vehicle F",
+                "es": "🚜 Vehículo F"
+              }
+            },
+            {
+              "value": "g",
+              "text": {
+                "default": "🚙 Vehicle G",
+                "es": "🚙 Vehículo G"
+              }
+            },
+            {
+              "value": "h",
+              "text": {
+                "default": "🚐 Vehicle H",
+                "es": "🚐 Vehículo H"
+              }
+            },
+            {
+              "value": "i",
+              "text": {
+                "default": "🚗 Vehicle H",
+                "es": "🚗 Vehículo H"
+              }
+            }
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "round_from_single",
+          "visibleIf": "{round_from_veh_equal_to} = false and \n{round_from_veh_type} <> 'none'",
+          "title": {
+            "default": "Were all animals transported in the same truck on a single journey?",
+            "es": "¿Todos los animales fueron transportados en el mismo camión en un solo viaje?",
+            "ca": "Tots els animals van ser transportats en el mateix camió en un sol viatge?"
+          }
+        },
+        {
+          "type": "text",
+          "name": "round_from_days_n",
+          "visibleIf": "{round_from_veh_equal_to} = false and {round_from_single} = false",
+          "title": {
+            "default": "How many journeys did it take to transport all the animals?",
+            "es": "¿Cuántos viajes se necesitaron para transportar a todos los animales?",
+            "ca": "Quants viatges van trigar a transportar tots els animals?"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_to_days_n}",
+          "clearIfInvisible": "none",
+          "inputType": "number",
+          "min": 1,
+          "max": 10,
+          "step": 1
+        },
+        {
+          "type": "boolean",
+          "name": "round_from_veh_days_exclusive",
+          "visibleIf": "{round_from_veh_equal_to} = false and {round_from_single} = false",
+          "title": {
+            "default": "Was the vehicle only used by the animals from your farm during those journeys?",
+            "es": "¿El vehículo solo lo utilizaban los animales de su granja durante esos trayectos?",
+            "ca": "El vehicle només va ser utilitzat pels animals de la vostra granja durant aquests viatges?"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_to_veh_days_exclusive}",
+          "clearIfInvisible": "none"
+        },
+        {
+          "type": "radiogroup",
+          "name": "round_from_each_veh_exclusive",
+          "visibleIf": "{round_from_veh_equal_to} = false",
+          "title": {
+            "default": "Were only the animals for this farm transported in each movement?",
+            "es": "¿Solo se transportaban los animales de esta granja en cada movimiento?",
+            "ca": "Només es transportaven els animals d'aquesta granja en cada moviment?"
+          },
+          "description": {
+            "default": " i.e. no animals that were going to another farm were on the same vehicle at the same time",
+            "es": " es decir, ningún animal que iba a otra granja estaba en el mismo vehículo al mismo tiempo",
+            "ca": " és a dir, cap animal que anés a una altra granja estigués al mateix vehicle al mateix temps"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_to_veh_each_exclusive}",
+          "clearIfInvisible": "none",
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        },
+        {
+          "type": "expression",
+          "name": "round_from_veh_exclusive",
+          "visible": false,
+          "title": {
+            "es": "round_from_veh_exclusive",
+            "ca": "round_from_veh_exclusive"
+          },
+          "clearIfInvisible": "none",
+          "expression": "iif({round_from_veh_days_exclusive} = true, \"yes\", \n{round_from_each_veh_exclusive})"
+        },
+        {
+          "type": "radiogroup",
+          "name": "round_from_veh_epiunit",
+          "visibleIf": "{round_from_each_veh_exclusive} = 'no' and {mov_type} = 'pasture' and\n{round_from_veh_equal_to} = false",
+          "title": {
+            "default": "Did your animals and the others go to the same place?",
+            "es": "¿Tus animales y los demás fueron al mismo lugar?",
+            "ca": "Els teus animals i els altres van anar al mateix lloc?"
+          },
+          "setValueIf": "{round_from_veh_equal_to} = true",
+          "setValueExpression": "{round_from_veh_epiunit}",
+          "clearIfInvisible": "none",
+          "choices": [
+            {
+              "value": "yes",
+              "text": {
+                "default": "Yes",
+                "es": "Sí",
+                "ca": "Sí"
+              }
+            },
+            {
+              "value": "no",
+              "text": "No"
+            },
+            {
+              "value": "unknown",
+              "text": {
+                "default": "Don't know",
+                "es": "No sé",
+                "ca": "No sé"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "complete_survey",
+      "title": {
+        "default": "Complete survey",
+        "es": "Encuesta completa",
+        "ca": "Completa l'enquesta"
+      },
+      "elements": [
+        {
+          "type": "comment",
+          "name": "complete_comments",
+          "title": {
+            "default": "Additional comments and feedback",
+            "es": "Comentarios y opiniones adicionales",
+            "ca": "Comentaris i comentaris addicionals"
+          },
+          "validators": [
+            {
+              "type": "regex",
+              "text": {
+                "default": "Input contains invalid characters. Please use only letters, numbers, and basic punctuation.",
+                "es": "La entrada contiene caracteres no válidos. Utilice solo letras, números y signos de puntuación básicos.",
+                "ca": "L'entrada conté caràcters no vàlids. Si us plau, utilitzeu només lletres, números i puntuació bàsica."
+              },
+              "regex": "^[a-zA-Z0-9\\s.,!?()\\\\-_áéíóúüÁÉÍÓÚÜàèìòùÀÈÌÒÙäëïöÄËÏÖñÑçÇ']*$"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "progressBarType": "buttons",
+  "progressBarShowPageTitles": true,
+  "showTOC": true,
+  "checkErrorsMode": "onValueChanged"
+}
