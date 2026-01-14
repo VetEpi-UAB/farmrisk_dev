@@ -1,4 +1,4 @@
-﻿key;type;factor;lit;lit_es
+﻿key;type;factor;lit;lit_esp
 animal_category;factor;;Animal category;Tipo de animal
 cattleunder8;level;animal_category;Calves ( <8 m);Terneros ( <8 m)
 cattle8to24;level;animal_category;Heifers (8 - 24 m);Novillas (8 - 24 m)
