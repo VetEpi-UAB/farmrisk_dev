@@ -12,11 +12,11 @@ execute:
 # This chunk is excluded from the unified script
 
 # Convert "set_up" qmd file to a plain R script
-knitr::purl("set_up_v3.qmd", documentation = 2, output = "unified_script/set_up_v3.R")
+knitr::purl("set_up_v2.qmd", documentation = 2, output = "unified_script/set_up_v2.R")
 # Specify farm_id
 farm_id<-"bc1_v2" #CAT-ESP-6-1" #bl1_v3_mod" #bc1_v2
 # Source the setup script
-source("unified_script/set_up_v3.R")
+source("unified_script/set_up_v2.R")
 ```
 
 ```{r}

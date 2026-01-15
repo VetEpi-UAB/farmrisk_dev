@@ -27,17 +27,17 @@ This algorithm uses the [`mcmodule`](https://nataliaciria.github.io/mcmodule/ind
 
 ## Connect to SQL database
 
-\[...\]
+$$...$$
 
 ## Process flow
 
 ### `farmrisk` developemt
 
-\[...\]
+$$...$$
 
 ### FARMR!SK app
 
-\[...\]
+$$...$$
 
 ## Contact
 
