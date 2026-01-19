@@ -116,3 +116,4 @@ recurrent_days;Days in recurrent site (days at risk per recurrent movement);;;;F
 mov_round;Is it a round movement?;;mov_type;"value==""round""";FALSE;user_p
 mov_frequency;Movement annual frequency (times/year);;;;FALSE;user_n
 mov_recurrent;Is a recurring movement?;;mov_recurrent;"value==""recurrent""";FALSE;user_p
+manure_spread;Is the manure spread in the field near the farm?;rpert;FALSE;user_p
