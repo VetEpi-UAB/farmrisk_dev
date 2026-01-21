@@ -85,10 +85,6 @@ A JSON summarizing the simulation results is returned.
 
 For questions or bug reports, please open an issue or contact Natalia Ciria ([Natalia.Ciria\@uab.cat](mailto:Natalia.Ciria@uab.cat))
 
-## License
-
-[![](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
 ## Acknowledgements
 
 `farmrisk` was developed with support from:
