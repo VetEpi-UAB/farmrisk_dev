@@ -14,8 +14,8 @@ This algorithm uses the [`mcmodule`](https://nataliaciria.github.io/mcmodule/ind
         -   `administrative_levels.csv`: list of regional administrative levels for Andorra, Austria, Belgium, Germany, Spain, Estonia, Finland, France, Greece, Italy, Luxembourg, Poland, and Portugal. Includes [GADM](https://www.notion.so/Code-sandbox-14a8e979bd6980e29fc0e642ae1785b8?pvs=21) hierarchy, names, and GID codes for municipalities (level 3), provinces (level 2), regions (level 1), and countries (level 0), or their equivalent levels. *Note that some municipality (level 3) names are missing.*
         -   Model-specific files (e.g., cattle):
             -   `data/`: tables containing bibliography and expert based-model parameters.
-            -   `[model]_core_exp.R`: general expressions to calculate risk steps probabilities.
-            -   `[model]_link_exp.R`: expressions to connect inputs (survey and admin parameters) with core expression.
+            -   `[model]_core_exp.R`: general expressions to calculate risk step probabilities.
+            -   `[model]_link_exp.R`: expressions to connect inputs (survey and admin parameters) with core expressions.
             -   `[model]_data_keys.R`: list that defines the columns and keys (fields that uniquely identify each row in a table) for each of the tables in `data/`.
             -   `[model]_mctable.R`: table defining all the model inputs and their probability distributions. See model parameters documentation for more information.
     -   `user/`: only needed to run the model locally. Should contain a directory named after the farm_id, which includes the farm's bsg and mov files.
