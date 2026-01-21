@@ -177,7 +177,8 @@ if(admin_wif){
 ```{r}
 visit_indir_exp<-c(
   visit_indir_link = visit_indir_link_exp, 
-  visit_indir_contact = indir_contact_exp)
+  visit_indir_contact = indir_contact_exp,
+  visit_indir_area=area_exp)
 
 visit_indir<-mcmodule::eval_module(
   exp = visit_indir_exp,
