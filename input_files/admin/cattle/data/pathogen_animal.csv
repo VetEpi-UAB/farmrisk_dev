@@ -1,13 +1,13 @@
-pathogen;animal_category;within_prev_min;within_prev_mode;within_prev_max;within_prev_pi_min;within_prev_pi_mode;within_prev_pi_max;test_pd;test_pd_tr;mortality_min;mortality_mode;mortality_max;mortality_pi_min;mortality_pi_mode;mortality_pi_max;pathogen_animal_notes;pathogen_animal_ref
-BVD;cattleunder8;0.022;0.0255;0.029;0.0002;0.0101;0.02;elisa_ag;elisa_ag;;;;0.45;0.5;0.55;;within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005, within_prev_pi: https://pubmed.ncbi.nlm.nih.gov/24511819/ 
-BVD;cattlebull;0.022;0.0255;0.029;;;;elisa_ag;elisa_ag;;;;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005
-BVD;cattle8to24;0.022;0.0255;0.029;0.0001;0.00055;0.001;elisa_ag;elisa_abs;;;;0.45;0.5;0.55;;within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005, within_prev_pi: https://pubmed.ncbi.nlm.nih.gov/24511819/ 
-BVD;cattlefrom24;0.022;0.0255;0.029;;;;elisa_abs;elisa_abs;;;;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005
-IBR;cattleunder8;0.15;0.175;0.2;;;;elisa_abs;elisa_abs;0.01;0.02;0.03;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024
-IBR;cattlebull;0.53;0.555;0.58;;;;elisa_abs;elisa_abs;0.08;0.084;0.09;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024
-IBR;cattle8to24;0.15;0.175;0.2;;;;elisa_abs;elisa_abs;0.01;0.02;0.03;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024
-IBR;cattlefrom24;0.53;0.555;0.58;;;;elisa_abs;elisa_abs;0.08;0.084;0.09;;;;;within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024
-TB;cattleunder8;0.001588;0.003471;0.005353;;;;sitt;sitt;;;;;;;From MAPA (ES) 2021 TB Report;
-TB;cattlebull;0.001588;0.003471;0.005353;;;;sitt;sitt;;;;;;;From MAPA (ES) 2021 TB Report;
-TB;cattle8to24;0.001588;0.003471;0.005353;;;;sitt;sitt;;;;;;;From MAPA (ES) 2021 TB Report;
-TB;cattlefrom24;0.001588;0.003471;0.005353;;;;sitt;sitt;;;;;;;From MAPA (ES) 2021 TB Report;
+"pathogen","animal_category","within_prev_min","within_prev_mode","within_prev_max","within_prev_pi_min","within_prev_pi_mode","within_prev_pi_max","test_pd","test_pd_tr","mortality_min","mortality_mode","mortality_max","mortality_pi_min","mortality_pi_mode","mortality_pi_max","pathogen_animal_notes","pathogen_animal_ref"
+"BVD","cattleunder8",0.022,0.0255,0.029,2e-04,0.0101,0.02,"elisa_ag","elisa_ag",NA,NA,NA,0.45,0.5,0.55,"","within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005, within_prev_pi: https://pubmed.ncbi.nlm.nih.gov/24511819/ "
+"BVD","cattlebull",0.022,0.0255,0.029,NA,NA,NA,"elisa_ag","elisa_ag",NA,NA,NA,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005"
+"BVD","cattle8to24",0.022,0.0255,0.029,1e-04,0.00055,0.001,"elisa_ag","elisa_abs",NA,NA,NA,0.45,0.5,0.55,"","within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005, within_prev_pi: https://pubmed.ncbi.nlm.nih.gov/24511819/ "
+"BVD","cattlefrom24",0.022,0.0255,0.029,NA,NA,NA,"elisa_abs","elisa_abs",NA,NA,NA,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2014.05.005"
+"IBR","cattleunder8",0.15,0.175,0.2,NA,NA,NA,"elisa_abs","elisa_abs",0.01,0.02,0.03,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024"
+"IBR","cattlebull",0.53,0.555,0.58,NA,NA,NA,"elisa_abs","elisa_abs",0.08,0.084,0.09,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024"
+"IBR","cattle8to24",0.15,0.175,0.2,NA,NA,NA,"elisa_abs","elisa_abs",0.01,0.02,0.03,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024"
+"IBR","cattlefrom24",0.53,0.555,0.58,NA,NA,NA,"elisa_abs","elisa_abs",0.08,0.084,0.09,NA,NA,NA,"","within_prev: https://doi.org/10.1016/j.prevetmed.2017.08.024"
+"TB","cattleunder8",0.001588,0.003471,0.005353,NA,NA,NA,"sitt","sitt",NA,NA,NA,NA,NA,NA,"From MAPA (ES) 2021 TB Report",""
+"TB","cattlebull",0.001588,0.003471,0.005353,NA,NA,NA,"sitt","sitt",NA,NA,NA,NA,NA,NA,"From MAPA (ES) 2021 TB Report",""
+"TB","cattle8to24",0.001588,0.003471,0.005353,NA,NA,NA,"sitt","sitt",NA,NA,NA,NA,NA,NA,"From MAPA (ES) 2021 TB Report",""
+"TB","cattlefrom24",0.001588,0.003471,0.005353,NA,NA,NA,"sitt","sitt",NA,NA,NA,NA,NA,NA,"From MAPA (ES) 2021 TB Report",""

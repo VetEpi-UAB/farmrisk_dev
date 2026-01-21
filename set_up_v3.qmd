@@ -98,7 +98,7 @@ if(!exists("loaded_functions_time")){
 # Get arguments from the command line
 args = commandArgs(trailingOnly = TRUE)
 
-# Check if there is at least one argument; if not, use a manual farm_id
+# Check if there is at least one argument, if not, use a manual farm_id
 if (!length(args) == 0) {
     farm_id<-args[1]
 }
@@ -242,7 +242,6 @@ for(i in admin_files[grepl(".csv$", admin_files)]){
   user_file_name<-gsub(".*/", "", gsub(".csv", "", i))
   assign(user_file_name, 
          read.csv(i,
-                  sep = ";",
                   stringsAsFactors = TRUE,
                   na.strings = c(NA, "NA", ""))
          )
