@@ -52,6 +52,10 @@ neighbour_data<-neighbour_data%>%
   health_status == "BVDneg"|
   health_status == "Salmpos"|
   health_status == "Salmneg"))
+
+neighbour_status <- tidy_status_table(pathway = "farm")
+
+neighbour_data <- left_join(neighbour_status,neighbour_data)
 ```
 
 ### Admin what-if
@@ -96,6 +100,9 @@ neighbour<-mcmodule::agg_totals(
   agg_keys = c("pathogen", "scenario_id", "farm_id"))
 
 neighbour<-mcmodule::add_prefix(neighbour)
+
+
+
 
 print_pathway_risk(neighbour, "neighbour_inf_agg")
 message("\nNEIGHBOURS PATHWAY OK!")
