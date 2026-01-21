@@ -339,7 +339,6 @@ for(i in admin_files[grepl(".csv$", admin_files)]){
   user_file_name<-gsub(".*/", "", gsub(".csv", "", i))
   assign(user_file_name, 
          read.csv(i,
-                  sep = ";",
                   stringsAsFactors = TRUE,
                   na.strings = c(NA, "NA", ""))
          )
@@ -349,7 +348,7 @@ for(i in admin_files[grepl(".csv$", admin_files)]){
 #### Source admin R scripts
 
 ```{r}
-# Get list of R script files in the input admin model directory
+# Get list of R script files in the input admin model directory+ç
 admin_r_files <- list.files(
   path = admin_model_path,
   pattern = "\\.R$",

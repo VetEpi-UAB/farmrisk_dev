@@ -1,5 +1,5 @@
-﻿animal_category;pregnant;animal_category_p;livestock_units;animal_notes;animal_ref
-cattleunder8;FALSE;0.2;0.4;;animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)
-cattle8to24;TRUE;0.29;0.7;;animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)
-cattlefrom24;TRUE;0.5;1;;animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)
-cattlebull;FALSE;0.01;1;;animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)
+"animal_category","pregnant","animal_category_p","livestock_units","animal_notes","animal_ref"
+"cattleunder8",FALSE,0.2,0.4,NA,"animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)"
+"cattle8to24",TRUE,0.29,0.7,NA,"animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)"
+"cattlefrom24",TRUE,0.5,1,NA,"animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)"
+"cattlebull",FALSE,0.01,1,NA,"animal_category_p: own, livestock_unit: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Livestock_unit_(LSU)"

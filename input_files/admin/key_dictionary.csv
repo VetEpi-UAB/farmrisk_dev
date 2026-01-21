@@ -1,112 +1,112 @@
-﻿key;type;factor;lit;lit_esp
-animal_category;factor;;Animal category;Tipo de animal
-cattleunder8;level;animal_category;Calves ( <8 m);Terneros ( <8 m)
-cattle8to24;level;animal_category;Heifers (8 - 24 m);Novillas (8 - 24 m)
-cattlefrom24;level;animal_category;Adult cows (>24 m);Vacas adultas (>24 m)
-cattlebull;level;animal_category;Bulls;Toros
-test;factor;;Test;
-sitt;level;test;Single intradermal tuberculin;
-sictt;level;test;Single comparative intradermal tuberculin;
-ifn;level;test;Interferon-gamma assay;
-elisa_abs;level;test;ELISA for antibody detection;
-elisa_ag;level;test;ELISA for antigen detection;
-pcr;level;test;PCR for antigen detection;
-health_status;factor;;Disease control plan;
-unk_plan;level;health_status;Unknown;
-unk;level;health_status;Unknown;
-no_plan;level;health_status;No control plan;
-T3H;level;health_status;T3H (Long-term officially free);
-T3;level;health_status;T3 (Officially free);
-T2neg;level;health_status;T2-;
-T2pos;level;health_status;T2+;
-T1;level;health_status;T1;
-Ts;level;health_status;Ts;
-Tr;level;health_status;Tr;
-IBR1;level;health_status;IBR1 (Control programme, disease present);
-IBR1neg;level;health_status;IBR1-;
-IBR2;level;health_status;IBR2;
-IBR3;level;health_status;IBR3;
-IBR4;level;health_status;IBR4 (Officially free);
-BVDneg;level;health_status;BVD- (Officially free);
-BVDpos;level;health_status;BVD+ Control plan (Not Officially Free);
-farm_type;factor;;Farm type;
-beef;level;farm_type;Beef cattle;
-dairy;level;farm_type;Dairy cattle;
-Other;level;farm_type;Other;
-visit_type;factor;;Visit type;
-vet;level;visit_type;External veterinarians;
-mov_origin;factor;;Site where the animals came from/went;
-site;level;mov_origin;Other site of your farm (close location);
-farm;level;mov_origin;Other farm/s;
-pasture;level;mov_origin;Pasture;
-trader;level;mov_origin;Animal trader farm;
-center;level;mov_origin;Animal assembly centre;
-shared_rearing;level;mov_origin;Shared external rearing centre;
-genetic;level;mov_origin;Genetic selection centre;
-fair;level;mov_origin;Livestock fair;
-other_farmer;level;visit_type;Other farmers;
-farm_worker;level;visit_type;Farm workers that own livestock or work on other farms;
-farmer_visit;level;visit_type;Farmer that visits other farms (e.g. for purchasing animals);
-animal_professional;level;visit_type;Other animal professionals (e.g. hoof trimmer);
-other_professional;level;visit_type;Other professionals (e.g. electrician, plumber...);
-slaughter_veh;level;visit_type;Slaughterhouse vehicle;
-rendering_veh;level;visit_type;Rendering vehicle;
-feed_veh;level;visit_type;Feed vehicle;
-milk_veh;level;visit_type;Milk collection vehicle;
-calf_veh;level;visit_type;Calf transport vehicle;
-adult_veh;level;visit_type;Adult cattle transport vehicle;
-daily;level;frequency;Daily or several times a week (~ each day);
-weekly;level;frequency;At least once a week (~ each 7 days);
-monthly;level;frequency;At least once a month (~ each 30 days);
-few;level;frequency;At least several times a year (~ each 90 ays);
-rare;level;frequency;Once a year or less (~ each 360 days);
-always;level;;Always;
-sometimes;level;;Sometimes;
-never;level;;Never;
-each;level;;Each time it is used;
-frequency;level;;From time to  time;
-pasture_mix;pathway;;Pasture mix with other animals;
-pasture_veh;pathway;;Pasture transport;
-purchase_origin;pathway;;Purchase origin;
-purchase_veh;pathway;;Purchase transport;
-visit_total;pathway;;People and vehicle visits to the farm;
-visit_people;pathway;;People visits to the farm;
-visit_veh;pathway;;Vehicle visits to the farm;
-farm_neigbour;pathway;;Neigbouring farms;
-neighbour_total;pathway;;Neigbouring farms;
-total_wildlife;pathway;;Wildlife;
-farm_wildlife;pathway;;Wildlife in farm;
-pasture_wildlife;pathway;;Wildlife in pasture;
-mov_livestock;pathway;;Animals from other origin;
-mov_transport;pathway;;Animal transport;
-visit_type;agg_results;;Visit type;
-purchase_by_mov;agg_results;;Purchase movement;
-pasture_by_mov;agg_results;;Pasture movement;
-mov_livestock_by_mov;agg_results;;Animals from other origin;
-mov_by_mov;agg_results;;Animal movement;
-mov_prequaran_livestock_by_herd;agg_results;;Animals from other origin (pre quarantine);
-mov_prequaran_transport_by_herd;agg_results;;Animal transport (pre quarantine);
-a;level;veh_id;🚚 Vehicle A;
-b;level;veh_id;🛻 Vehicle B;
-c;level;veh_id;🚛 Vehicle C;
-d;level;veh_id;🚌 Vehicle D;
-e;level;veh_id;🛺 Vehicle E;
-f;level;veh_id;🚜 Vehicle F;
-g;level;veh_id;🚙 Vehicle G;
-h;level;veh_id;🚐 Vehicle H;
-i;level;veh_id;🚗 Vehicle H;
-a;level;pasture_id;🌿 Pasture A;
-b;level;pasture_id;🍂 Pasture B;
-c;level;pasture_id;🌾 Pasture C;
-d;level;pasture_id;🌱 Pasture D;
-e;level;pasture_id;☘️ Pasture E;
-f;level;pasture_id;🍁 Pasture F;
-g;level;pasture_id;🍃 Pasture G;
-h;level;pasture_id;🏞️ Pasture H;
-i;level;pasture_id;⛰️ Pasture I;
-j;level;pasture_id;🌄 Pasture J;
-low;level;waterpoints;Low waterer (<90cm);
-high;level;waterpoints;High waterer (>90cm);
-waterhole;level;waterpoints;Waterhole;
-river;level;waterpoints;River;
-stream;level;waterpoints;Stream (seasonal flow);
+"key","type","factor","lit","lit_esp"
+"animal_category","factor","","Animal category","Tipo de animal"
+"cattleunder8","level","animal_category","Calves ( <8 m)","Terneros ( <8 m)"
+"cattle8to24","level","animal_category","Heifers (8 - 24 m)","Novillas (8 - 24 m)"
+"cattlefrom24","level","animal_category","Adult cows (>24 m)","Vacas adultas (>24 m)"
+"cattlebull","level","animal_category","Bulls","Toros"
+"test","factor","","Test",""
+"sitt","level","test","Single intradermal tuberculin",""
+"sictt","level","test","Single comparative intradermal tuberculin",""
+"ifn","level","test","Interferon-gamma assay",""
+"elisa_abs","level","test","ELISA for antibody detection",""
+"elisa_ag","level","test","ELISA for antigen detection",""
+"pcr","level","test","PCR for antigen detection",""
+"health_status","factor","","Disease control plan",""
+"unk_plan","level","health_status","Unknown",""
+"unk","level","health_status","Unknown",""
+"no_plan","level","health_status","No control plan",""
+"T3H","level","health_status","T3H (Long-term officially free)",""
+"T3","level","health_status","T3 (Officially free)",""
+"T2neg","level","health_status","T2-",""
+"T2pos","level","health_status","T2+",""
+"T1","level","health_status","T1",""
+"Ts","level","health_status","Ts",""
+"Tr","level","health_status","Tr",""
+"IBR1","level","health_status","IBR1 (Control programme, disease present)",""
+"IBR1neg","level","health_status","IBR1-",""
+"IBR2","level","health_status","IBR2",""
+"IBR3","level","health_status","IBR3",""
+"IBR4","level","health_status","IBR4 (Officially free)",""
+"BVDneg","level","health_status","BVD- (Officially free)",""
+"BVDpos","level","health_status","BVD+ Control plan (Not Officially Free)",""
+"farm_type","factor","","Farm type",""
+"beef","level","farm_type","Beef cattle",""
+"dairy","level","farm_type","Dairy cattle",""
+"Other","level","farm_type","Other",""
+"visit_type","factor","","Visit type",""
+"vet","level","visit_type","External veterinarians",""
+"mov_origin","factor","","Site where the animals came from/went",""
+"site","level","mov_origin","Other site of your farm (close location)",""
+"farm","level","mov_origin","Other farm/s",""
+"pasture","level","mov_origin","Pasture",""
+"trader","level","mov_origin","Animal trader farm",""
+"center","level","mov_origin","Animal assembly centre",""
+"shared_rearing","level","mov_origin","Shared external rearing centre",""
+"genetic","level","mov_origin","Genetic selection centre",""
+"fair","level","mov_origin","Livestock fair",""
+"other_farmer","level","visit_type","Other farmers",""
+"farm_worker","level","visit_type","Farm workers that own livestock or work on other farms",""
+"farmer_visit","level","visit_type","Farmer that visits other farms (e.g. for purchasing animals)",""
+"animal_professional","level","visit_type","Other animal professionals (e.g. hoof trimmer)",""
+"other_professional","level","visit_type","Other professionals (e.g. electrician, plumber...)",""
+"slaughter_veh","level","visit_type","Slaughterhouse vehicle",""
+"rendering_veh","level","visit_type","Rendering vehicle",""
+"feed_veh","level","visit_type","Feed vehicle",""
+"milk_veh","level","visit_type","Milk collection vehicle",""
+"calf_veh","level","visit_type","Calf transport vehicle",""
+"adult_veh","level","visit_type","Adult cattle transport vehicle",""
+"daily","level","frequency","Daily or several times a week (~ each day)",""
+"weekly","level","frequency","At least once a week (~ each 7 days)",""
+"monthly","level","frequency","At least once a month (~ each 30 days)",""
+"few","level","frequency","At least several times a year (~ each 90 ays)",""
+"rare","level","frequency","Once a year or less (~ each 360 days)",""
+"always","level","","Always",""
+"sometimes","level","","Sometimes",""
+"never","level","","Never",""
+"each","level","","Each time it is used",""
+"frequency","level","","From time to  time",""
+"pasture_mix","pathway","","Pasture mix with other animals",""
+"pasture_veh","pathway","","Pasture transport",""
+"purchase_origin","pathway","","Purchase origin",""
+"purchase_veh","pathway","","Purchase transport",""
+"visit_total","pathway","","People and vehicle visits to the farm",""
+"visit_people","pathway","","People visits to the farm",""
+"visit_veh","pathway","","Vehicle visits to the farm",""
+"farm_neigbour","pathway","","Neigbouring farms",""
+"neighbour_total","pathway","","Neigbouring farms",""
+"total_wildlife","pathway","","Wildlife",""
+"farm_wildlife","pathway","","Wildlife in farm",""
+"pasture_wildlife","pathway","","Wildlife in pasture",""
+"mov_livestock","pathway","","Animals from other origin",""
+"mov_transport","pathway","","Animal transport",""
+"visit_type","agg_results","","Visit type",""
+"purchase_by_mov","agg_results","","Purchase movement",""
+"pasture_by_mov","agg_results","","Pasture movement",""
+"mov_livestock_by_mov","agg_results","","Animals from other origin",""
+"mov_by_mov","agg_results","","Animal movement",""
+"mov_prequaran_livestock_by_herd","agg_results","","Animals from other origin (pre quarantine)",""
+"mov_prequaran_transport_by_herd","agg_results","","Animal transport (pre quarantine)",""
+"a","level","veh_id","🚚 Vehicle A",""
+"b","level","veh_id","🛻 Vehicle B",""
+"c","level","veh_id","🚛 Vehicle C",""
+"d","level","veh_id","🚌 Vehicle D",""
+"e","level","veh_id","🛺 Vehicle E",""
+"f","level","veh_id","🚜 Vehicle F",""
+"g","level","veh_id","🚙 Vehicle G",""
+"h","level","veh_id","🚐 Vehicle H",""
+"i","level","veh_id","🚗 Vehicle H",""
+"a","level","pasture_id","🌿 Pasture A",""
+"b","level","pasture_id","🍂 Pasture B",""
+"c","level","pasture_id","🌾 Pasture C",""
+"d","level","pasture_id","🌱 Pasture D",""
+"e","level","pasture_id","☘️ Pasture E",""
+"f","level","pasture_id","🍁 Pasture F",""
+"g","level","pasture_id","🍃 Pasture G",""
+"h","level","pasture_id","🏞️ Pasture H",""
+"i","level","pasture_id","⛰️ Pasture I",""
+"j","level","pasture_id","🌄 Pasture J",""
+"low","level","waterpoints","Low waterer (<90cm)",""
+"high","level","waterpoints","High waterer (>90cm)",""
+"waterhole","level","waterpoints","Waterhole",""
+"river","level","waterpoints","River",""
+"stream","level","waterpoints","Stream (seasonal flow)",""

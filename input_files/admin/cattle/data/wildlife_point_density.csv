@@ -1,6 +1,6 @@
-wildlife;contact_point;density_level;contact_rate_wildlife_min;contact_rate_wildlife_max;density_min;density_max;wildlife_visit_density_notes;wildlife_visit_density_ref
-wildboar;water;level_1;0;0.0028;0;16;;
-wildboar;water;level_2;0.0014;0.0042;16;33;;
-wildboar;water;level_3;0.0028;0.0056;33;51;;
-wildboar;water;level_4;0.0042;0.0069;51;80;;
-wildboar;water;level_5;0.0056;0.0139;80;246;;
+"wildlife","contact_point","density_level","contact_rate_wildlife_min","contact_rate_wildlife_max","density_min","density_max","wildlife_visit_density_notes","wildlife_visit_density_ref"
+"wildboar","water","level_1",0,0.0028,0,16,NA,NA
+"wildboar","water","level_2",0.0014,0.0042,16,33,NA,NA
+"wildboar","water","level_3",0.0028,0.0056,33,51,NA,NA
+"wildboar","water","level_4",0.0042,0.0069,51,80,NA,NA
+"wildboar","water","level_5",0.0056,0.0139,80,246,NA,NA
