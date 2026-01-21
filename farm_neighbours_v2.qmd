@@ -33,7 +33,25 @@ neighbour_data<-neighbour_data%>%
   left_join(tidy_prefix(bsg, "neighbour", rm_prefix = FALSE))%>%
   hjoin_region(pathogen_region)%>%
   left_join(pathogen)%>%
-  left_join(filter(pathogen_status, health_status == "unk"))
+  left_join(filter(pathogen_status, health_status == "unk"| 
+  health_status=="no_plan"| 
+  health_status =="T1"| 
+  health_status == "Ts"| 
+  health_status == "Tr"|
+  health_status == "T2pos"|
+  health_status == "T2neg"|
+  health_status == "T3"|
+  health_status == "T3H"|
+  health_status == "IBRpos"|
+  health_status == "IBR1"|
+  health_status == "IBR1neg"|
+  health_status == "IBR2"|
+  health_status == "IBR3"|
+  health_status == "IBR4"|
+  health_status == "BVDpos"|
+  health_status == "BVDneg"|
+  health_status == "Salmpos"|
+  health_status == "Salmneg"))
 ```
 
 ### Admin what-if
