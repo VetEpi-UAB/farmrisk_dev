@@ -1,0 +1,114 @@
+"";"key";"type";"factor";"lit";"lit_esp"
+"1";"animal_category";"factor";NA;"Animal category";"Tipo de animal"
+"2";"cattleunder8";"level";"animal_category";"Calves ( <8 m)";"Terneros ( <8 m)"
+"3";"cattle8to24";"level";"animal_category";"Heifers (8 - 24 m)";"Novillas (8 - 24 m)"
+"4";"cattlefrom24";"level";"animal_category";"Adult cows (>24 m)";"Vacas adultas (>24 m)"
+"5";"cattlebull";"level";"animal_category";"Bulls";"Toros"
+"6";"test";"factor";NA;"Test";NA
+"7";"sitt";"level";"test";"Single intradermal tuberculin";NA
+"8";"sictt";"level";"test";"Single comparative intradermal tuberculin";NA
+"9";"ifn";"level";"test";"Interferon-gamma assay";NA
+"10";"elisa_abs";"level";"test";"ELISA for antibody detection";NA
+"11";"elisa_ag";"level";"test";"ELISA for antigen detection";NA
+"12";"pcr";"level";"test";"PCR for antigen detection";NA
+"13";"health_status";"factor";NA;"Disease control plan";NA
+"14";"unk_plan";"level";"health_status";"Unknown";NA
+"15";"unk";"level";"health_status";"Unknown";NA
+"16";"no_plan";"level";"health_status";"No control plan";NA
+"17";"T3H";"level";"health_status";"T3H (Long-term officially free)";NA
+"18";"T3";"level";"health_status";"T3 (Officially free)";NA
+"19";"T2neg";"level";"health_status";"T2-";NA
+"20";"T2pos";"level";"health_status";"T2+";NA
+"21";"T1";"level";"health_status";"T1";NA
+"22";"Ts";"level";"health_status";"Ts";NA
+"23";"Tr";"level";"health_status";"Tr";NA
+"24";"IBR1";"level";"health_status";"IBR1 (Control programme, disease present)";NA
+"25";"IBR1neg";"level";"health_status";"IBR1-";NA
+"26";"IBR2";"level";"health_status";"IBR2";NA
+"27";"IBR3";"level";"health_status";"IBR3";NA
+"28";"IBR4";"level";"health_status";"IBR4 (Officially free)";NA
+"29";"BVDneg";"level";"health_status";"BVD- (Officially free)";NA
+"30";"BVDpos";"level";"health_status";"BVD+ Control plan (Not Officially Free)";NA
+"31";"farm_type";"factor";NA;"Farm type";NA
+"32";"beef";"level";"farm_type";"Beef cattle";NA
+"33";"dairy";"level";"farm_type";"Dairy cattle";NA
+"34";"Other";"level";"farm_type";"Other";NA
+"35";"visit_type";"factor";NA;"Visit type";NA
+"36";"vet";"level";"visit_type";"External veterinarians";NA
+"37";"mov_origin";"factor";NA;"Site where the animals came from/went";NA
+"38";"site";"level";"mov_origin";"Other site of your farm (close location)";NA
+"39";"farm";"level";"mov_origin";"Other farm/s";NA
+"40";"pasture";"level";"mov_origin";"Pasture";NA
+"41";"trader";"level";"mov_origin";"Animal trader farm";NA
+"42";"center";"level";"mov_origin";"Animal assembly centre";NA
+"43";"shared_rearing";"level";"mov_origin";"Shared external rearing centre";NA
+"44";"genetic";"level";"mov_origin";"Genetic selection centre";NA
+"45";"fair";"level";"mov_origin";"Livestock fair";NA
+"46";"other_farmer";"level";"visit_type";"Other farmers";NA
+"47";"farm_worker";"level";"visit_type";"Farm workers that own livestock or work on other farms";NA
+"48";"farmer_visit";"level";"visit_type";"Farmer that visits other farms (e.g. for purchasing animals)";NA
+"49";"animal_professional";"level";"visit_type";"Other animal professionals (e.g. hoof trimmer)";NA
+"50";"other_professional";"level";"visit_type";"Other professionals (e.g. electrician, plumber...)";NA
+"51";"slaughter_veh";"level";"visit_type";"Slaughterhouse vehicle";NA
+"52";"rendering_veh";"level";"visit_type";"Rendering vehicle";NA
+"53";"feed_veh";"level";"visit_type";"Feed vehicle";NA
+"54";"milk_veh";"level";"visit_type";"Milk collection vehicle";NA
+"55";"calf_veh";"level";"visit_type";"Calf transport vehicle";NA
+"56";"adult_veh";"level";"visit_type";"Adult cattle transport vehicle";NA
+"57";"daily";"level";"frequency";"Daily or several times a week (~ each day)";NA
+"58";"weekly";"level";"frequency";"At least once a week (~ each 7 days)";NA
+"59";"monthly";"level";"frequency";"At least once a month (~ each 30 days)";NA
+"60";"few";"level";"frequency";"At least several times a year (~ each 90 ays)";NA
+"61";"rare";"level";"frequency";"Once a year or less (~ each 360 days)";NA
+"62";"always";"level";NA;"Always";NA
+"63";"sometimes";"level";NA;"Sometimes";NA
+"64";"never";"level";NA;"Never";NA
+"65";"each";"level";NA;"Each time it is used";NA
+"66";"frequency";"level";NA;"From time to  time";NA
+"67";"pasture_mix";"pathway";NA;"Pasture mix with other animals";NA
+"68";"pasture_veh";"pathway";NA;"Pasture transport";NA
+"69";"purchase_origin";"pathway";NA;"Purchase origin";NA
+"70";"purchase_veh";"pathway";NA;"Purchase transport";NA
+"71";"visit_total";"pathway";NA;"People and vehicle visits to the farm";NA
+"72";"visit_people";"pathway";NA;"People visits to the farm";NA
+"73";"visit_veh";"pathway";NA;"Vehicle visits to the farm";NA
+"74";"farm_neigbour";"pathway";NA;"Neigbouring farms";NA
+"75";"neighbour_total";"pathway";NA;"Neigbouring farms";NA
+"76";"total_wildlife";"pathway";NA;"Wildlife";NA
+"77";"farm_wildlife";"pathway";NA;"Wildlife in farm";NA
+"78";"pasture_wildlife";"pathway";NA;"Wildlife in pasture";NA
+"79";"mov_livestock";"pathway";NA;"Animals from other origin";NA
+"80";"mov_transport";"pathway";NA;"Animal transport";NA
+"81";"visit_type";"agg_results";NA;"Visit type";NA
+"82";"purchase_by_mov";"agg_results";NA;"Purchase movement";NA
+"83";"pasture_by_mov";"agg_results";NA;"Pasture movement";NA
+"84";"mov_livestock_by_mov";"agg_results";NA;"Animals from other origin";NA
+"85";"mov_by_mov";"agg_results";NA;"Animal movement";NA
+"86";"mov_prequaran_livestock_by_herd";"agg_results";NA;"Animals from other origin (pre quarantine)";NA
+"87";"mov_prequaran_transport_by_herd";"agg_results";NA;"Animal transport (pre quarantine)";NA
+"88";"a";"level";"veh_id";"🚚 Vehicle A";NA
+"89";"b";"level";"veh_id";"🛻 Vehicle B";NA
+"90";"c";"level";"veh_id";"🚛 Vehicle C";NA
+"91";"d";"level";"veh_id";"🚌 Vehicle D";NA
+"92";"e";"level";"veh_id";"🛺 Vehicle E";NA
+"93";"f";"level";"veh_id";"🚜 Vehicle F";NA
+"94";"g";"level";"veh_id";"🚙 Vehicle G";NA
+"95";"h";"level";"veh_id";"🚐 Vehicle H";NA
+"96";"i";"level";"veh_id";"🚗 Vehicle H";NA
+"97";"a";"level";"pasture_id";"🌿 Pasture A";NA
+"98";"b";"level";"pasture_id";"🍂 Pasture B";NA
+"99";"c";"level";"pasture_id";"🌾 Pasture C";NA
+"100";"d";"level";"pasture_id";"🌱 Pasture D";NA
+"101";"e";"level";"pasture_id";"☘️ Pasture E";NA
+"102";"f";"level";"pasture_id";"🍁 Pasture F";NA
+"103";"g";"level";"pasture_id";"🍃 Pasture G";NA
+"104";"h";"level";"pasture_id";"🏞️ Pasture H";NA
+"105";"i";"level";"pasture_id";"⛰️ Pasture I";NA
+"106";"j";"level";"pasture_id";"🌄 Pasture J";NA
+"107";"low";"level";"waterpoints";"Low waterer (<90cm)";NA
+"108";"high";"level";"waterpoints";"High waterer (>90cm)";NA
+"109";"waterhole";"level";"waterpoints";"Waterhole";NA
+"110";"river";"level";"waterpoints";"River";NA
+"111";"stream";"level";"waterpoints";"Stream (seasonal flow)";NA
+"112";"Salmpos";"level";"health_status";"Salmonella+";"NA"
+"113";"Salmneg";"level";"health_status";"Salmonella-";"NA"
