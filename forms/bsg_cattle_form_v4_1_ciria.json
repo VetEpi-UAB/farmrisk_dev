@@ -1050,6 +1050,241 @@
           }
         },
         {
+          "type": "panel",
+          "name": "neighbour_health_panel",
+          "title": {
+            "default": "Health status",
+            "es": "Estado de salud",
+            "ca": "Estat de salut"
+          }, "elements": [
+            {
+              "type": "boolean",
+              "name": "neighbour_health_know",
+              "visibleIf": "{site_share} = true",
+              "title": {
+                "default": "Do you know the health status of the neighbouring farms (5km radius)?",
+                "es": "¿Conoces el estado de salud de las granjas vecinas (radio de 5km)?",
+                "ca": "Coneixes l'estat de salut de les granges veïnes (radi de 5km)?"
+              }
+            },
+            {
+              "type": "matrixdynamic",
+              "name": "neighbour_health",
+              "visibleIf": "{neighbour_health_know} = true",
+              "title": {
+                "default": "Disease control plan\r\n",
+                "es": "Plan de control de enfermedades de las granjas",
+                "ca": "Pla de control de malalties de les granges"
+              },
+              "description": {
+                "default": "TB -Tuberculosis, IBR - Infectious bovine rhinotracheitis/Bovine herpesvirus (BoHV-1), BVD - Bovine viral diarrhoea, Salmonella",
+                "es": "TB - Tuberculosis, IBR - Rinotraqueítis infecciosa bovina/Herpesvirus bovino (BoHV-1), BVD - Diarrea viral bovina, Salmonella",
+                "ca": "TB - Tuberculosi, IBR - Rinotraqueïtis infecciosa bovina/Herpesvirus boví (BoHV-1), BVD - Diarrea vírica bovina, Salmonella"
+              }, ,
+              "columns": [
+               
+                {
+                  "name": "neighbour_health_disease",
+                  "title": {
+                    "default": "Disease",
+                    "es": "Enfermedad",
+                    "ca": "Malaltia"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "TB",
+                      "text": {
+                        "es": "TUBERCULOSIS",
+                        "ca": "TB"
+                      }
+                    },
+                    {
+                      "value": "IBR",
+                      "text": {
+                        "es": "IBR",
+                        "ca": "IBR"
+                      }
+                    },
+                    {
+                      "value": "BVD",
+                      "text": {
+                        "es": "BVD",
+                        "ca": "BVD"
+                      }
+                    },
+                    {
+                      "value": "Salmonella",
+                      "text": {
+                        "es": "Salmonella",
+                        "ca": "Salmonella"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "name": "neighbour_health_status",
+                  "title": {
+                    "default": "Disease control plan",
+                    "es": "Plan de control de enfermedades",
+                    "ca": "Pla de control de malalties"
+                  },
+                  "cellType": "dropdown",
+                  "choices": [
+                    {
+                      "value": "unk_plan",
+                      "text": {
+                        "default": "Unknown",
+                        "es": "Desconocido",
+                        "ca": "Desconegut"
+                      }
+                    },
+                    {
+                      "value": "no_plan",
+                      "text": {
+                        "default": "No control plan",
+                        "es": "Sin plan de control",
+                        "ca": "Sense pla de control"
+                      }
+                    },
+                    {
+                      "value": "T3H",
+                      "text": {
+                        "default": "T3H (Long-term officially free)",
+                        "es": "T3H (Gratis oficialmente a largo plazo)",
+                        "ca": "T3H (Gratuït oficial de llarga durada)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T3",
+                      "text": {
+                        "default": "T3 (Officially free)",
+                        "es": "T3 (Oficialmente gratis)",
+                        "ca": "T3 (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T2neg",
+                      "text": "T2-",
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T2pos",
+                      "text": "T2+",
+                      "visibleIf": "{row.mov_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "T1",
+                      "text": {
+                        "es": "T1",
+                        "ca": "T1"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "Ts",
+                      "text": {
+                        "es": "Ts",
+                        "ca": "Ts"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "Tr",
+                      "text": {
+                        "es": "Tr",
+                        "ca": "Tr"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'TB'"
+                    },
+                    {
+                      "value": "IBR1",
+                      "text": {
+                        "default": "IBR1 (Control programme, disease present)",
+                        "es": "IBR1 (Programa de control, enfermedad presente)",
+                        "ca": "IBR1 (Programa de control, malaltia present)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR1neg",
+                      "text": "IBR1-",
+                      "visibleIf": "{row.neighbour_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR2",
+                      "text": {
+                        "es": "IBR2",
+                        "ca": "IBR2"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR3",
+                      "text": {
+                        "es": "IBR3",
+                        "ca": "IBR3"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'IBR' "
+                    },
+                    {
+                      "value": "IBR4",
+                      "text": {
+                        "default": "IBR4 (Officially free)",
+                        "es": "IBR4 (Oficialmente gratis)",
+                        "ca": "IBR4 (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'IBR'"
+                    },
+                    {
+                      "value": "BVDneg",
+                      "text": {
+                        "default": "BVD- (Officially free)",
+                        "es": "BVD- (Oficialmente gratis)",
+                        "ca": "BVD- (Oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'BVD'"
+                    },
+                    {
+                      "value": "BVDpos",
+                      "text": {
+                        "default": "BVD+ Control plan (Not Officially Free)",
+                        "es": "Plan de control BVD+ (no oficialmente gratuito)",
+                        "ca": "Pla de control BVD+ (no oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'BVD'"
+                    },
+                    
+                    {
+                      "value": "Salmpos",
+                      "text": {
+                        "default": "Salmonella+ Control plan (Not Officially Free)",
+                        "es": "Plan de control Salmonella+ (no oficialmente gratuito)",
+                        "ca": "Pla de control Salmonella+ (no oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'Salmonella'"
+                    },
+                    {
+                      "value": "Salmneg",
+                      "text": {
+                        "default": "Salmonella- Control plan (Not Officially Free)",
+                        "es": "Plan de control Salmonella- (no oficialmente gratuito)",
+                        "ca": "Pla de control Salmonella- (no oficialment gratuït)"
+                      },
+                      "visibleIf": "{row.neighbour_health_disease} = 'Salmonella'"
+                    }
+                  ]
+                }
+              ],
+              "rowCount": 3,
+              "maxRowCount": 18
+            },
+        
+        
+        
+        {
           "type": "boolean",
           "name": "outdoors_access",
           "title": {
