@@ -257,6 +257,12 @@ visit_indir_link_exp <- quote({
 
   #Number of times indirect contact happens
   n_times <- visit_frequency
+  
+  #ZONE EFFECT (PROBABILITY INDIRECT CONTACT one neighbour farm)
+  area_effect <- neighbour_farms
+  exponent <- visit_frequency
+  indir_level <- 4
+  area_prev <- herd_prev
 })
 
 #### Neighbour link expression ####
