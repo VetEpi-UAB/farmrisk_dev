@@ -844,7 +844,8 @@ if (!from_equal_to) {
 transport_exp <- c(
   mov_transport_link = transport_link_exp,
   mov_transport_dir_contact = dir_contact_exp,
-  mov_transport_indir_contact = indir_contact_exp
+  mov_transport_indir_contact = indir_contact_exp,
+  mov_transport_indir_area=area_exp
 )
 
 mov_transport_first <- mcmodule::eval_module(
