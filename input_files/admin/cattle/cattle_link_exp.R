@@ -116,6 +116,13 @@ transport_link_exp <- quote({
 
   #Number of times indirect contact happens
   n_times <- 1
+  
+  #ZONE EFFECT (PROBABILITY INDIRECT CONTACT one neighbour farm)
+  area_effect <- neighbour_farms
+  exponent <- farms_n
+  indir_level <- 3
+  area_prev <- herd_prev
+  
 })
 
 #### Quarantine link test expression ####
