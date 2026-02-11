@@ -2787,6 +2787,22 @@
                     "es": "Vehículo de transporte de ganado adulto",
                     "ca": "Vehicle de transport de bestiar adult"
                   }
+                },
+                {
+                  "value": "fert_veh",
+                  "text": {
+                    "default": "Vehicle transporting slurry for fertilising",
+                    "es": "Vehículo que transporta purines para fertilización",
+                    "ca": "Vehicle que transporta purí per a fertilització"
+                  }
+                },
+                {
+                  "value": "biogas_veh",
+                  "text": {
+                    "default": "Vehicle transporting slurry for biogas plant",
+                    "es": "Vehículo que transporta purines para planta de biogás",
+                    "ca": "Vehicle que transporta purí per a una planta de biogàs"
+                  }
                 }
               ],
               "choicesFromQuestionMode": "selected",
