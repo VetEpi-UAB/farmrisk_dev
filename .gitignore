@@ -9,7 +9,9 @@ db_keys.txt
 # exclude user output and inputs files
 input_files/user/*
 output_files/*
+reports/*
 
 # but keep output and inputs files folder
 !output_files/gitkeep.txt
 !input_files/user/gitkeep.txt
+!reports/gitkeep.txt
